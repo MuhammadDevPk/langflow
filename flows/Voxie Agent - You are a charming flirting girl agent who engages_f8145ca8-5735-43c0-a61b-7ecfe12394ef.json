@@ -1676,7 +1676,5 @@
   "action_name": null,
   "action_description": null,
   "access_type": "PRIVATE",
-  "id": "f8145ca8-5735-43c0-a61b-7ecfe12394ef",
-  "user_id": "7ddfb6d5-14f0-42ab-b1f3-cd42c65f89fc",
-  "folder_id": ""
+  "id": "f8145ca8-5735-43c0-a61b-7ecfe12394ef"
 }

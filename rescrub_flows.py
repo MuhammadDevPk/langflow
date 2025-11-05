@@ -18,12 +18,19 @@ def scrub_flow_properly(flow_data: Dict[str, Any], parent_key: str = None) -> Di
             if parent_key == "code" and key == "value":
                 continue
 
-            # Clear value fields for API keys
+            # Clear value fields for API keys (only in template, not top-level)
             if key == "value" and parent_key in ["api_key", "openai_api_key", "langflow_api_key", "folder_id"]:
                 if isinstance(value, str) and len(value) > 0:
                     flow_data[key] = ""  # Empty string!
             elif isinstance(value, (dict, list)):
                 flow_data[key] = scrub_flow_properly(value, parent_key=key)
+
+        # Remove top-level folder_id, folder, and user_id fields completely
+        if parent_key is None:  # Only at top level
+            for field in ["folder_id", "folder", "user_id"]:
+                if field in flow_data:
+                    del flow_data[field]
+
     elif isinstance(flow_data, list):
         return [scrub_flow_properly(item, parent_key=parent_key) for item in flow_data]
 

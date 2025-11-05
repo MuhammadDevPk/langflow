@@ -204,7 +204,6 @@
             "output_types": [],
             "pinned": false,
             "conditional_paths": [],
-            "frozen": false,
             "outputs": [
               {
                 "types": [
@@ -577,7 +576,6 @@
             "output_types": [],
             "pinned": false,
             "conditional_paths": [],
-            "frozen": false,
             "outputs": [
               {
                 "types": [
@@ -746,8 +744,6 @@
             },
             "description": "Create a prompt template with dynamic variables.",
             "icon": "braces",
-            "is_input": null,
-            "is_output": null,
             "is_composition": null,
             "base_classes": [
               "Message"
@@ -766,7 +762,6 @@
             "full_path": null,
             "pinned": false,
             "conditional_paths": [],
-            "frozen": false,
             "outputs": [
               {
                 "types": [
@@ -928,7 +923,6 @@
             "output_types": [],
             "pinned": false,
             "conditional_paths": [],
-            "frozen": false,
             "outputs": [
               {
                 "types": [
@@ -1148,7 +1142,6 @@
             "output_types": [],
             "pinned": false,
             "conditional_paths": [],
-            "frozen": false,
             "outputs": [
               {
                 "types": [

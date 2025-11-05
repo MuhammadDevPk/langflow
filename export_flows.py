@@ -71,6 +71,32 @@ def sanitize_filename(name: str) -> str:
     return name.strip()[:100]
 
 
+def remove_component_metadata(flow_data: Dict[str, Any]) -> Dict[str, Any]:
+    """Remove component version metadata to prevent update notifications.
+
+    This removes version-specific metadata from components so they automatically
+    use the latest version when imported on different machines.
+    """
+    if not isinstance(flow_data, dict):
+        return flow_data
+
+    # Navigate to nodes in the flow
+    if "data" in flow_data and isinstance(flow_data["data"], dict):
+        if "nodes" in flow_data["data"] and isinstance(flow_data["data"]["nodes"], list):
+            for node in flow_data["data"]["nodes"]:
+                if isinstance(node, dict) and "data" in node:
+                    node_data = node["data"]
+                    if isinstance(node_data, dict) and "node" in node_data:
+                        component = node_data["node"]
+                        # Remove version metadata that causes update notifications
+                        if isinstance(component, dict):
+                            # Remove version-related fields
+                            for field in ["frozen", "is_input", "is_output", "official"]:
+                                component.pop(field, None)
+
+    return flow_data
+
+
 def scrub_secrets_from_flow(flow_data: Dict[str, Any], parent_key: str = None) -> Dict[str, Any]:
     """Remove API keys and secrets from flow data before saving.
 
@@ -135,6 +161,9 @@ def export_flows(base_url: str = "http://localhost:7860", api_key: str = None, o
         if flow_data:
             # Scrub secrets from flow data
             flow_data = scrub_secrets_from_flow(flow_data)
+
+            # Remove component metadata to prevent update notifications
+            flow_data = remove_component_metadata(flow_data)
 
             # Remove folder_id to make flows portable across different Langflow instances
             if "folder_id" in flow_data:

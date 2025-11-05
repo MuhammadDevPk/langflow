@@ -23,17 +23,27 @@ def scrub_secrets_from_value(value: Any) -> Any:
     return value
 
 
-def scrub_flow_secrets(flow_data: Dict[str, Any]) -> Dict[str, Any]:
-    """Recursively scrub secrets from flow data."""
+def scrub_flow_secrets(flow_data: Dict[str, Any], parent_key: str = None) -> Dict[str, Any]:
+    """Recursively scrub secrets from flow data.
+
+    Args:
+        flow_data: The flow data to scrub
+        parent_key: The parent key name (used to avoid scrubbing component code)
+    """
     if isinstance(flow_data, dict):
         for key, value in flow_data.items():
+            # Skip scrubbing if this is component code
+            # Component code is stored in template.code.value and should never be scrubbed
+            if parent_key == "code" and key == "value":
+                continue
+
             # Check specific fields that might contain secrets
             if key in ["api_key", "openai_api_key", "value"] and isinstance(value, str):
                 flow_data[key] = scrub_secrets_from_value(value)
             elif isinstance(value, (dict, list)):
-                flow_data[key] = scrub_flow_secrets(value)
+                flow_data[key] = scrub_flow_secrets(value, parent_key=key)
     elif isinstance(flow_data, list):
-        return [scrub_flow_secrets(item) for item in flow_data]
+        return [scrub_flow_secrets(item, parent_key=parent_key) for item in flow_data]
 
     return flow_data
 

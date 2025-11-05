@@ -129,6 +129,12 @@ def export_flows(base_url: str = "http://localhost:7860", api_key: str = None, o
             # Scrub secrets from flow data
             flow_data = scrub_secrets_from_flow(flow_data)
 
+            # Remove folder_id to make flows portable across different Langflow instances
+            if "folder_id" in flow_data:
+                del flow_data["folder_id"]
+            if "folder" in flow_data:
+                del flow_data["folder"]
+
             # Create filename
             safe_name = sanitize_filename(flow_name)
             filename = f"{safe_name}_{flow_id}.json"

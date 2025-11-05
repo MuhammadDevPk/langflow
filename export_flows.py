@@ -85,14 +85,11 @@ def scrub_secrets_from_flow(flow_data: Dict[str, Any], parent_key: str = None) -
             if parent_key == "code" and key == "value":
                 continue
 
-            # Check specific fields that might contain secrets
-            if key in ["api_key", "openai_api_key", "value"] and isinstance(value, str):
-                # Check if it looks like an OpenAI key
-                if value.startswith("sk-") and len(value) > 20:
-                    flow_data[key] = "sk-YOUR_OPENAI_API_KEY_HERE"
-                # Check for other common API key patterns
-                elif "api" in str(value).lower() and len(value) > 30:
-                    flow_data[key] = "YOUR_API_KEY_HERE"
+            # Clear value fields for API keys and folder IDs
+            # Template structure is: template.openai_api_key.value = "sk-xxx"
+            if key == "value" and parent_key in ["api_key", "openai_api_key", "langflow_api_key", "folder_id"]:
+                if isinstance(value, str) and len(value) > 0:
+                    flow_data[key] = ""  # Empty string!
             elif isinstance(value, (dict, list)):
                 flow_data[key] = scrub_secrets_from_flow(value, parent_key=key)
     elif isinstance(flow_data, list):

@@ -595,7 +595,7 @@
                 "placeholder": "",
                 "show": true,
                 "name": "api_key",
-                "value": "sk-YOUR_OPENAI_API_KEY_HERE",
+                "value": "",
                 "display_name": "OpenAI API Key",
                 "advanced": false,
                 "input_types": [],
@@ -1896,5 +1896,5 @@
   "access_type": "PRIVATE",
   "id": "76c0c376-55c4-4da3-979a-5a541a97db24",
   "user_id": "7ddfb6d5-14f0-42ab-b1f3-cd42c65f89fc",
-  "folder_id": "001eb0a9-01be-44f0-8a5b-24ccd4c1284f"
+  "folder_id": ""
 }

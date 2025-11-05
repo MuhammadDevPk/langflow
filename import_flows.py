@@ -162,6 +162,40 @@ def inject_folder_id_into_flow(flow_data: dict, folder_id: str) -> dict:
     return flow_data
 
 
+def update_flow_components(base_url: str, api_key: str, flow_id: str) -> bool:
+    """Update all components in a flow to latest versions."""
+    try:
+        headers = {
+            "accept": "application/json",
+            "x-api-key": api_key,
+        }
+
+        # First get the flow to update its components
+        response = requests.get(
+            f"{base_url}/api/v1/flows/{flow_id}",
+            headers=headers,
+            timeout=10
+        )
+
+        if response.status_code != 200:
+            return False
+
+        flow_data = response.json()
+
+        # Update the flow (this triggers component updates)
+        update_response = requests.patch(
+            f"{base_url}/api/v1/flows/{flow_id}",
+            headers={**headers, "Content-Type": "application/json"},
+            json=flow_data,
+            timeout=30
+        )
+
+        return update_response.status_code in (200, 201)
+
+    except Exception:
+        return False
+
+
 def import_flow(base_url: str, api_key: str, flow_file: Path, folder_id: Optional[str] = None) -> bool:
     """Import a single flow file into Langflow."""
     try:
@@ -192,6 +226,14 @@ def import_flow(base_url: str, api_key: str, flow_file: Path, folder_id: Optiona
         response = requests.post(url, headers=headers, files=files, timeout=30)
 
         if response.status_code in (200, 201):
+            # Get the imported flow ID from response
+            result = response.json()
+            flow_id = result.get("id")
+
+            # Auto-update components to latest versions
+            if flow_id:
+                update_flow_components(base_url, api_key, flow_id)
+
             return True
         else:
             print(f"    Error: HTTP {response.status_code} - {response.text}")

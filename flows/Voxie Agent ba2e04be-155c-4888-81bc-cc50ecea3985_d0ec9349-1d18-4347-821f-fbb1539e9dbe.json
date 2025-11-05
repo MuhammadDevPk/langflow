@@ -1,0 +1,448 @@
+{
+  "name": "Voxie Agent ba2e04be-155c-4888-81bc-cc50ecea3985",
+  "description": "Generated Voxie agent",
+  "icon": null,
+  "icon_bg_color": null,
+  "gradient": null,
+  "data": {
+    "edges": [],
+    "nodes": [
+      {
+        "data": {
+          "id": "ChatInput-a0c99a",
+          "type": "ChatInput",
+          "node": {
+            "base_classes": [
+              "Message"
+            ],
+            "description": "Get chat inputs from the Playground.",
+            "display_name": "Chat Input",
+            "icon": "MessagesSquare",
+            "template": {
+              "input_value": {
+                "type": "str",
+                "required": false,
+                "show": true,
+                "multiline": true,
+                "name": "input_value",
+                "display_name": "Input Text",
+                "value": "",
+                "info": "Message to be passed as input.",
+                "dynamic": false,
+                "list": false,
+                "password": false,
+                "advanced": false
+              },
+              "should_store_message": {
+                "type": "bool",
+                "required": false,
+                "show": true,
+                "name": "should_store_message",
+                "display_name": "Store Messages",
+                "value": true,
+                "info": "Store the message in the history.",
+                "dynamic": false,
+                "advanced": true
+              },
+              "sender": {
+                "type": "str",
+                "required": false,
+                "show": true,
+                "name": "sender",
+                "display_name": "Sender Type",
+                "value": "User",
+                "options": [
+                  "Machine",
+                  "User"
+                ],
+                "info": "Type of sender.",
+                "dynamic": false,
+                "advanced": true,
+                "list": false,
+                "password": false
+              },
+              "sender_name": {
+                "type": "str",
+                "required": false,
+                "show": true,
+                "name": "sender_name",
+                "display_name": "Sender Name",
+                "value": "User",
+                "info": "Name of the sender.",
+                "dynamic": false,
+                "advanced": true,
+                "list": false,
+                "password": false
+              },
+              "session_id": {
+                "type": "str",
+                "required": false,
+                "show": true,
+                "name": "session_id",
+                "display_name": "Session ID",
+                "value": "",
+                "info": "The session ID of the chat. If empty, the current session ID parameter will be used.",
+                "dynamic": false,
+                "advanced": true,
+                "list": false,
+                "password": false
+              },
+              "files": {
+                "type": "file",
+                "required": false,
+                "show": true,
+                "name": "files",
+                "display_name": "Files",
+                "value": "",
+                "fileTypes": [
+                  ".txt",
+                  ".pdf",
+                  ".docx",
+                  ".csv",
+                  ".jpg",
+                  ".png",
+                  ".gif"
+                ],
+                "info": "Files to be sent with the message.",
+                "dynamic": false,
+                "advanced": true,
+                "list": true
+              }
+            }
+          }
+        },
+        "dragging": false,
+        "id": "ChatInput-a0c99a",
+        "measured": {
+          "height": 188,
+          "width": 320
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "selected": false,
+        "type": "genericNode"
+      },
+      {
+        "data": {
+          "id": "OpenAI-0f0d33",
+          "type": "OpenAI",
+          "node": {
+            "base_classes": [
+              "LanguageModel"
+            ],
+            "description": "Generates text using OpenAI LLMs.",
+            "display_name": "OpenAI",
+            "icon": "OpenAI",
+            "template": {
+              "api_key": {
+                "type": "str",
+                "password": true,
+                "required": true,
+                "show": true,
+                "name": "api_key",
+                "display_name": "OpenAI API Key",
+                "value": "sk-YOUR_OPENAI_API_KEY_HERE",
+                "advanced": false,
+                "dynamic": false,
+                "info": "The OpenAI API Key to use for the OpenAI model.",
+                "list": false
+              },
+              "model_name": {
+                "type": "str",
+                "list": true,
+                "required": false,
+                "show": true,
+                "name": "model_name",
+                "display_name": "Model Name",
+                "value": "gpt-4o-mini",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "options": [
+                  "gpt-4o-mini",
+                  "gpt-4o",
+                  "gpt-3.5-turbo"
+                ]
+              },
+              "temperature": {
+                "type": "float",
+                "required": false,
+                "show": true,
+                "name": "temperature",
+                "display_name": "Temperature",
+                "value": 0.1,
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "min": 0,
+                "max": 1,
+                "step": 0.01,
+                "list": false
+              },
+              "max_tokens": {
+                "type": "int",
+                "required": false,
+                "show": true,
+                "name": "max_tokens",
+                "display_name": "Max Tokens",
+                "value": "",
+                "advanced": true,
+                "dynamic": false,
+                "info": "The maximum number of tokens to generate. Set to 0 for unlimited tokens.",
+                "list": false
+              },
+              "openai_api_base": {
+                "type": "str",
+                "required": false,
+                "show": true,
+                "name": "openai_api_base",
+                "display_name": "OpenAI API Base",
+                "value": "",
+                "advanced": true,
+                "dynamic": false,
+                "info": "The base URL of the OpenAI API. Defaults to https://api.openai.com/v1. You can change this to use other APIs like JinaChat, LocalAI and Prem.",
+                "list": false,
+                "password": false
+              },
+              "seed": {
+                "type": "int",
+                "required": false,
+                "show": true,
+                "name": "seed",
+                "display_name": "Seed",
+                "value": 1,
+                "advanced": true,
+                "dynamic": false,
+                "info": "The seed controls the reproducibility of the job.",
+                "list": false
+              },
+              "max_retries": {
+                "type": "int",
+                "required": false,
+                "show": true,
+                "name": "max_retries",
+                "display_name": "Max Retries",
+                "value": 5,
+                "advanced": true,
+                "dynamic": false,
+                "info": "The maximum number of retries to make when generating.",
+                "list": false
+              },
+              "timeout": {
+                "type": "int",
+                "required": false,
+                "show": true,
+                "name": "timeout",
+                "display_name": "Timeout",
+                "value": 700,
+                "advanced": true,
+                "dynamic": false,
+                "info": "The timeout for requests to OpenAI completion API.",
+                "list": false
+              },
+              "json_mode": {
+                "type": "bool",
+                "required": false,
+                "show": true,
+                "name": "json_mode",
+                "display_name": "JSON Mode",
+                "value": false,
+                "advanced": true,
+                "dynamic": false,
+                "info": "If True, it will output JSON regardless of passing a schema.",
+                "list": false
+              },
+              "model_kwargs": {
+                "type": "dict",
+                "required": false,
+                "show": true,
+                "name": "model_kwargs",
+                "display_name": "Model Kwargs",
+                "value": {},
+                "advanced": true,
+                "dynamic": false,
+                "info": "Additional keyword arguments to pass to the model.",
+                "list": false,
+                "object": true
+              },
+              "system_message": {
+                "type": "str",
+                "required": false,
+                "show": true,
+                "multiline": true,
+                "name": "system_message",
+                "display_name": "System Message",
+                "value": "You are a polite FAQ helper for our hotel room bookings. Your role is to assist guests by answering their questions about room availability, pricing, amenities, and booking procedures. Always respond in a friendly and helpful manner, using simple language without jargon. If you are unsure about an answer, say, \"I'd be happy to check that for you.\" After each response, suggest one follow-up question to keep the conversation going.\nDefault settings: Be polite, helpful, and venue-specific.",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "list": false,
+                "password": false
+              },
+              "prompt": {
+                "type": "prompt",
+                "required": true,
+                "show": true,
+                "multiline": true,
+                "name": "prompt",
+                "display_name": "Prompt",
+                "value": "",
+                "advanced": false,
+                "dynamic": false,
+                "info": "",
+                "list": false,
+                "load_from_db": false,
+                "password": false
+              }
+            }
+          }
+        },
+        "dragging": false,
+        "id": "OpenAI-0f0d33",
+        "measured": {
+          "height": 524,
+          "width": 320
+        },
+        "position": {
+          "x": 300,
+          "y": 0
+        },
+        "selected": false,
+        "type": "genericNode"
+      },
+      {
+        "data": {
+          "id": "chat-output-0",
+          "type": "ChatOutput",
+          "node": {
+            "base_classes": [],
+            "description": "Display a chat message in the Playground.",
+            "display_name": "Chat Output",
+            "icon": "MessageCircle",
+            "template": {
+              "input_value": {
+                "type": "str",
+                "input_types": [
+                  "Data",
+                  "DataFrame",
+                  "Message"
+                ],
+                "required": true,
+                "show": true,
+                "name": "input_value",
+                "display_name": "Inputs",
+                "value": "",
+                "advanced": false,
+                "dynamic": false,
+                "info": "Message to be passed as output.",
+                "list": false,
+                "password": false,
+                "multiline": false
+              },
+              "should_store_message": {
+                "type": "bool",
+                "required": false,
+                "show": true,
+                "name": "should_store_message",
+                "display_name": "Store Messages",
+                "value": true,
+                "info": "Store the message in the history.",
+                "dynamic": false,
+                "advanced": true
+              },
+              "sender": {
+                "type": "str",
+                "required": false,
+                "show": true,
+                "name": "sender",
+                "display_name": "Sender Type",
+                "value": "Machine",
+                "options": [
+                  "Machine",
+                  "User"
+                ],
+                "info": "Type of sender.",
+                "dynamic": false,
+                "advanced": true,
+                "list": false,
+                "password": false
+              },
+              "sender_name": {
+                "type": "str",
+                "required": false,
+                "show": true,
+                "name": "sender_name",
+                "display_name": "Sender Name",
+                "value": "AI",
+                "info": "Name of the sender.",
+                "dynamic": false,
+                "advanced": true,
+                "list": false,
+                "password": false
+              },
+              "session_id": {
+                "type": "str",
+                "required": false,
+                "show": true,
+                "name": "session_id",
+                "display_name": "Session ID",
+                "value": "",
+                "info": "The session ID of the chat. If empty, the current session ID parameter will be used.",
+                "dynamic": false,
+                "advanced": true,
+                "list": false,
+                "password": false
+              },
+              "data_template": {
+                "type": "str",
+                "required": false,
+                "show": true,
+                "multiline": true,
+                "name": "data_template",
+                "display_name": "Data Template",
+                "value": "{text}",
+                "info": "Template to convert Data to Text. If left empty, it will be dynamically set to the Data's text key.",
+                "dynamic": false,
+                "advanced": true,
+                "list": false,
+                "password": false
+              }
+            }
+          }
+        },
+        "dragging": false,
+        "id": "chat-output-0",
+        "measured": {
+          "height": 188,
+          "width": 320
+        },
+        "position": {
+          "x": 600,
+          "y": 0
+        },
+        "selected": false,
+        "type": "genericNode"
+      }
+    ],
+    "viewport": {
+      "x": 111.43470871106084,
+      "y": 246.6495078684784,
+      "zoom": 0.9233809143812017
+    }
+  },
+  "is_component": false,
+  "updated_at": "2025-11-02T15:48:40+00:00",
+  "webhook": false,
+  "endpoint_name": null,
+  "tags": [],
+  "locked": false,
+  "mcp_enabled": false,
+  "action_name": null,
+  "action_description": null,
+  "access_type": "PRIVATE",
+  "id": "d0ec9349-1d18-4347-821f-fbb1539e9dbe",
+  "user_id": "7ddfb6d5-14f0-42ab-b1f3-cd42c65f89fc",
+  "folder_id": "001eb0a9-01be-44f0-8a5b-24ccd4c1284f"
+}

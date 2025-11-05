@@ -166,7 +166,7 @@
                 "list": false,
                 "show": true,
                 "multiline": false,
-                "value": "sk-YOUR_OPENAI_API_KEY_HERE",
+                "value": "",
                 "fileTypes": [],
                 "file_path": "",
                 "password": true,
@@ -614,5 +614,5 @@
   "access_type": "PRIVATE",
   "id": "988851f1-8aa5-47c8-ad49-206a0dfd2524",
   "user_id": "7ddfb6d5-14f0-42ab-b1f3-cd42c65f89fc",
-  "folder_id": "001eb0a9-01be-44f0-8a5b-24ccd4c1284f"
+  "folder_id": ""
 }

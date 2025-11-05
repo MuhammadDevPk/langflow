@@ -264,7 +264,7 @@
                 "placeholder": "",
                 "show": true,
                 "name": "api_key",
-                "value": "sk-YOUR_OPENAI_API_KEY_HERE",
+                "value": "",
                 "display_name": "OpenAI API Key",
                 "advanced": false,
                 "input_types": [],
@@ -849,7 +849,7 @@
                 "placeholder": "",
                 "show": true,
                 "name": "folder_id",
-                "value": "001eb0a9-01be-44f0-8a5b-24ccd4c1284f",
+                "value": "",
                 "display_name": "Folder ID",
                 "advanced": false,
                 "dynamic": false,
@@ -887,7 +887,7 @@
                 "placeholder": "",
                 "show": true,
                 "name": "langflow_api_key",
-                "value": "sk-YOUR_OPENAI_API_KEY_HERE",
+                "value": "",
                 "display_name": "Langflow API Key",
                 "advanced": false,
                 "input_types": [],
@@ -904,7 +904,7 @@
                 "placeholder": "",
                 "show": true,
                 "name": "openai_api_key",
-                "value": "sk-YOUR_OPENAI_API_KEY_HERE",
+                "value": "",
                 "display_name": "OpenAI API Key",
                 "advanced": false,
                 "input_types": [],
@@ -1329,5 +1329,5 @@
   "access_type": "PRIVATE",
   "id": "9f30562c-5e21-4aba-aac5-3dc226b2495f",
   "user_id": "7ddfb6d5-14f0-42ab-b1f3-cd42c65f89fc",
-  "folder_id": "001eb0a9-01be-44f0-8a5b-24ccd4c1284f"
+  "folder_id": ""
 }

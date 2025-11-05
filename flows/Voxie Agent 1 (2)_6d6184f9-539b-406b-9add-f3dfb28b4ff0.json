@@ -174,7 +174,7 @@
                 "show": true,
                 "name": "api_key",
                 "display_name": "OpenAI API Key",
-                "value": "sk-YOUR_OPENAI_API_KEY_HERE",
+                "value": "",
                 "advanced": false,
                 "dynamic": false,
                 "info": "The OpenAI API Key to use for the OpenAI model.",
@@ -475,5 +475,5 @@
   "access_type": "PRIVATE",
   "id": "6d6184f9-539b-406b-9add-f3dfb28b4ff0",
   "user_id": "7ddfb6d5-14f0-42ab-b1f3-cd42c65f89fc",
-  "folder_id": "001eb0a9-01be-44f0-8a5b-24ccd4c1284f"
+  "folder_id": ""
 }

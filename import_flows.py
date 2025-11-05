@@ -146,12 +146,32 @@ def get_existing_flows(base_url: str, api_key: str) -> set:
     return set()
 
 
+def inject_folder_id_into_flow(flow_data: dict, folder_id: str) -> dict:
+    """Inject the current folder ID into Progress Agent Builder components."""
+    nodes = flow_data.get("data", {}).get("nodes", [])
+
+    for node in nodes:
+        node_data = node.get("data", {})
+        # Check if this is a Progress Agent Builder component
+        if node_data.get("type") == "ProgressAgentBuilder":
+            template = node_data.get("node", {}).get("template", {})
+            # Inject the folder_id into the template
+            if "folder_id" in template:
+                template["folder_id"]["value"] = folder_id
+
+    return flow_data
+
+
 def import_flow(base_url: str, api_key: str, flow_file: Path, folder_id: Optional[str] = None) -> bool:
     """Import a single flow file into Langflow."""
     try:
         # Read the flow file
         with open(flow_file, 'r', encoding='utf-8') as f:
             flow_data = json.load(f)
+
+        # If we have a folder_id, inject it into Progress Agent Builder components
+        if folder_id:
+            flow_data = inject_folder_id_into_flow(flow_data, folder_id)
 
         # Prepare the upload
         headers = {

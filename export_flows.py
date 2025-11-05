@@ -71,6 +71,26 @@ def sanitize_filename(name: str) -> str:
     return name.strip()[:100]
 
 
+def scrub_secrets_from_flow(flow_data: Dict[str, Any]) -> Dict[str, Any]:
+    """Remove API keys and secrets from flow data before saving."""
+    if isinstance(flow_data, dict):
+        for key, value in flow_data.items():
+            # Check specific fields that might contain secrets
+            if key in ["api_key", "openai_api_key", "value"] and isinstance(value, str):
+                # Check if it looks like an OpenAI key
+                if value.startswith("sk-") and len(value) > 20:
+                    flow_data[key] = "sk-YOUR_OPENAI_API_KEY_HERE"
+                # Check for other common API key patterns
+                elif "api" in str(value).lower() and len(value) > 30:
+                    flow_data[key] = "YOUR_API_KEY_HERE"
+            elif isinstance(value, (dict, list)):
+                flow_data[key] = scrub_secrets_from_flow(value)
+    elif isinstance(flow_data, list):
+        return [scrub_secrets_from_flow(item) for item in flow_data]
+
+    return flow_data
+
+
 def export_flows(base_url: str = "http://localhost:7860", api_key: str = None, output_dir: str = "flows"):
     """Export all flows to JSON files."""
 
@@ -106,6 +126,9 @@ def export_flows(base_url: str = "http://localhost:7860", api_key: str = None, o
         flow_data = get_flow_details(base_url, api_key, flow_id)
 
         if flow_data:
+            # Scrub secrets from flow data
+            flow_data = scrub_secrets_from_flow(flow_data)
+
             # Create filename
             safe_name = sanitize_filename(flow_name)
             filename = f"{safe_name}_{flow_id}.json"

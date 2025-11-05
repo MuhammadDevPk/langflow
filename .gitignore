@@ -8,3 +8,15 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Langflow database (flows are exported to flows/ directory instead)
+*.db
+langflow.db
+
+# Environment files with secrets
+.env
+.env.local
+
+# Langflow cache
+.cache/
+langflow.log

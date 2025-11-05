@@ -204,7 +204,6 @@
             "output_types": [],
             "pinned": false,
             "conditional_paths": [],
-            "frozen": false,
             "outputs": [
               {
                 "types": [
@@ -423,7 +422,6 @@
             "output_types": [],
             "pinned": false,
             "conditional_paths": [],
-            "frozen": false,
             "outputs": [
               {
                 "types": [
@@ -1053,7 +1051,6 @@
             "output_types": [],
             "pinned": false,
             "conditional_paths": [],
-            "frozen": false,
             "outputs": [
               {
                 "types": [
@@ -1523,7 +1520,6 @@
             "output_types": [],
             "pinned": false,
             "conditional_paths": [],
-            "frozen": false,
             "outputs": [
               {
                 "types": [
@@ -1775,7 +1771,6 @@
             "output_types": [],
             "pinned": false,
             "conditional_paths": [],
-            "frozen": false,
             "outputs": [
               {
                 "types": [

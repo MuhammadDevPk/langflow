@@ -7,7 +7,11 @@ requires-python = ">=3.11"
 dependencies = [
     "docling>=2.58.0",
     "easyocr>=1.7.2",
+    "flask>=3.1.2",
     "langflow>=1.6.5",
+    "ngrok>=1.4.0",
+    "requests>=2.32.5",
     "torch==2.2.2",
     "torchvision==0.17.2",
+    "twilio>=9.8.5",
 ]

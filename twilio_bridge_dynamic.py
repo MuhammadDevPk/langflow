@@ -43,7 +43,7 @@ AGENT_MAPPINGS = os.getenv("AGENT_MAPPINGS", "{}")
 
 try:
     agent_map = json.loads(AGENT_MAPPINGS)
-except:
+except (json.JSONDecodeError, ValueError):
     agent_map = {}
 
 def get_agent_config(twilio_number):

@@ -1,0 +1,35 @@
+# Dockerfile for Langflow deployment on Railway
+FROM python:3.11-slim
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Langflow
+RUN pip install --no-cache-dir langflow==1.1.1
+
+# Create directory for flows
+RUN mkdir -p /app/flows
+
+# Copy flows if they exist
+COPY flows/ /app/flows/ 2>/dev/null || true
+
+# Environment variables will be set by Railway
+ENV LANGFLOW_DATABASE_URL=sqlite:///./langflow.db
+ENV LANGFLOW_AUTO_LOGIN=false
+ENV PORT=7860
+
+# Expose port
+EXPOSE 7860
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+  CMD curl -f http://localhost:${PORT}/health || exit 1
+
+# Start Langflow
+CMD langflow run --host 0.0.0.0 --port ${PORT}

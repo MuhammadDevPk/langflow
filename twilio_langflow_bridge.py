@@ -8,9 +8,9 @@ app = Flask(__name__)
 
 # Configuration - Set these via environment variables or update here
 LANGFLOW_URL = os.getenv("LANGFLOW_URL", "http://localhost:7860")
-FLOW_ID = os.getenv("FLOW_ID", "d45c9565-e07f-472d-8fbb-f529bb9bf8fe")  # Set your agent's flow_id
+FLOW_ID = os.getenv("FLOW_ID", "9c7c075b-85da-4dfd-ae0c-bcb322851b04")  # Set your agent's flow_id
 NGROK_AUTH_TOKEN = os.getenv("NGROK_AUTH_TOKEN", "356U1FngJ7bKRyDVv0Zgyp2yoBa_4MCdPpo4iFLqjVY7GPvkQ")  # Get from ngrok.com after signup
-LANGFLOW_API_KEY = os.getenv("LANGFLOW_API_KEY", "sk-oKBwmuh2HTmiOMOF_n4_WHtTm8WoG5jy19TsE4XvA9s")  # Optional: if your Langflow requires auth
+LANGFLOW_API_KEY = os.getenv("LANGFLOW_API_KEY", "sk-SlAQGa_sWQnLcJHEHW2WLIFkv17xjpGLdj3EhRV5bmY")  # Optional: if your Langflow requires auth
 
 # Voice settings
 VOICE_INTRO = os.getenv("VOICE_INTRO", "Hi, this is your Voxie agent. How can I help you today?")

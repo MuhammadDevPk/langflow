@@ -77,6 +77,34 @@ class VAPIToLangflowRealNode:
         with open(self.template_path, 'r') as f:
             return json.load(f)
 
+    def _load_conditional_router_template(self) -> Optional[Dict]:
+        """
+        Load ConditionalRouter template from all_nodes_json.json.
+
+        Returns:
+            ConditionalRouter template node or None if not found.
+        """
+        # Check if conditional_router_template.json exists (we extracted it earlier)
+        conditional_router_path = Path(__file__).parent / "conditional_router_template.json"
+        if conditional_router_path.exists():
+            with open(conditional_router_path, 'r') as f:
+                return json.load(f)
+
+        # Fallback: try to load from all_nodes_json.json
+        all_nodes_path = Path(__file__).parent / "json" / "outputs" / "all_nodes_json.json"
+        if all_nodes_path.exists():
+            try:
+                with open(all_nodes_path, 'r') as f:
+                    data = json.load(f)
+                    nodes = data.get('data', {}).get('nodes', [])
+                    for node in nodes:
+                        if node.get('id', '').startswith('ConditionalRouter-'):
+                            return copy.deepcopy(node)
+            except Exception as e:
+                print(f"  ⚠  Warning: Could not load ConditionalRouter from all_nodes_json.json: {e}")
+
+        return None
+
     def _extract_component_templates(self) -> Dict[str, Dict]:
         """
         Extract individual component templates from the flow for cloning.
@@ -93,6 +121,13 @@ class VAPIToLangflowRealNode:
                 # Store deep copy as template
                 library[node_type] = copy.deepcopy(node)
                 print(f"  ✓ Extracted template for: {node_type}")
+
+        # Load ConditionalRouter template if not already present
+        if 'ConditionalRouter' not in library:
+            conditional_router_template = self._load_conditional_router_template()
+            if conditional_router_template:
+                library['ConditionalRouter'] = conditional_router_template
+                print(f"  ✓ Loaded ConditionalRouter template from all_nodes_json.json")
 
         return library
 
@@ -182,6 +217,37 @@ class VAPIToLangflowRealNode:
 
         print(f"\nCreated {len(new_flow['data']['nodes'])} nodes\n")
 
+        # Feature 4: Detect branching points and insert routing logic
+        print("Detecting branching points...")
+        branching_nodes = self._find_branching_nodes(vapi_edges)
+        print(f"  Found {len(branching_nodes)} branching points\n")
+
+        if branching_nodes:
+            print("Inserting routing logic for branching points...")
+            for source_name, outgoing_edges in branching_nodes.items():
+                source_id = id_map.get(source_name)
+                if not source_id:
+                    print(f"  ⚠  Warning: Source node not found for branching: {source_name}")
+                    continue
+
+                # Get source node position
+                source_node = next((n for n in new_flow['data']['nodes'] if n['id'] == source_id), None)
+                if not source_node:
+                    continue
+
+                source_pos = source_node['position']
+
+                # Insert RouterAgent + ConditionalRouter chain
+                routing_nodes = self._insert_routing_logic(
+                    source_id, source_name, outgoing_edges, id_map, source_pos
+                )
+
+                # Add routing nodes to flow
+                new_flow['data']['nodes'].extend(routing_nodes)
+                print(f"  ✓ {source_name}: Added {len(routing_nodes)} routing nodes ({len(outgoing_edges)} branches)")
+
+            print(f"\nInserted routing logic for {len(branching_nodes)} branching points\n")
+
         # Create edges
         print("Creating edges...")
 
@@ -194,13 +260,20 @@ class VAPIToLangflowRealNode:
                 new_flow['data']['edges'].append(edge)
                 print(f"  ✓ ChatInput → {start_node['name']}")
 
-        # Create edges from VAPI workflow
+        # Create edges from VAPI workflow (with routing logic if branching)
+        edges_handled_by_routing = set()
         for vapi_edge in vapi_edges:
             from_name = vapi_edge.get('from')
             to_name = vapi_edge.get('to')
             from_id = id_map.get(from_name)
             to_id = id_map.get(to_name)
-            condition = vapi_edge.get('condition')  # Extract condition for conversation flow
+            condition = vapi_edge.get('condition')
+
+            # Check if this edge is part of a branching point
+            if from_name in branching_nodes:
+                # This edge will be handled by routing logic
+                edges_handled_by_routing.add((from_name, to_name))
+                continue
 
             if from_id and to_id:
                 edge = self._create_edge(from_id, to_id, from_name, to_name, condition)
@@ -217,6 +290,101 @@ class VAPIToLangflowRealNode:
                     print(f"  ⚠  Warning: Source node not found: {from_name}")
                 if not to_id:
                     print(f"  ⚠  Warning: Target node not found: {to_name}")
+
+        # Create routing edges for branching points
+        if hasattr(self, '_routing_components') and self._routing_components:
+            print("\nCreating routing edges...")
+            for source_name, routing_info in self._routing_components.items():
+                source_id = id_map.get(source_name)
+                router_agent_id = routing_info['router_agent_id']
+                edges_to_targets = routing_info['edges']
+                pattern = routing_info['routing_pattern']
+
+                # Connect source → RouterAgent
+                edge = self._create_edge(source_id, router_agent_id, source_name, f"Router({source_name})")
+                new_flow['data']['edges'].append(edge)
+                print(f"  ✓ {source_name} → Router({source_name})")
+
+                if pattern == 'simple':
+                    # 2-way routing: RouterAgent → ConditionalRouter → [true/false targets]
+                    cond_router_id = routing_info['conditional_router_id']
+
+                    # Connect RouterAgent → ConditionalRouter
+                    edge = self._create_edge(router_agent_id, cond_router_id,
+                                            f"Router({source_name})", f"RouteCheck({source_name})")
+                    new_flow['data']['edges'].append(edge)
+                    print(f"  ✓ Router({source_name}) → RouteCheck({source_name})")
+
+                    # Connect ConditionalRouter true_result → target 1
+                    target_1_name = edges_to_targets[0].get('to')
+                    target_1_id = id_map.get(target_1_name)
+                    if target_1_id:
+                        # Need to create edge from ConditionalRouter's true_result output
+                        edge = self._create_edge_with_specific_output(
+                            cond_router_id, target_1_id, "true_result",
+                            f"RouteCheck({source_name})", target_1_name
+                        )
+                        new_flow['data']['edges'].append(edge)
+                        print(f"  ✓ RouteCheck({source_name}) [TRUE] → {target_1_name}")
+
+                    # Connect ConditionalRouter false_result → target 2
+                    target_2_name = edges_to_targets[1].get('to')
+                    target_2_id = id_map.get(target_2_name)
+                    if target_2_id:
+                        edge = self._create_edge_with_specific_output(
+                            cond_router_id, target_2_id, "false_result",
+                            f"RouteCheck({source_name})", target_2_name
+                        )
+                        new_flow['data']['edges'].append(edge)
+                        print(f"  ✓ RouteCheck({source_name}) [FALSE] → {target_2_name}")
+
+                elif pattern == 'cascade':
+                    # 3+ way routing: cascade pattern
+                    cascade_router_ids = routing_info['cascade_router_ids']
+
+                    # Connect RouterAgent → first ConditionalRouter
+                    first_router_id = cascade_router_ids[0]
+                    edge = self._create_edge(router_agent_id, first_router_id,
+                                            f"Router({source_name})", f"RouteCheck_1({source_name})")
+                    new_flow['data']['edges'].append(edge)
+                    print(f"  ✓ Router({source_name}) → RouteCheck_1({source_name})")
+
+                    # Connect cascade chain
+                    for i, cond_router_id in enumerate(cascade_router_ids):
+                        condition_num = i + 1
+
+                        # Connect true_result → target i
+                        target_name = edges_to_targets[i].get('to')
+                        target_id = id_map.get(target_name)
+                        if target_id:
+                            edge = self._create_edge_with_specific_output(
+                                cond_router_id, target_id, "true_result",
+                                f"RouteCheck_{condition_num}({source_name})", target_name
+                            )
+                            new_flow['data']['edges'].append(edge)
+                            print(f"  ✓ RouteCheck_{condition_num}({source_name}) [TRUE] → {target_name}")
+
+                        # Connect false_result → next router or default target
+                        if i < len(cascade_router_ids) - 1:
+                            # Connect to next router
+                            next_router_id = cascade_router_ids[i + 1]
+                            edge = self._create_edge_with_specific_output(
+                                cond_router_id, next_router_id, "false_result",
+                                f"RouteCheck_{condition_num}({source_name})", f"RouteCheck_{condition_num + 1}({source_name})"
+                            )
+                            new_flow['data']['edges'].append(edge)
+                            print(f"  ✓ RouteCheck_{condition_num}({source_name}) [FALSE] → RouteCheck_{condition_num + 1}({source_name})")
+                        else:
+                            # Last router: connect to default target (last edge)
+                            default_target_name = edges_to_targets[-1].get('to')
+                            default_target_id = id_map.get(default_target_name)
+                            if default_target_id:
+                                edge = self._create_edge_with_specific_output(
+                                    cond_router_id, default_target_id, "false_result",
+                                    f"RouteCheck_{condition_num}({source_name})", default_target_name
+                                )
+                                new_flow['data']['edges'].append(edge)
+                                print(f"  ✓ RouteCheck_{condition_num}({source_name}) [FALSE] → {default_target_name} (default)")
 
         # Find terminal nodes (nodes with no outgoing edges)
         terminal_nodes = set(id_map.values())
@@ -247,13 +415,15 @@ class VAPIToLangflowRealNode:
             print(f"{'='*60}\n")
             print("Next steps:")
             print("1. Import the JSON file into Langflow")
-            print("2. Add OpenAI API key to OpenAI nodes")
+            print("2. Add OpenAI API key to OpenAI nodes (if not auto-injected)")
             print("3. Test in the Playground")
-            print("\nNOTE: Conversation Flow (Feature 2) is now active:")
-            print("  ✓ First messages extracted and configured")
-            print("  ✓ Edge conditions stored in metadata")
-            print("  ⚠ Conditional routing NOT yet functional (Feature 4 needed)")
-            print("  → Branching nodes will execute all paths, not choose one\n")
+            print("\nFeatures implemented:")
+            print("  ✓ Feature 1: Variable Extraction (JSON output in prompts)")
+            print("  ✓ Feature 2: Conversation Flow (first messages)")
+            print("  ✓ Feature 3: Basic Chat (ChatInput/ChatOutput)")
+            print("  ✓ Feature 4: Conditional Routing (RouterAgent + ConditionalRouter)")
+            print(f"  → {len(branching_nodes)} branching points with intelligent routing")
+            print("  ⚠ Feature 5: Tool Integration (not yet implemented)\n")
 
         return output_json
 
@@ -521,6 +691,15 @@ class VAPIToLangflowRealNode:
                 "input_types": ["Message"],
                 "input_type": "str"
             }
+        elif node_id.startswith("ConditionalRouter"):
+            return {
+                "type": "ConditionalRouter",
+                "output_name": "true_result",  # Has two outputs: true_result and false_result
+                "output_types": ["Message"],
+                "input_name": "input_text",  # Primary input
+                "input_types": ["Message"],
+                "input_type": "str"
+            }
         elif node_id.startswith("ChatOutput"):
             return {
                 "type": "ChatOutput",
@@ -608,6 +787,266 @@ class VAPIToLangflowRealNode:
             # Store for future Feature 4 (Conditional Routing) implementation
 
         return edge
+
+    def _create_edge_with_specific_output(self, source_id: str, target_id: str,
+                                          output_name: str, source_name: str = "",
+                                          target_name: str = "") -> Dict:
+        """
+        Create edge with a specific output handle (for ConditionalRouter true/false outputs).
+
+        Args:
+            source_id: Source node ID
+            target_id: Target node ID
+            output_name: Specific output handle name (e.g., "true_result", "false_result")
+            source_name: Source node name (for logging)
+            target_name: Target node name (for logging)
+
+        Returns:
+            Edge dictionary
+        """
+        # Get component info
+        source_info = self._get_component_io_info(source_id)
+        target_info = self._get_component_io_info(target_id)
+
+        # Override output name with specific output
+        source_handle_obj = {
+            "dataType": source_info["type"],
+            "id": source_id,
+            "name": output_name,  # Use specific output (true_result or false_result)
+            "output_types": source_info["output_types"]
+        }
+
+        target_handle_obj = {
+            "fieldName": target_info["input_name"],
+            "id": target_id,
+            "inputTypes": target_info["input_types"],
+            "type": target_info["input_type"]
+        }
+
+        # Stringify handles
+        source_handle_str = json.dumps(source_handle_obj)
+        target_handle_str = json.dumps(target_handle_obj)
+
+        # Create edge ID
+        edge_id = f"xy-edge__{source_id}{source_handle_str}-{target_id}{target_handle_str}"
+
+        edge = {
+            "source": source_id,
+            "sourceHandle": source_handle_str,
+            "target": target_id,
+            "targetHandle": target_handle_str,
+            "data": {
+                "targetHandle": target_handle_obj,
+                "sourceHandle": source_handle_obj
+            },
+            "id": edge_id,
+            "selected": False,
+            "animated": False,
+            "className": ""
+        }
+
+        return edge
+
+    def _find_branching_nodes(self, vapi_edges: List[Dict]) -> Dict[str, List[Dict]]:
+        """
+        Find nodes with multiple outgoing edges (branching points).
+
+        Args:
+            vapi_edges: List of VAPI edges
+
+        Returns:
+            Dictionary mapping node names to list of outgoing edges
+        """
+        outgoing = {}
+        for edge in vapi_edges:
+            from_node = edge.get('from')
+            if from_node:
+                if from_node not in outgoing:
+                    outgoing[from_node] = []
+                outgoing[from_node].append(edge)
+
+        # Return only nodes with 2+ outgoing edges (branching points)
+        branching = {k: v for k, v in outgoing.items() if len(v) >= 2}
+        return branching
+
+    def _create_router_agent(self, source_node_name: str, conditions: List[Dict],
+                            source_node_id: str, position: Dict[str, float]) -> Dict:
+        """
+        Create a RouterAgent node that evaluates VAPI conditions using LLM.
+
+        Args:
+            source_node_name: Name of the source node (for identification)
+            conditions: List of VAPI condition dictionaries with 'prompt' field
+            source_node_id: ID of the source node (for positioning)
+            position: Position dictionary with x and y coordinates
+
+        Returns:
+            RouterAgent node dictionary
+        """
+        # Clone OpenAIModel (or Agent) as RouterAgent
+        if 'Agent' in self.component_library:
+            router = self._clone_component('Agent')
+        elif 'OpenAIModel' in self.component_library:
+            router = self._clone_component('OpenAIModel')
+        else:
+            raise ValueError("No Agent or OpenAIModel template available for RouterAgent")
+
+        # Build routing prompt
+        condition_texts = []
+        for i, condition in enumerate(conditions, 1):
+            cond_prompt = condition.get('prompt', f'Condition {i}')
+            condition_texts.append(f"{i}. {cond_prompt}")
+
+        routing_prompt = f"""You are a routing agent for a conversation workflow. Based on the user's message and conversation context, determine which condition best matches the user's intent.
+
+CONDITIONS:
+{chr(10).join(condition_texts)}
+
+INSTRUCTIONS:
+- Analyze the user's message carefully
+- Choose the condition number (1, 2, 3, etc.) that BEST matches the user's intent
+- If multiple conditions could apply, choose the MOST SPECIFIC one
+- Respond with ONLY the number, nothing else
+
+Your response (just the number):"""
+
+        # Update prompt in template
+        template = router['data']['node']['template']
+        if 'system_message' in template:
+            template['system_message']['value'] = routing_prompt
+        elif 'agent_description' in template:
+            template['agent_description']['value'] = routing_prompt
+
+        # Inject API key if available
+        if self.openai_api_key and 'openai_api_key' in template:
+            template['openai_api_key']['value'] = self.openai_api_key
+
+        # Set position
+        router['position'] = position
+
+        # Update node name for clarity
+        router['data']['node']['display_name'] = f"Router ({source_node_name})"
+
+        return router
+
+    def _create_conditional_router(self, condition_index: int, total_conditions: int,
+                                   position: Dict[str, float], branch_name: str = "") -> Dict:
+        """
+        Create a ConditionalRouter node for path selection.
+
+        Args:
+            condition_index: The condition number to match (1, 2, 3, etc.)
+            total_conditions: Total number of conditions
+            position: Position dictionary with x and y coordinates
+            branch_name: Name of the branch (for display)
+
+        Returns:
+            ConditionalRouter node dictionary
+        """
+        if 'ConditionalRouter' not in self.component_library:
+            raise ValueError("ConditionalRouter template not available")
+
+        router = self._clone_component('ConditionalRouter')
+
+        # Configure the router
+        template = router['data']['node']['template']
+        template['operator']['value'] = 'equals'
+        template['match_text']['value'] = str(condition_index)
+        template['case_sensitive']['value'] = False
+        template['max_iterations']['value'] = 10
+        template['default_route']['value'] = 'false_result'
+
+        # Set position
+        router['position'] = position
+
+        # Update display name
+        if branch_name:
+            router['data']['node']['display_name'] = f"Route Check ({branch_name})"
+
+        return router
+
+    def _insert_routing_logic(self, source_id: str, source_name: str,
+                             edges_to_targets: List[Dict], id_map: Dict[str, str],
+                             position: Dict[str, float]) -> List[Dict]:
+        """
+        Insert RouterAgent + ConditionalRouter chain between source and targets.
+
+        Args:
+            source_id: Source node ID
+            source_name: Source node name
+            edges_to_targets: List of edges from source to different targets
+            id_map: Mapping of VAPI names to Langflow IDs
+            position: Starting position for routing nodes
+
+        Returns:
+            List of new nodes (RouterAgent + ConditionalRouters)
+        """
+        new_nodes = []
+        num_branches = len(edges_to_targets)
+
+        # Extract conditions
+        conditions = [edge.get('condition', {}) for edge in edges_to_targets]
+
+        # Create RouterAgent
+        router_agent_pos = {
+            'x': position['x'] + 300,
+            'y': position['y']
+        }
+        router_agent = self._create_router_agent(
+            source_name, conditions, source_id, router_agent_pos
+        )
+        new_nodes.append(router_agent)
+        router_agent_id = router_agent['id']
+
+        # Store for edge creation
+        self._routing_components = getattr(self, '_routing_components', {})
+        self._routing_components[source_name] = {
+            'router_agent_id': router_agent_id,
+            'edges': edges_to_targets,
+            'num_branches': num_branches
+        }
+
+        if num_branches == 2:
+            # Simple 2-way routing: single ConditionalRouter
+            cond_router_pos = {
+                'x': position['x'] + 600,
+                'y': position['y']
+            }
+            cond_router = self._create_conditional_router(
+                1, num_branches, cond_router_pos,
+                f"{source_name}_branch"
+            )
+            new_nodes.append(cond_router)
+            cond_router_id = cond_router['id']
+
+            # Store routing info
+            self._routing_components[source_name]['conditional_router_id'] = cond_router_id
+            self._routing_components[source_name]['routing_pattern'] = 'simple'
+
+        else:
+            # 3+ way routing: cascade pattern
+            # Create chain of ConditionalRouters
+            cascade_routers = []
+            for i in range(num_branches - 1):
+                cond_router_pos = {
+                    'x': position['x'] + 600 + (i * 300),
+                    'y': position['y'] + (i * 150)
+                }
+                target_edge = edges_to_targets[i]
+                target_name = target_edge.get('to', f'branch_{i+1}')
+
+                cond_router = self._create_conditional_router(
+                    i + 1, num_branches, cond_router_pos,
+                    target_name
+                )
+                new_nodes.append(cond_router)
+                cascade_routers.append(cond_router['id'])
+
+            # Store routing info
+            self._routing_components[source_name]['cascade_router_ids'] = cascade_routers
+            self._routing_components[source_name]['routing_pattern'] = 'cascade'
+
+        return new_nodes
 
 
 def main():

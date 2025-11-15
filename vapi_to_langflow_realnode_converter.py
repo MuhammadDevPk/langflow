@@ -918,8 +918,9 @@ Your response (just the number):"""
             template['agent_description']['value'] = routing_prompt
 
         # Inject API key if available
-        if self.openai_api_key and 'openai_api_key' in template:
-            template['openai_api_key']['value'] = self.openai_api_key
+        if self.openai_api_key and 'api_key' in template:
+            template['api_key']['value'] = self.openai_api_key
+            print(f"    ✓ API key injected into RouterAgent")
 
         # Set position
         router['position'] = position

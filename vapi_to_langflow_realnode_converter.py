@@ -54,10 +54,11 @@ class VAPIToLangflowRealNode:
         """Find a suitable template flow in the flows directory."""
         flows_dir = Path(__file__).parent / "flows"
 
-        # Look for Main Agent or any flow with OpenAI components
+        # Look for Basic Agent Blue Print first (has complete component code)
+        # Main Agent has placeholder code that requires extraction
         candidates = [
-            flows_dir / "Main Agent_9f30562c-5e21-4aba-aac5-3dc226b2495f.json",
-            flows_dir / "Basic Agent Blue Print_76c0c376-55c4-4da3-979a-5a541a97db24.json"
+            flows_dir / "Basic Agent Blue Print_76c0c376-55c4-4da3-979a-5a541a97db24.json",
+            flows_dir / "Main Agent_9f30562c-5e21-4aba-aac5-3dc226b2495f.json"
         ]
 
         for candidate in candidates:
@@ -199,11 +200,18 @@ class VAPIToLangflowRealNode:
             to_name = vapi_edge.get('to')
             from_id = id_map.get(from_name)
             to_id = id_map.get(to_name)
+            condition = vapi_edge.get('condition')  # Extract condition for conversation flow
 
             if from_id and to_id:
-                edge = self._create_edge(from_id, to_id, from_name, to_name)
+                edge = self._create_edge(from_id, to_id, from_name, to_name, condition)
                 new_flow['data']['edges'].append(edge)
-                print(f"  ✓ {from_name} → {to_name}")
+
+                # Show condition info if present
+                if condition and condition.get('prompt'):
+                    cond_preview = condition['prompt'][:40] + "..." if len(condition['prompt']) > 40 else condition['prompt']
+                    print(f"  ✓ {from_name} → {to_name} [condition: {cond_preview}]")
+                else:
+                    print(f"  ✓ {from_name} → {to_name}")
             else:
                 if not from_id:
                     print(f"  ⚠  Warning: Source node not found: {from_name}")
@@ -240,7 +248,12 @@ class VAPIToLangflowRealNode:
             print("Next steps:")
             print("1. Import the JSON file into Langflow")
             print("2. Add OpenAI API key to OpenAI nodes")
-            print("3. Test in the Playground\n")
+            print("3. Test in the Playground")
+            print("\nNOTE: Conversation Flow (Feature 2) is now active:")
+            print("  ✓ First messages extracted and configured")
+            print("  ✓ Edge conditions stored in metadata")
+            print("  ⚠ Conditional routing NOT yet functional (Feature 4 needed)")
+            print("  → Branching nodes will execute all paths, not choose one\n")
 
         return output_json
 
@@ -352,8 +365,8 @@ class VAPIToLangflowRealNode:
         if 'data' in cloned:
             cloned['data']['id'] = new_id
 
-        # Clean corrupted code field to prevent "outdated components" issue
-        self._clean_component_code(cloned)
+        # Skip code cleaning - Basic Agent Blue Print template already has complete code
+        # self._clean_component_code(cloned)  # Disabled: causes "missing code" errors
 
         return cloned
 
@@ -383,6 +396,44 @@ class VAPIToLangflowRealNode:
             # Update the system message/prompt
             template = langflow_node.get('data', {}).get('node', {}).get('template', {})
             prompt = vapi_node.get('prompt', '')
+
+            # Extract first message if present (for conversation flow)
+            message_plan = vapi_node.get('messagePlan', {})
+            first_message = message_plan.get('firstMessage')
+            if first_message:
+                # Prepend first message as an explicit instruction
+                prompt = f"FIRST MESSAGE: When starting the conversation or when this node is first reached, begin by saying:\n\"{first_message}\"\n\nThen continue with your role:\n{prompt}"
+                print(f"    ✓ First message configured: \"{first_message[:60]}...\"" if len(first_message) > 60 else f"    ✓ First message configured: \"{first_message}\"")
+
+            # Check if this node extracts variables
+            variable_extraction_plan = vapi_node.get('variableExtractionPlan')
+            if variable_extraction_plan:
+                # Add JSON output formatting to prompt for variable extraction
+                extracted_vars = variable_extraction_plan.get('output', [])
+                if extracted_vars:
+                    var_names = [v.get('title') for v in extracted_vars]
+                    var_descriptions = {v.get('title'): v.get('description', '') for v in extracted_vars}
+
+                    # Build JSON schema description
+                    json_schema = "{\n"
+                    for var in extracted_vars:
+                        var_name = var.get('title')
+                        var_desc = var.get('description', '')
+                        var_type = var.get('type', 'string')
+                        var_enum = var.get('enum', [])
+
+                        if var_enum:
+                            json_schema += f'  "{var_name}": "{var_enum[0]}" // Options: {", ".join(var_enum)}\n'
+                        else:
+                            json_schema += f'  "{var_name}": "<{var_type}>" // {var_desc}\n'
+                    json_schema += "}"
+
+                    # Enhance prompt with variable extraction instructions
+                    prompt += f"\n\nIMPORTANT: After your response, you MUST extract the following information and output it as JSON:\n{json_schema}\n\n"
+                    prompt += f"Variables to extract: {', '.join(var_names)}\n"
+                    prompt += "Format: First provide your conversational response, then on a new line output ONLY the JSON object with extracted values."
+
+                    print(f"    ✓ Variable extraction configured: {', '.join(var_names)}")
 
             # Try different possible prompt field names
             if 'system_message' in template:
@@ -461,6 +512,15 @@ class VAPIToLangflowRealNode:
                 "input_types": ["Message"],
                 "input_type": "str"
             }
+        elif node_id.startswith("Agent"):
+            return {
+                "type": "Agent",
+                "output_name": "response",  # Agent outputs "response", not "output"!
+                "output_types": ["Message"],
+                "input_name": "input_value",
+                "input_types": ["Message"],
+                "input_type": "str"
+            }
         elif node_id.startswith("ChatOutput"):
             return {
                 "type": "ChatOutput",
@@ -482,7 +542,8 @@ class VAPIToLangflowRealNode:
             }
 
     def _create_edge(self, source_id: str, target_id: str,
-                    source_name: str = "", target_name: str = "") -> Dict:
+                    source_name: str = "", target_name: str = "",
+                    condition: Dict = None) -> Dict:
         """
         Create a Langflow edge connecting two nodes with proper handle format.
 
@@ -491,9 +552,10 @@ class VAPIToLangflowRealNode:
             target_id: Target node ID
             source_name: Source node name (for logging)
             target_name: Target node name (for logging)
+            condition: Optional VAPI condition metadata (for conversation flow)
 
         Returns:
-            Edge dictionary with JSON-stringified handles
+            Edge dictionary with JSON-stringified handles and optional condition metadata
         """
         # Get component info for source and target
         source_info = self._get_component_io_info(source_id)
@@ -536,6 +598,14 @@ class VAPIToLangflowRealNode:
             "animated": False,
             "className": ""
         }
+
+        # Add VAPI condition metadata if present (for conversation flow)
+        if condition:
+            edge['data']['vapiCondition'] = {
+                'type': condition.get('type', 'ai'),
+                'prompt': condition.get('prompt', '')
+            }
+            # Store for future Feature 4 (Conditional Routing) implementation
 
         return edge
 

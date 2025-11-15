@@ -21,6 +21,7 @@ import sys
 import os
 import inspect
 import argparse
+import requests
 from pathlib import Path
 from typing import Dict, List, Any, Optional
 from dotenv import load_dotenv
@@ -29,12 +30,13 @@ from dotenv import load_dotenv
 class VAPIToLangflowRealNode:
     """Converts VAPI workflows to multi-node Langflow flows using template cloning."""
 
-    def __init__(self, template_path: Optional[str] = None):
+    def __init__(self, template_path: Optional[str] = None, validate_api_key: bool = True):
         """
         Initialize converter with component templates.
 
         Args:
             template_path: Path to template flow JSON. If None, uses Main Agent flow.
+            validate_api_key: Whether to validate the OpenAI API key (default: True)
         """
         # Load environment variables from .env file
         load_dotenv()
@@ -42,6 +44,24 @@ class VAPIToLangflowRealNode:
 
         if self.openai_api_key:
             print("  ✓ OpenAI API key loaded from environment")
+
+            # Validate API key if requested
+            if validate_api_key:
+                print("  ⏳ Validating API key with OpenAI...")
+                if self._validate_openai_api_key():
+                    print("  ✅ API key is valid and working")
+                else:
+                    print("  ❌ API key validation FAILED")
+                    print("     The key may be invalid, revoked, or expired")
+                    print("     Please check your key at: https://platform.openai.com/api-keys")
+                    print("\n  ⚠️  WARNING: Generated JSON will contain an invalid API key!")
+                    print("     You can continue, but Langflow will fail with authentication errors.")
+
+                    # Ask user if they want to continue
+                    response = input("\n  Continue anyway? (yes/no): ").strip().lower()
+                    if response not in ['yes', 'y']:
+                        print("\n  Exiting. Please update your API key and try again.")
+                        sys.exit(1)
         else:
             print("  ⚠ Warning: OPENAI_API_KEY not found in .env file")
             print("    API keys will need to be added manually to nodes")
@@ -104,6 +124,47 @@ class VAPIToLangflowRealNode:
                 print(f"  ⚠  Warning: Could not load ConditionalRouter from all_nodes_json.json: {e}")
 
         return None
+
+    def _validate_openai_api_key(self) -> bool:
+        """
+        Validate the OpenAI API key by making a test request to OpenAI's API.
+
+        Returns:
+            True if the API key is valid, False otherwise
+        """
+        if not self.openai_api_key:
+            return False
+
+        try:
+            # Test the API key with a simple models endpoint request
+            response = requests.get(
+                'https://api.openai.com/v1/models',
+                headers={'Authorization': f'Bearer {self.openai_api_key}'},
+                timeout=10
+            )
+
+            # Check if the request was successful
+            if response.status_code == 200:
+                return True
+            elif response.status_code == 401:
+                # Unauthorized - invalid API key
+                return False
+            else:
+                # Other error - assume key might be valid but other issues exist
+                print(f"     Unexpected status code: {response.status_code}")
+                return False
+
+        except requests.exceptions.Timeout:
+            print("     API validation timed out - network issue?")
+            # Don't fail on timeout, assume key might be valid
+            return True
+        except requests.exceptions.RequestException as e:
+            print(f"     API validation error: {e}")
+            # Don't fail on network errors, assume key might be valid
+            return True
+        except Exception as e:
+            print(f"     Unexpected error during validation: {e}")
+            return True
 
     def _extract_component_templates(self) -> Dict[str, Dict]:
         """
@@ -1085,6 +1146,13 @@ Examples:
         default=None
     )
 
+    parser.add_argument(
+        '--skip-validation',
+        action='store_true',
+        help='Skip OpenAI API key validation (faster but may generate invalid JSON)',
+        default=False
+    )
+
     args = parser.parse_args()
 
     # Determine output path
@@ -1095,7 +1163,10 @@ Examples:
     try:
         # Create converter
         print("Initializing converter...")
-        converter = VAPIToLangflowRealNode(template_path=args.template)
+        converter = VAPIToLangflowRealNode(
+            template_path=args.template,
+            validate_api_key=not args.skip_validation
+        )
         print(f"  Using template: {converter.template_path}")
         print(f"  Available components: {', '.join(converter.component_library.keys())}\n")
 

@@ -1,14 +1,14 @@
 {
   "name": "Appointment Scheduler",
   "description": "Converted from VAPI: Appointment Scheduler",
-  "id": "74f7e7a1-984c-4afd-8918-c620f6f0a42b",
+  "id": "01092f7c-3fc7-44c8-8a11-3ae91762dc6a",
   "icon": null,
   "icon_bg_color": null,
   "gradient": null,
   "data": {
     "nodes": [
       {
-        "id": "ChatInput-81033",
+        "id": "ChatInput-9fde9",
         "type": "genericNode",
         "position": {
           "x": -800,
@@ -238,7 +238,7 @@
           },
           "showNode": true,
           "type": "ChatInput",
-          "id": "ChatInput-81033"
+          "id": "ChatInput-9fde9"
         },
         "selected": false,
         "measured": {
@@ -248,7 +248,7 @@
         "dragging": false
       },
       {
-        "id": "Agent-920b2",
+        "id": "Agent-c20f7",
         "type": "genericNode",
         "position": {
           "x": -705.8237557575243,
@@ -886,7 +886,7 @@
           },
           "showNode": true,
           "type": "Agent",
-          "id": "Agent-920b2"
+          "id": "Agent-c20f7"
         },
         "selected": false,
         "measured": {
@@ -896,7 +896,7 @@
         "dragging": false
       },
       {
-        "id": "Agent-bfaf7",
+        "id": "Agent-245f2",
         "type": "genericNode",
         "position": {
           "x": -1483.580975329013,
@@ -1534,7 +1534,7 @@
           },
           "showNode": true,
           "type": "Agent",
-          "id": "Agent-bfaf7"
+          "id": "Agent-245f2"
         },
         "selected": false,
         "measured": {
@@ -1544,7 +1544,7 @@
         "dragging": false
       },
       {
-        "id": "Agent-48a9f",
+        "id": "Agent-88518",
         "type": "genericNode",
         "position": {
           "x": -1471.8258644292039,
@@ -2182,7 +2182,7 @@
           },
           "showNode": true,
           "type": "Agent",
-          "id": "Agent-48a9f"
+          "id": "Agent-88518"
         },
         "selected": false,
         "measured": {
@@ -2192,7 +2192,7 @@
         "dragging": false
       },
       {
-        "id": "Agent-4b9e7",
+        "id": "Agent-d9b24",
         "type": "genericNode",
         "position": {
           "x": -388.5315683262705,
@@ -2830,7 +2830,7 @@
           },
           "showNode": true,
           "type": "Agent",
-          "id": "Agent-4b9e7"
+          "id": "Agent-d9b24"
         },
         "selected": false,
         "measured": {
@@ -2840,7 +2840,7 @@
         "dragging": false
       },
       {
-        "id": "Agent-1db5f",
+        "id": "Agent-022f0",
         "type": "genericNode",
         "position": {
           "x": 722.7050867585804,
@@ -3478,7 +3478,7 @@
           },
           "showNode": true,
           "type": "Agent",
-          "id": "Agent-1db5f"
+          "id": "Agent-022f0"
         },
         "selected": false,
         "measured": {
@@ -3488,7 +3488,7 @@
         "dragging": false
       },
       {
-        "id": "Agent-f8d48",
+        "id": "Agent-25677",
         "type": "genericNode",
         "position": {
           "x": -2193.344692421535,
@@ -4126,7 +4126,7 @@
           },
           "showNode": true,
           "type": "Agent",
-          "id": "Agent-f8d48"
+          "id": "Agent-25677"
         },
         "selected": false,
         "measured": {
@@ -4136,7 +4136,7 @@
         "dragging": false
       },
       {
-        "id": "Agent-d6fb7",
+        "id": "Agent-debe6",
         "type": "genericNode",
         "position": {
           "x": -1141.9725905844539,
@@ -4774,7 +4774,7 @@
           },
           "showNode": true,
           "type": "Agent",
-          "id": "Agent-d6fb7"
+          "id": "Agent-debe6"
         },
         "selected": false,
         "measured": {
@@ -4784,7 +4784,7 @@
         "dragging": false
       },
       {
-        "id": "Agent-eaa4a",
+        "id": "Agent-3af72",
         "type": "genericNode",
         "position": {
           "x": -1618.942009199001,
@@ -5422,7 +5422,7 @@
           },
           "showNode": true,
           "type": "Agent",
-          "id": "Agent-eaa4a"
+          "id": "Agent-3af72"
         },
         "selected": false,
         "measured": {
@@ -5432,7 +5432,7 @@
         "dragging": false
       },
       {
-        "id": "Agent-80dc7",
+        "id": "Agent-78502",
         "type": "genericNode",
         "position": {
           "x": -754.7613039283544,
@@ -6070,7 +6070,7 @@
           },
           "showNode": true,
           "type": "Agent",
-          "id": "Agent-80dc7"
+          "id": "Agent-78502"
         },
         "selected": false,
         "measured": {
@@ -6080,7 +6080,7 @@
         "dragging": false
       },
       {
-        "id": "Agent-da1b1",
+        "id": "Agent-78924",
         "type": "genericNode",
         "position": {
           "x": 96.73649340762202,
@@ -6718,7 +6718,7 @@
           },
           "showNode": true,
           "type": "Agent",
-          "id": "Agent-da1b1"
+          "id": "Agent-78924"
         },
         "selected": false,
         "measured": {
@@ -6728,7 +6728,7 @@
         "dragging": false
       },
       {
-        "id": "Agent-db795",
+        "id": "Agent-c267e",
         "type": "genericNode",
         "position": {
           "x": 97.7396338091923,
@@ -7366,7 +7366,7 @@
           },
           "showNode": true,
           "type": "Agent",
-          "id": "Agent-db795"
+          "id": "Agent-c267e"
         },
         "selected": false,
         "measured": {
@@ -7376,7 +7376,7 @@
         "dragging": false
       },
       {
-        "id": "Agent-37483",
+        "id": "Agent-e4726",
         "type": "genericNode",
         "position": {
           "x": 1155.7930375388546,
@@ -8014,7 +8014,7 @@
           },
           "showNode": true,
           "type": "Agent",
-          "id": "Agent-37483"
+          "id": "Agent-e4726"
         },
         "selected": false,
         "measured": {
@@ -8024,7 +8024,7 @@
         "dragging": false
       },
       {
-        "id": "Agent-c6790",
+        "id": "Agent-c543a",
         "type": "genericNode",
         "position": {
           "x": 1277.0746535656376,
@@ -8662,7 +8662,7 @@
           },
           "showNode": true,
           "type": "Agent",
-          "id": "Agent-c6790"
+          "id": "Agent-c543a"
         },
         "selected": false,
         "measured": {
@@ -8672,7 +8672,7 @@
         "dragging": false
       },
       {
-        "id": "Agent-1b329",
+        "id": "Agent-613a7",
         "type": "genericNode",
         "position": {
           "x": 1236.6097216819107,
@@ -9310,7 +9310,7 @@
           },
           "showNode": true,
           "type": "Agent",
-          "id": "Agent-1b329"
+          "id": "Agent-613a7"
         },
         "selected": false,
         "measured": {
@@ -9320,7 +9320,7 @@
         "dragging": false
       },
       {
-        "id": "Agent-1eb45",
+        "id": "Agent-2daee",
         "type": "genericNode",
         "position": {
           "x": -2192.1700111914006,
@@ -9958,7 +9958,7 @@
           },
           "showNode": true,
           "type": "Agent",
-          "id": "Agent-1eb45"
+          "id": "Agent-2daee"
         },
         "selected": false,
         "measured": {
@@ -9968,7 +9968,7 @@
         "dragging": false
       },
       {
-        "id": "Agent-98fef",
+        "id": "Agent-d499e",
         "type": "genericNode",
         "position": {
           "x": -1148.0525139142742,
@@ -10606,7 +10606,7 @@
           },
           "showNode": true,
           "type": "Agent",
-          "id": "Agent-98fef"
+          "id": "Agent-d499e"
         },
         "selected": false,
         "measured": {
@@ -10616,7 +10616,7 @@
         "dragging": false
       },
       {
-        "id": "Agent-15d4d",
+        "id": "Agent-748fe",
         "type": "genericNode",
         "position": {
           "x": -1616.3897378665279,
@@ -11254,7 +11254,7 @@
           },
           "showNode": true,
           "type": "Agent",
-          "id": "Agent-15d4d"
+          "id": "Agent-748fe"
         },
         "selected": false,
         "measured": {
@@ -11264,7 +11264,7 @@
         "dragging": false
       },
       {
-        "id": "Agent-fe61c",
+        "id": "Agent-3e356",
         "type": "genericNode",
         "position": {
           "x": 1264.9351740005195,
@@ -11902,7 +11902,7 @@
           },
           "showNode": true,
           "type": "Agent",
-          "id": "Agent-fe61c"
+          "id": "Agent-3e356"
         },
         "selected": false,
         "measured": {
@@ -11912,7 +11912,7 @@
         "dragging": false
       },
       {
-        "id": "Agent-831b7",
+        "id": "Agent-f73a6",
         "type": "genericNode",
         "position": {
           "x": -1147.2083634850887,
@@ -12550,7 +12550,7 @@
           },
           "showNode": true,
           "type": "Agent",
-          "id": "Agent-831b7"
+          "id": "Agent-f73a6"
         },
         "selected": false,
         "measured": {
@@ -12560,7 +12560,7 @@
         "dragging": false
       },
       {
-        "id": "Agent-8d577",
+        "id": "Agent-5f8e8",
         "type": "genericNode",
         "position": {
           "x": -1613.5324085869356,
@@ -13198,7 +13198,7 @@
           },
           "showNode": true,
           "type": "Agent",
-          "id": "Agent-8d577"
+          "id": "Agent-5f8e8"
         },
         "selected": false,
         "measured": {
@@ -13208,7 +13208,7 @@
         "dragging": false
       },
       {
-        "id": "Agent-e966a",
+        "id": "Agent-2e5e2",
         "type": "genericNode",
         "position": {
           "x": 1280.4936711110045,
@@ -13846,7 +13846,7 @@
           },
           "showNode": true,
           "type": "Agent",
-          "id": "Agent-e966a"
+          "id": "Agent-2e5e2"
         },
         "selected": false,
         "measured": {
@@ -13856,7 +13856,7 @@
         "dragging": false
       },
       {
-        "id": "ChatOutput-a99f5",
+        "id": "ChatOutput-cc5b5",
         "type": "genericNode",
         "position": {
           "x": 2005.350541948589,
@@ -14064,7 +14064,7 @@
           },
           "showNode": false,
           "type": "ChatOutput",
-          "id": "ChatOutput-a99f5"
+          "id": "ChatOutput-cc5b5"
         },
         "selected": false,
         "measured": {
@@ -14074,7 +14074,7 @@
         "dragging": false
       },
       {
-        "id": "ChatOutput-433be",
+        "id": "ChatOutput-5f293",
         "type": "genericNode",
         "position": {
           "x": -354.92881830948005,
@@ -14282,7 +14282,7 @@
           },
           "showNode": false,
           "type": "ChatOutput",
-          "id": "ChatOutput-433be"
+          "id": "ChatOutput-5f293"
         },
         "selected": false,
         "measured": {
@@ -14292,7 +14292,7 @@
         "dragging": false
       },
       {
-        "id": "ChatOutput-eecaa",
+        "id": "ChatOutput-29446",
         "type": "genericNode",
         "position": {
           "x": 2405.350541948589,
@@ -14500,7 +14500,7 @@
           },
           "showNode": false,
           "type": "ChatOutput",
-          "id": "ChatOutput-eecaa"
+          "id": "ChatOutput-29446"
         },
         "selected": false,
         "measured": {
@@ -14510,7 +14510,7 @@
         "dragging": false
       },
       {
-        "id": "Agent-8be24",
+        "id": "Agent-05e5c",
         "type": "genericNode",
         "position": {
           "x": -405.8237557575243,
@@ -15148,7 +15148,7 @@
           },
           "showNode": true,
           "type": "Agent",
-          "id": "Agent-8be24"
+          "id": "Agent-05e5c"
         },
         "selected": false,
         "measured": {
@@ -15159,7 +15159,7 @@
       },
       {
         "data": {
-          "id": "ConditionalRouter-e42c0",
+          "id": "ConditionalRouter-d05c6",
           "node": {
             "base_classes": [
               "Message"
@@ -15432,7 +15432,7 @@
           "type": "ConditionalRouter"
         },
         "dragging": false,
-        "id": "ConditionalRouter-e42c0",
+        "id": "ConditionalRouter-d05c6",
         "measured": {
           "height": 429,
           "width": 320
@@ -15446,7 +15446,7 @@
       },
       {
         "data": {
-          "id": "ConditionalRouter-c020d",
+          "id": "ConditionalRouter-42195",
           "node": {
             "base_classes": [
               "Message"
@@ -15719,7 +15719,7 @@
           "type": "ConditionalRouter"
         },
         "dragging": false,
-        "id": "ConditionalRouter-c020d",
+        "id": "ConditionalRouter-42195",
         "measured": {
           "height": 429,
           "width": 320
@@ -15732,7 +15732,7 @@
         "type": "genericNode"
       },
       {
-        "id": "Agent-bc3d2",
+        "id": "Agent-908a8",
         "type": "genericNode",
         "position": {
           "x": -88.53156832627047,
@@ -16370,7 +16370,7 @@
           },
           "showNode": true,
           "type": "Agent",
-          "id": "Agent-bc3d2"
+          "id": "Agent-908a8"
         },
         "selected": false,
         "measured": {
@@ -16381,7 +16381,7 @@
       },
       {
         "data": {
-          "id": "ConditionalRouter-67f2b",
+          "id": "ConditionalRouter-0d4b9",
           "node": {
             "base_classes": [
               "Message"
@@ -16654,7 +16654,7 @@
           "type": "ConditionalRouter"
         },
         "dragging": false,
-        "id": "ConditionalRouter-67f2b",
+        "id": "ConditionalRouter-0d4b9",
         "measured": {
           "height": 429,
           "width": 320
@@ -16667,7 +16667,7 @@
         "type": "genericNode"
       },
       {
-        "id": "Agent-177b5",
+        "id": "Agent-20132",
         "type": "genericNode",
         "position": {
           "x": 1022.7050867585804,
@@ -17305,7 +17305,7 @@
           },
           "showNode": true,
           "type": "Agent",
-          "id": "Agent-177b5"
+          "id": "Agent-20132"
         },
         "selected": false,
         "measured": {
@@ -17316,7 +17316,7 @@
       },
       {
         "data": {
-          "id": "ConditionalRouter-9eae7",
+          "id": "ConditionalRouter-0764a",
           "node": {
             "base_classes": [
               "Message"
@@ -17589,7 +17589,7 @@
           "type": "ConditionalRouter"
         },
         "dragging": false,
-        "id": "ConditionalRouter-9eae7",
+        "id": "ConditionalRouter-0764a",
         "measured": {
           "height": 429,
           "width": 320
@@ -17604,14 +17604,14 @@
     ],
     "edges": [
       {
-        "source": "ChatInput-81033",
-        "sourceHandle": "{\"dataType\": \"ChatInput\", \"id\": \"ChatInput-81033\", \"name\": \"message\", \"output_types\": [\"Message\"]}",
-        "target": "Agent-920b2",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-920b2\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "source": "ChatInput-9fde9",
+        "sourceHandle": "{\"dataType\": \"ChatInput\", \"id\": \"ChatInput-9fde9\", \"name\": \"message\", \"output_types\": [\"Message\"]}",
+        "target": "Agent-c20f7",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-c20f7\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "Agent-920b2",
+            "id": "Agent-c20f7",
             "inputTypes": [
               "Message"
             ],
@@ -17619,27 +17619,27 @@
           },
           "sourceHandle": {
             "dataType": "ChatInput",
-            "id": "ChatInput-81033",
+            "id": "ChatInput-9fde9",
             "name": "message",
             "output_types": [
               "Message"
             ]
           }
         },
-        "id": "xy-edge__ChatInput-81033{\"dataType\": \"ChatInput\", \"id\": \"ChatInput-81033\", \"name\": \"message\", \"output_types\": [\"Message\"]}-Agent-920b2{\"fieldName\": \"input_value\", \"id\": \"Agent-920b2\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "id": "xy-edge__ChatInput-9fde9{\"dataType\": \"ChatInput\", \"id\": \"ChatInput-9fde9\", \"name\": \"message\", \"output_types\": [\"Message\"]}-Agent-c20f7{\"fieldName\": \"input_value\", \"id\": \"Agent-c20f7\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "Agent-bfaf7",
-        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-bfaf7\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
-        "target": "Agent-48a9f",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-48a9f\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "source": "Agent-245f2",
+        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-245f2\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
+        "target": "Agent-88518",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-88518\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "Agent-48a9f",
+            "id": "Agent-88518",
             "inputTypes": [
               "Message"
             ],
@@ -17647,7 +17647,7 @@
           },
           "sourceHandle": {
             "dataType": "Agent",
-            "id": "Agent-bfaf7",
+            "id": "Agent-245f2",
             "name": "response",
             "output_types": [
               "Message"
@@ -17658,20 +17658,20 @@
             "prompt": "User type determined, ready to proceed with appointment scheduling"
           }
         },
-        "id": "xy-edge__Agent-bfaf7{\"dataType\": \"Agent\", \"id\": \"Agent-bfaf7\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-48a9f{\"fieldName\": \"input_value\", \"id\": \"Agent-48a9f\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "id": "xy-edge__Agent-245f2{\"dataType\": \"Agent\", \"id\": \"Agent-245f2\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-88518{\"fieldName\": \"input_value\", \"id\": \"Agent-88518\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "Agent-48a9f",
-        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-48a9f\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
-        "target": "Agent-f8d48",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-f8d48\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "source": "Agent-88518",
+        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-88518\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
+        "target": "Agent-25677",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-25677\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "Agent-f8d48",
+            "id": "Agent-25677",
             "inputTypes": [
               "Message"
             ],
@@ -17679,7 +17679,7 @@
           },
           "sourceHandle": {
             "dataType": "Agent",
-            "id": "Agent-48a9f",
+            "id": "Agent-88518",
             "name": "response",
             "output_types": [
               "Message"
@@ -17690,20 +17690,20 @@
             "prompt": "User indicated urgent care need"
           }
         },
-        "id": "xy-edge__Agent-48a9f{\"dataType\": \"Agent\", \"id\": \"Agent-48a9f\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-f8d48{\"fieldName\": \"input_value\", \"id\": \"Agent-f8d48\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "id": "xy-edge__Agent-88518{\"dataType\": \"Agent\", \"id\": \"Agent-88518\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-25677{\"fieldName\": \"input_value\", \"id\": \"Agent-25677\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "Agent-48a9f",
-        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-48a9f\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
-        "target": "Agent-d6fb7",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-d6fb7\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "source": "Agent-88518",
+        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-88518\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
+        "target": "Agent-debe6",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-debe6\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "Agent-d6fb7",
+            "id": "Agent-debe6",
             "inputTypes": [
               "Message"
             ],
@@ -17711,7 +17711,7 @@
           },
           "sourceHandle": {
             "dataType": "Agent",
-            "id": "Agent-48a9f",
+            "id": "Agent-88518",
             "name": "response",
             "output_types": [
               "Message"
@@ -17722,20 +17722,20 @@
             "prompt": "User neede routine appointment"
           }
         },
-        "id": "xy-edge__Agent-48a9f{\"dataType\": \"Agent\", \"id\": \"Agent-48a9f\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-d6fb7{\"fieldName\": \"input_value\", \"id\": \"Agent-d6fb7\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "id": "xy-edge__Agent-88518{\"dataType\": \"Agent\", \"id\": \"Agent-88518\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-debe6{\"fieldName\": \"input_value\", \"id\": \"Agent-debe6\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "Agent-f8d48",
-        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-f8d48\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
-        "target": "Agent-1eb45",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-1eb45\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "source": "Agent-25677",
+        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-25677\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
+        "target": "Agent-2daee",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-2daee\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "Agent-1eb45",
+            "id": "Agent-2daee",
             "inputTypes": [
               "Message"
             ],
@@ -17743,7 +17743,7 @@
           },
           "sourceHandle": {
             "dataType": "Agent",
-            "id": "Agent-f8d48",
+            "id": "Agent-25677",
             "name": "response",
             "output_types": [
               "Message"
@@ -17754,20 +17754,20 @@
             "prompt": "Symptoms indicate medical emergency"
           }
         },
-        "id": "xy-edge__Agent-f8d48{\"dataType\": \"Agent\", \"id\": \"Agent-f8d48\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-1eb45{\"fieldName\": \"input_value\", \"id\": \"Agent-1eb45\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "id": "xy-edge__Agent-25677{\"dataType\": \"Agent\", \"id\": \"Agent-25677\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-2daee{\"fieldName\": \"input_value\", \"id\": \"Agent-2daee\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "Agent-f8d48",
-        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-f8d48\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
-        "target": "Agent-eaa4a",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-eaa4a\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "source": "Agent-25677",
+        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-25677\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
+        "target": "Agent-3af72",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-3af72\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "Agent-eaa4a",
+            "id": "Agent-3af72",
             "inputTypes": [
               "Message"
             ],
@@ -17775,7 +17775,7 @@
           },
           "sourceHandle": {
             "dataType": "Agent",
-            "id": "Agent-f8d48",
+            "id": "Agent-25677",
             "name": "response",
             "output_types": [
               "Message"
@@ -17786,20 +17786,20 @@
             "prompt": "Urgent but not emergency, can schedule same-day"
           }
         },
-        "id": "xy-edge__Agent-f8d48{\"dataType\": \"Agent\", \"id\": \"Agent-f8d48\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-eaa4a{\"fieldName\": \"input_value\", \"id\": \"Agent-eaa4a\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "id": "xy-edge__Agent-25677{\"dataType\": \"Agent\", \"id\": \"Agent-25677\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-3af72{\"fieldName\": \"input_value\", \"id\": \"Agent-3af72\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "Agent-d6fb7",
-        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-d6fb7\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
-        "target": "Agent-98fef",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-98fef\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "source": "Agent-debe6",
+        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-debe6\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
+        "target": "Agent-d499e",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-d499e\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "Agent-98fef",
+            "id": "Agent-d499e",
             "inputTypes": [
               "Message"
             ],
@@ -17807,7 +17807,7 @@
           },
           "sourceHandle": {
             "dataType": "Agent",
-            "id": "Agent-d6fb7",
+            "id": "Agent-debe6",
             "name": "response",
             "output_types": [
               "Message"
@@ -17818,20 +17818,20 @@
             "prompt": "Patient information collected successfully"
           }
         },
-        "id": "xy-edge__Agent-d6fb7{\"dataType\": \"Agent\", \"id\": \"Agent-d6fb7\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-98fef{\"fieldName\": \"input_value\", \"id\": \"Agent-98fef\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "id": "xy-edge__Agent-debe6{\"dataType\": \"Agent\", \"id\": \"Agent-debe6\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-d499e{\"fieldName\": \"input_value\", \"id\": \"Agent-d499e\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "Agent-eaa4a",
-        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-eaa4a\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
-        "target": "Agent-15d4d",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-15d4d\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "source": "Agent-3af72",
+        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-3af72\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
+        "target": "Agent-748fe",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-748fe\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "Agent-15d4d",
+            "id": "Agent-748fe",
             "inputTypes": [
               "Message"
             ],
@@ -17839,7 +17839,7 @@
           },
           "sourceHandle": {
             "dataType": "Agent",
-            "id": "Agent-eaa4a",
+            "id": "Agent-3af72",
             "name": "response",
             "output_types": [
               "Message"
@@ -17850,20 +17850,20 @@
             "prompt": "Urgent patient information collected successfully"
           }
         },
-        "id": "xy-edge__Agent-eaa4a{\"dataType\": \"Agent\", \"id\": \"Agent-eaa4a\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-15d4d{\"fieldName\": \"input_value\", \"id\": \"Agent-15d4d\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "id": "xy-edge__Agent-3af72{\"dataType\": \"Agent\", \"id\": \"Agent-3af72\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-748fe{\"fieldName\": \"input_value\", \"id\": \"Agent-748fe\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "Agent-80dc7",
-        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-80dc7\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
-        "target": "ChatOutput-433be",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-433be\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
+        "source": "Agent-78502",
+        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-78502\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
+        "target": "ChatOutput-5f293",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-5f293\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "ChatOutput-433be",
+            "id": "ChatOutput-5f293",
             "inputTypes": [
               "Data",
               "DataFrame",
@@ -17873,7 +17873,7 @@
           },
           "sourceHandle": {
             "dataType": "Agent",
-            "id": "Agent-80dc7",
+            "id": "Agent-78502",
             "name": "response",
             "output_types": [
               "Message"
@@ -17884,20 +17884,20 @@
             "prompt": "Appointment successfully rescheduled"
           }
         },
-        "id": "xy-edge__Agent-80dc7{\"dataType\": \"Agent\", \"id\": \"Agent-80dc7\", \"name\": \"response\", \"output_types\": [\"Message\"]}-ChatOutput-433be{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-433be\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
+        "id": "xy-edge__Agent-78502{\"dataType\": \"Agent\", \"id\": \"Agent-78502\", \"name\": \"response\", \"output_types\": [\"Message\"]}-ChatOutput-5f293{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-5f293\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "Agent-da1b1",
-        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-da1b1\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
-        "target": "Agent-db795",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-db795\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "source": "Agent-78924",
+        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-78924\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
+        "target": "Agent-c267e",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-c267e\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "Agent-db795",
+            "id": "Agent-c267e",
             "inputTypes": [
               "Message"
             ],
@@ -17905,7 +17905,7 @@
           },
           "sourceHandle": {
             "dataType": "Agent",
-            "id": "Agent-da1b1",
+            "id": "Agent-78924",
             "name": "response",
             "output_types": [
               "Message"
@@ -17916,20 +17916,20 @@
             "prompt": "Patient wants to reschedule instead of cancel"
           }
         },
-        "id": "xy-edge__Agent-da1b1{\"dataType\": \"Agent\", \"id\": \"Agent-da1b1\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-db795{\"fieldName\": \"input_value\", \"id\": \"Agent-db795\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "id": "xy-edge__Agent-78924{\"dataType\": \"Agent\", \"id\": \"Agent-78924\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-c267e{\"fieldName\": \"input_value\", \"id\": \"Agent-c267e\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "Agent-da1b1",
-        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-da1b1\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
-        "target": "ChatOutput-433be",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-433be\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
+        "source": "Agent-78924",
+        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-78924\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
+        "target": "ChatOutput-5f293",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-5f293\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "ChatOutput-433be",
+            "id": "ChatOutput-5f293",
             "inputTypes": [
               "Data",
               "DataFrame",
@@ -17939,7 +17939,7 @@
           },
           "sourceHandle": {
             "dataType": "Agent",
-            "id": "Agent-da1b1",
+            "id": "Agent-78924",
             "name": "response",
             "output_types": [
               "Message"
@@ -17950,20 +17950,20 @@
             "prompt": "Appointment canceled, no reschedule needed"
           }
         },
-        "id": "xy-edge__Agent-da1b1{\"dataType\": \"Agent\", \"id\": \"Agent-da1b1\", \"name\": \"response\", \"output_types\": [\"Message\"]}-ChatOutput-433be{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-433be\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
+        "id": "xy-edge__Agent-78924{\"dataType\": \"Agent\", \"id\": \"Agent-78924\", \"name\": \"response\", \"output_types\": [\"Message\"]}-ChatOutput-5f293{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-5f293\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "Agent-db795",
-        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-db795\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
-        "target": "ChatOutput-433be",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-433be\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
+        "source": "Agent-c267e",
+        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-c267e\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
+        "target": "ChatOutput-5f293",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-5f293\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "ChatOutput-433be",
+            "id": "ChatOutput-5f293",
             "inputTypes": [
               "Data",
               "DataFrame",
@@ -17973,7 +17973,7 @@
           },
           "sourceHandle": {
             "dataType": "Agent",
-            "id": "Agent-db795",
+            "id": "Agent-c267e",
             "name": "response",
             "output_types": [
               "Message"
@@ -17984,20 +17984,20 @@
             "prompt": "Appointment rescheduled from cancellation"
           }
         },
-        "id": "xy-edge__Agent-db795{\"dataType\": \"Agent\", \"id\": \"Agent-db795\", \"name\": \"response\", \"output_types\": [\"Message\"]}-ChatOutput-433be{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-433be\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
+        "id": "xy-edge__Agent-c267e{\"dataType\": \"Agent\", \"id\": \"Agent-c267e\", \"name\": \"response\", \"output_types\": [\"Message\"]}-ChatOutput-5f293{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-5f293\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "Agent-37483",
-        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-37483\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
-        "target": "Agent-c6790",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-c6790\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "source": "Agent-e4726",
+        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-e4726\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
+        "target": "Agent-c543a",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-c543a\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "Agent-c6790",
+            "id": "Agent-c543a",
             "inputTypes": [
               "Message"
             ],
@@ -18005,7 +18005,7 @@
           },
           "sourceHandle": {
             "dataType": "Agent",
-            "id": "Agent-37483",
+            "id": "Agent-e4726",
             "name": "response",
             "output_types": [
               "Message"
@@ -18016,20 +18016,20 @@
             "prompt": "Customer type determined after general info"
           }
         },
-        "id": "xy-edge__Agent-37483{\"dataType\": \"Agent\", \"id\": \"Agent-37483\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-c6790{\"fieldName\": \"input_value\", \"id\": \"Agent-c6790\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "id": "xy-edge__Agent-e4726{\"dataType\": \"Agent\", \"id\": \"Agent-e4726\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-c543a{\"fieldName\": \"input_value\", \"id\": \"Agent-c543a\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "Agent-c6790",
-        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-c6790\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
-        "target": "Agent-1b329",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-1b329\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "source": "Agent-c543a",
+        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-c543a\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
+        "target": "Agent-613a7",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-613a7\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "Agent-1b329",
+            "id": "Agent-613a7",
             "inputTypes": [
               "Message"
             ],
@@ -18037,7 +18037,7 @@
           },
           "sourceHandle": {
             "dataType": "Agent",
-            "id": "Agent-c6790",
+            "id": "Agent-c543a",
             "name": "response",
             "output_types": [
               "Message"
@@ -18048,20 +18048,20 @@
             "prompt": "Appointment type determined after general info"
           }
         },
-        "id": "xy-edge__Agent-c6790{\"dataType\": \"Agent\", \"id\": \"Agent-c6790\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-1b329{\"fieldName\": \"input_value\", \"id\": \"Agent-1b329\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "id": "xy-edge__Agent-c543a{\"dataType\": \"Agent\", \"id\": \"Agent-c543a\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-613a7{\"fieldName\": \"input_value\", \"id\": \"Agent-613a7\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "Agent-1eb45",
-        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-1eb45\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
-        "target": "ChatOutput-433be",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-433be\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
+        "source": "Agent-2daee",
+        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-2daee\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
+        "target": "ChatOutput-5f293",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-5f293\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "ChatOutput-433be",
+            "id": "ChatOutput-5f293",
             "inputTypes": [
               "Data",
               "DataFrame",
@@ -18071,7 +18071,7 @@
           },
           "sourceHandle": {
             "dataType": "Agent",
-            "id": "Agent-1eb45",
+            "id": "Agent-2daee",
             "name": "response",
             "output_types": [
               "Message"
@@ -18082,20 +18082,20 @@
             "prompt": "Emergency guidance provided"
           }
         },
-        "id": "xy-edge__Agent-1eb45{\"dataType\": \"Agent\", \"id\": \"Agent-1eb45\", \"name\": \"response\", \"output_types\": [\"Message\"]}-ChatOutput-433be{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-433be\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
+        "id": "xy-edge__Agent-2daee{\"dataType\": \"Agent\", \"id\": \"Agent-2daee\", \"name\": \"response\", \"output_types\": [\"Message\"]}-ChatOutput-5f293{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-5f293\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "Agent-98fef",
-        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-98fef\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
-        "target": "Agent-831b7",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-831b7\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "source": "Agent-d499e",
+        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-d499e\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
+        "target": "Agent-f73a6",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-f73a6\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "Agent-831b7",
+            "id": "Agent-f73a6",
             "inputTypes": [
               "Message"
             ],
@@ -18103,7 +18103,7 @@
           },
           "sourceHandle": {
             "dataType": "Agent",
-            "id": "Agent-98fef",
+            "id": "Agent-d499e",
             "name": "response",
             "output_types": [
               "Message"
@@ -18114,20 +18114,20 @@
             "prompt": "Patient selected appointment time"
           }
         },
-        "id": "xy-edge__Agent-98fef{\"dataType\": \"Agent\", \"id\": \"Agent-98fef\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-831b7{\"fieldName\": \"input_value\", \"id\": \"Agent-831b7\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "id": "xy-edge__Agent-d499e{\"dataType\": \"Agent\", \"id\": \"Agent-d499e\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-f73a6{\"fieldName\": \"input_value\", \"id\": \"Agent-f73a6\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "Agent-15d4d",
-        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-15d4d\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
-        "target": "Agent-8d577",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-8d577\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "source": "Agent-748fe",
+        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-748fe\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
+        "target": "Agent-5f8e8",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-5f8e8\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "Agent-8d577",
+            "id": "Agent-5f8e8",
             "inputTypes": [
               "Message"
             ],
@@ -18135,7 +18135,7 @@
           },
           "sourceHandle": {
             "dataType": "Agent",
-            "id": "Agent-15d4d",
+            "id": "Agent-748fe",
             "name": "response",
             "output_types": [
               "Message"
@@ -18146,20 +18146,20 @@
             "prompt": "Patient selected urgent appointment time"
           }
         },
-        "id": "xy-edge__Agent-15d4d{\"dataType\": \"Agent\", \"id\": \"Agent-15d4d\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-8d577{\"fieldName\": \"input_value\", \"id\": \"Agent-8d577\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "id": "xy-edge__Agent-748fe{\"dataType\": \"Agent\", \"id\": \"Agent-748fe\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-5f8e8{\"fieldName\": \"input_value\", \"id\": \"Agent-5f8e8\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "Agent-1b329",
-        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-1b329\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
-        "target": "Agent-fe61c",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-fe61c\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "source": "Agent-613a7",
+        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-613a7\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
+        "target": "Agent-3e356",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-3e356\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "Agent-fe61c",
+            "id": "Agent-3e356",
             "inputTypes": [
               "Message"
             ],
@@ -18167,7 +18167,7 @@
           },
           "sourceHandle": {
             "dataType": "Agent",
-            "id": "Agent-1b329",
+            "id": "Agent-613a7",
             "name": "response",
             "output_types": [
               "Message"
@@ -18178,20 +18178,20 @@
             "prompt": "Patient information collected after general info"
           }
         },
-        "id": "xy-edge__Agent-1b329{\"dataType\": \"Agent\", \"id\": \"Agent-1b329\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-fe61c{\"fieldName\": \"input_value\", \"id\": \"Agent-fe61c\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "id": "xy-edge__Agent-613a7{\"dataType\": \"Agent\", \"id\": \"Agent-613a7\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-3e356{\"fieldName\": \"input_value\", \"id\": \"Agent-3e356\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "Agent-fe61c",
-        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-fe61c\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
-        "target": "Agent-e966a",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-e966a\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "source": "Agent-3e356",
+        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-3e356\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
+        "target": "Agent-2e5e2",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-2e5e2\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "Agent-e966a",
+            "id": "Agent-2e5e2",
             "inputTypes": [
               "Message"
             ],
@@ -18199,7 +18199,7 @@
           },
           "sourceHandle": {
             "dataType": "Agent",
-            "id": "Agent-fe61c",
+            "id": "Agent-3e356",
             "name": "response",
             "output_types": [
               "Message"
@@ -18210,20 +18210,20 @@
             "prompt": "Patient selected appointment time after general info"
           }
         },
-        "id": "xy-edge__Agent-fe61c{\"dataType\": \"Agent\", \"id\": \"Agent-fe61c\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-e966a{\"fieldName\": \"input_value\", \"id\": \"Agent-e966a\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "id": "xy-edge__Agent-3e356{\"dataType\": \"Agent\", \"id\": \"Agent-3e356\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-2e5e2{\"fieldName\": \"input_value\", \"id\": \"Agent-2e5e2\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "Agent-831b7",
-        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-831b7\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
-        "target": "ChatOutput-433be",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-433be\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
+        "source": "Agent-f73a6",
+        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-f73a6\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
+        "target": "ChatOutput-5f293",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-5f293\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "ChatOutput-433be",
+            "id": "ChatOutput-5f293",
             "inputTypes": [
               "Data",
               "DataFrame",
@@ -18233,7 +18233,7 @@
           },
           "sourceHandle": {
             "dataType": "Agent",
-            "id": "Agent-831b7",
+            "id": "Agent-f73a6",
             "name": "response",
             "output_types": [
               "Message"
@@ -18244,20 +18244,20 @@
             "prompt": "Appointment confirmed and instructions given"
           }
         },
-        "id": "xy-edge__Agent-831b7{\"dataType\": \"Agent\", \"id\": \"Agent-831b7\", \"name\": \"response\", \"output_types\": [\"Message\"]}-ChatOutput-433be{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-433be\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
+        "id": "xy-edge__Agent-f73a6{\"dataType\": \"Agent\", \"id\": \"Agent-f73a6\", \"name\": \"response\", \"output_types\": [\"Message\"]}-ChatOutput-5f293{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-5f293\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "Agent-8d577",
-        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-8d577\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
-        "target": "ChatOutput-433be",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-433be\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
+        "source": "Agent-5f8e8",
+        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-5f8e8\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
+        "target": "ChatOutput-5f293",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-5f293\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "ChatOutput-433be",
+            "id": "ChatOutput-5f293",
             "inputTypes": [
               "Data",
               "DataFrame",
@@ -18267,7 +18267,7 @@
           },
           "sourceHandle": {
             "dataType": "Agent",
-            "id": "Agent-8d577",
+            "id": "Agent-5f8e8",
             "name": "response",
             "output_types": [
               "Message"
@@ -18278,20 +18278,20 @@
             "prompt": "Urgent appointment confirmed and instructions given"
           }
         },
-        "id": "xy-edge__Agent-8d577{\"dataType\": \"Agent\", \"id\": \"Agent-8d577\", \"name\": \"response\", \"output_types\": [\"Message\"]}-ChatOutput-433be{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-433be\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
+        "id": "xy-edge__Agent-5f8e8{\"dataType\": \"Agent\", \"id\": \"Agent-5f8e8\", \"name\": \"response\", \"output_types\": [\"Message\"]}-ChatOutput-5f293{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-5f293\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "Agent-e966a",
-        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-e966a\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
-        "target": "ChatOutput-433be",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-433be\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
+        "source": "Agent-2e5e2",
+        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-2e5e2\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
+        "target": "ChatOutput-5f293",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-5f293\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "ChatOutput-433be",
+            "id": "ChatOutput-5f293",
             "inputTypes": [
               "Data",
               "DataFrame",
@@ -18301,7 +18301,7 @@
           },
           "sourceHandle": {
             "dataType": "Agent",
-            "id": "Agent-e966a",
+            "id": "Agent-2e5e2",
             "name": "response",
             "output_types": [
               "Message"
@@ -18312,48 +18312,20 @@
             "prompt": "Appointment confirmed after general info flow"
           }
         },
-        "id": "xy-edge__Agent-e966a{\"dataType\": \"Agent\", \"id\": \"Agent-e966a\", \"name\": \"response\", \"output_types\": [\"Message\"]}-ChatOutput-433be{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-433be\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
+        "id": "xy-edge__Agent-2e5e2{\"dataType\": \"Agent\", \"id\": \"Agent-2e5e2\", \"name\": \"response\", \"output_types\": [\"Message\"]}-ChatOutput-5f293{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-5f293\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "ChatInput-81033",
-        "sourceHandle": "{\"dataType\": \"ChatInput\", \"id\": \"ChatInput-81033\", \"name\": \"message\", \"output_types\": [\"Message\"]}",
-        "target": "Agent-8be24",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-8be24\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "source": "Agent-c20f7",
+        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-c20f7\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
+        "target": "Agent-05e5c",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-05e5c\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "Agent-8be24",
-            "inputTypes": [
-              "Message"
-            ],
-            "type": "str"
-          },
-          "sourceHandle": {
-            "dataType": "ChatInput",
-            "id": "ChatInput-81033",
-            "name": "message",
-            "output_types": [
-              "Message"
-            ]
-          }
-        },
-        "id": "xy-edge__ChatInput-81033{\"dataType\": \"ChatInput\", \"id\": \"ChatInput-81033\", \"name\": \"message\", \"output_types\": [\"Message\"]}-Agent-8be24{\"fieldName\": \"input_value\", \"id\": \"Agent-8be24\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
-        "selected": false,
-        "animated": false,
-        "className": ""
-      },
-      {
-        "source": "Agent-8be24",
-        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-8be24\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
-        "target": "ConditionalRouter-e42c0",
-        "targetHandle": "{\"fieldName\": \"input_text\", \"id\": \"ConditionalRouter-e42c0\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
-        "data": {
-          "targetHandle": {
-            "fieldName": "input_text",
-            "id": "ConditionalRouter-e42c0",
+            "id": "Agent-05e5c",
             "inputTypes": [
               "Message"
             ],
@@ -18361,27 +18333,55 @@
           },
           "sourceHandle": {
             "dataType": "Agent",
-            "id": "Agent-8be24",
+            "id": "Agent-c20f7",
             "name": "response",
             "output_types": [
               "Message"
             ]
           }
         },
-        "id": "xy-edge__Agent-8be24{\"dataType\": \"Agent\", \"id\": \"Agent-8be24\", \"name\": \"response\", \"output_types\": [\"Message\"]}-ConditionalRouter-e42c0{\"fieldName\": \"input_text\", \"id\": \"ConditionalRouter-e42c0\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "id": "xy-edge__Agent-c20f7{\"dataType\": \"Agent\", \"id\": \"Agent-c20f7\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-05e5c{\"fieldName\": \"input_value\", \"id\": \"Agent-05e5c\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "ConditionalRouter-e42c0",
-        "sourceHandle": "{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-e42c0\", \"name\": \"true_result\", \"output_types\": [\"Message\"]}",
-        "target": "Agent-bfaf7",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-bfaf7\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "source": "Agent-05e5c",
+        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-05e5c\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
+        "target": "ConditionalRouter-d05c6",
+        "targetHandle": "{\"fieldName\": \"input_text\", \"id\": \"ConditionalRouter-d05c6\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "data": {
+          "targetHandle": {
+            "fieldName": "input_text",
+            "id": "ConditionalRouter-d05c6",
+            "inputTypes": [
+              "Message"
+            ],
+            "type": "str"
+          },
+          "sourceHandle": {
+            "dataType": "Agent",
+            "id": "Agent-05e5c",
+            "name": "response",
+            "output_types": [
+              "Message"
+            ]
+          }
+        },
+        "id": "xy-edge__Agent-05e5c{\"dataType\": \"Agent\", \"id\": \"Agent-05e5c\", \"name\": \"response\", \"output_types\": [\"Message\"]}-ConditionalRouter-d05c6{\"fieldName\": \"input_text\", \"id\": \"ConditionalRouter-d05c6\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "selected": false,
+        "animated": false,
+        "className": ""
+      },
+      {
+        "source": "ConditionalRouter-d05c6",
+        "sourceHandle": "{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-d05c6\", \"name\": \"true_result\", \"output_types\": [\"Message\"]}",
+        "target": "Agent-245f2",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-245f2\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "Agent-bfaf7",
+            "id": "Agent-245f2",
             "inputTypes": [
               "Message"
             ],
@@ -18389,27 +18389,27 @@
           },
           "sourceHandle": {
             "dataType": "ConditionalRouter",
-            "id": "ConditionalRouter-e42c0",
+            "id": "ConditionalRouter-d05c6",
             "name": "true_result",
             "output_types": [
               "Message"
             ]
           }
         },
-        "id": "xy-edge__ConditionalRouter-e42c0{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-e42c0\", \"name\": \"true_result\", \"output_types\": [\"Message\"]}-Agent-bfaf7{\"fieldName\": \"input_value\", \"id\": \"Agent-bfaf7\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "id": "xy-edge__ConditionalRouter-d05c6{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-d05c6\", \"name\": \"true_result\", \"output_types\": [\"Message\"]}-Agent-245f2{\"fieldName\": \"input_value\", \"id\": \"Agent-245f2\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "ConditionalRouter-e42c0",
-        "sourceHandle": "{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-e42c0\", \"name\": \"false_result\", \"output_types\": [\"Message\"]}",
-        "target": "ConditionalRouter-c020d",
-        "targetHandle": "{\"fieldName\": \"input_text\", \"id\": \"ConditionalRouter-c020d\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "source": "ConditionalRouter-d05c6",
+        "sourceHandle": "{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-d05c6\", \"name\": \"false_result\", \"output_types\": [\"Message\"]}",
+        "target": "ConditionalRouter-42195",
+        "targetHandle": "{\"fieldName\": \"input_text\", \"id\": \"ConditionalRouter-42195\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_text",
-            "id": "ConditionalRouter-c020d",
+            "id": "ConditionalRouter-42195",
             "inputTypes": [
               "Message"
             ],
@@ -18417,27 +18417,27 @@
           },
           "sourceHandle": {
             "dataType": "ConditionalRouter",
-            "id": "ConditionalRouter-e42c0",
+            "id": "ConditionalRouter-d05c6",
             "name": "false_result",
             "output_types": [
               "Message"
             ]
           }
         },
-        "id": "xy-edge__ConditionalRouter-e42c0{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-e42c0\", \"name\": \"false_result\", \"output_types\": [\"Message\"]}-ConditionalRouter-c020d{\"fieldName\": \"input_text\", \"id\": \"ConditionalRouter-c020d\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "id": "xy-edge__ConditionalRouter-d05c6{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-d05c6\", \"name\": \"false_result\", \"output_types\": [\"Message\"]}-ConditionalRouter-42195{\"fieldName\": \"input_text\", \"id\": \"ConditionalRouter-42195\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "ConditionalRouter-c020d",
-        "sourceHandle": "{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-c020d\", \"name\": \"true_result\", \"output_types\": [\"Message\"]}",
-        "target": "Agent-4b9e7",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-4b9e7\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "source": "ConditionalRouter-42195",
+        "sourceHandle": "{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-42195\", \"name\": \"true_result\", \"output_types\": [\"Message\"]}",
+        "target": "Agent-d9b24",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-d9b24\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "Agent-4b9e7",
+            "id": "Agent-d9b24",
             "inputTypes": [
               "Message"
             ],
@@ -18445,27 +18445,27 @@
           },
           "sourceHandle": {
             "dataType": "ConditionalRouter",
-            "id": "ConditionalRouter-c020d",
+            "id": "ConditionalRouter-42195",
             "name": "true_result",
             "output_types": [
               "Message"
             ]
           }
         },
-        "id": "xy-edge__ConditionalRouter-c020d{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-c020d\", \"name\": \"true_result\", \"output_types\": [\"Message\"]}-Agent-4b9e7{\"fieldName\": \"input_value\", \"id\": \"Agent-4b9e7\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "id": "xy-edge__ConditionalRouter-42195{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-42195\", \"name\": \"true_result\", \"output_types\": [\"Message\"]}-Agent-d9b24{\"fieldName\": \"input_value\", \"id\": \"Agent-d9b24\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "ConditionalRouter-c020d",
-        "sourceHandle": "{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-c020d\", \"name\": \"false_result\", \"output_types\": [\"Message\"]}",
-        "target": "Agent-1db5f",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-1db5f\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "source": "ConditionalRouter-42195",
+        "sourceHandle": "{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-42195\", \"name\": \"false_result\", \"output_types\": [\"Message\"]}",
+        "target": "Agent-022f0",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-022f0\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "Agent-1db5f",
+            "id": "Agent-022f0",
             "inputTypes": [
               "Message"
             ],
@@ -18473,27 +18473,27 @@
           },
           "sourceHandle": {
             "dataType": "ConditionalRouter",
-            "id": "ConditionalRouter-c020d",
+            "id": "ConditionalRouter-42195",
             "name": "false_result",
             "output_types": [
               "Message"
             ]
           }
         },
-        "id": "xy-edge__ConditionalRouter-c020d{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-c020d\", \"name\": \"false_result\", \"output_types\": [\"Message\"]}-Agent-1db5f{\"fieldName\": \"input_value\", \"id\": \"Agent-1db5f\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "id": "xy-edge__ConditionalRouter-42195{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-42195\", \"name\": \"false_result\", \"output_types\": [\"Message\"]}-Agent-022f0{\"fieldName\": \"input_value\", \"id\": \"Agent-022f0\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "Agent-4b9e7",
-        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-4b9e7\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
-        "target": "Agent-bc3d2",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-bc3d2\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "source": "Agent-d9b24",
+        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-d9b24\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
+        "target": "Agent-908a8",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-908a8\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "Agent-bc3d2",
+            "id": "Agent-908a8",
             "inputTypes": [
               "Message"
             ],
@@ -18501,27 +18501,27 @@
           },
           "sourceHandle": {
             "dataType": "Agent",
-            "id": "Agent-4b9e7",
+            "id": "Agent-d9b24",
             "name": "response",
             "output_types": [
               "Message"
             ]
           }
         },
-        "id": "xy-edge__Agent-4b9e7{\"dataType\": \"Agent\", \"id\": \"Agent-4b9e7\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-bc3d2{\"fieldName\": \"input_value\", \"id\": \"Agent-bc3d2\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "id": "xy-edge__Agent-d9b24{\"dataType\": \"Agent\", \"id\": \"Agent-d9b24\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-908a8{\"fieldName\": \"input_value\", \"id\": \"Agent-908a8\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "Agent-bc3d2",
-        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-bc3d2\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
-        "target": "ConditionalRouter-67f2b",
-        "targetHandle": "{\"fieldName\": \"input_text\", \"id\": \"ConditionalRouter-67f2b\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "source": "Agent-908a8",
+        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-908a8\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
+        "target": "ConditionalRouter-0d4b9",
+        "targetHandle": "{\"fieldName\": \"input_text\", \"id\": \"ConditionalRouter-0d4b9\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_text",
-            "id": "ConditionalRouter-67f2b",
+            "id": "ConditionalRouter-0d4b9",
             "inputTypes": [
               "Message"
             ],
@@ -18529,27 +18529,27 @@
           },
           "sourceHandle": {
             "dataType": "Agent",
-            "id": "Agent-bc3d2",
+            "id": "Agent-908a8",
             "name": "response",
             "output_types": [
               "Message"
             ]
           }
         },
-        "id": "xy-edge__Agent-bc3d2{\"dataType\": \"Agent\", \"id\": \"Agent-bc3d2\", \"name\": \"response\", \"output_types\": [\"Message\"]}-ConditionalRouter-67f2b{\"fieldName\": \"input_text\", \"id\": \"ConditionalRouter-67f2b\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "id": "xy-edge__Agent-908a8{\"dataType\": \"Agent\", \"id\": \"Agent-908a8\", \"name\": \"response\", \"output_types\": [\"Message\"]}-ConditionalRouter-0d4b9{\"fieldName\": \"input_text\", \"id\": \"ConditionalRouter-0d4b9\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "ConditionalRouter-67f2b",
-        "sourceHandle": "{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-67f2b\", \"name\": \"true_result\", \"output_types\": [\"Message\"]}",
-        "target": "Agent-80dc7",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-80dc7\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "source": "ConditionalRouter-0d4b9",
+        "sourceHandle": "{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-0d4b9\", \"name\": \"true_result\", \"output_types\": [\"Message\"]}",
+        "target": "Agent-78502",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-78502\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "Agent-80dc7",
+            "id": "Agent-78502",
             "inputTypes": [
               "Message"
             ],
@@ -18557,27 +18557,27 @@
           },
           "sourceHandle": {
             "dataType": "ConditionalRouter",
-            "id": "ConditionalRouter-67f2b",
+            "id": "ConditionalRouter-0d4b9",
             "name": "true_result",
             "output_types": [
               "Message"
             ]
           }
         },
-        "id": "xy-edge__ConditionalRouter-67f2b{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-67f2b\", \"name\": \"true_result\", \"output_types\": [\"Message\"]}-Agent-80dc7{\"fieldName\": \"input_value\", \"id\": \"Agent-80dc7\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "id": "xy-edge__ConditionalRouter-0d4b9{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-0d4b9\", \"name\": \"true_result\", \"output_types\": [\"Message\"]}-Agent-78502{\"fieldName\": \"input_value\", \"id\": \"Agent-78502\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "ConditionalRouter-67f2b",
-        "sourceHandle": "{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-67f2b\", \"name\": \"false_result\", \"output_types\": [\"Message\"]}",
-        "target": "Agent-da1b1",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-da1b1\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "source": "ConditionalRouter-0d4b9",
+        "sourceHandle": "{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-0d4b9\", \"name\": \"false_result\", \"output_types\": [\"Message\"]}",
+        "target": "Agent-78924",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-78924\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "Agent-da1b1",
+            "id": "Agent-78924",
             "inputTypes": [
               "Message"
             ],
@@ -18585,27 +18585,27 @@
           },
           "sourceHandle": {
             "dataType": "ConditionalRouter",
-            "id": "ConditionalRouter-67f2b",
+            "id": "ConditionalRouter-0d4b9",
             "name": "false_result",
             "output_types": [
               "Message"
             ]
           }
         },
-        "id": "xy-edge__ConditionalRouter-67f2b{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-67f2b\", \"name\": \"false_result\", \"output_types\": [\"Message\"]}-Agent-da1b1{\"fieldName\": \"input_value\", \"id\": \"Agent-da1b1\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "id": "xy-edge__ConditionalRouter-0d4b9{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-0d4b9\", \"name\": \"false_result\", \"output_types\": [\"Message\"]}-Agent-78924{\"fieldName\": \"input_value\", \"id\": \"Agent-78924\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "Agent-1db5f",
-        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-1db5f\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
-        "target": "Agent-177b5",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-177b5\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "source": "Agent-022f0",
+        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-022f0\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
+        "target": "Agent-20132",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-20132\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "Agent-177b5",
+            "id": "Agent-20132",
             "inputTypes": [
               "Message"
             ],
@@ -18613,27 +18613,27 @@
           },
           "sourceHandle": {
             "dataType": "Agent",
-            "id": "Agent-1db5f",
+            "id": "Agent-022f0",
             "name": "response",
             "output_types": [
               "Message"
             ]
           }
         },
-        "id": "xy-edge__Agent-1db5f{\"dataType\": \"Agent\", \"id\": \"Agent-1db5f\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-177b5{\"fieldName\": \"input_value\", \"id\": \"Agent-177b5\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "id": "xy-edge__Agent-022f0{\"dataType\": \"Agent\", \"id\": \"Agent-022f0\", \"name\": \"response\", \"output_types\": [\"Message\"]}-Agent-20132{\"fieldName\": \"input_value\", \"id\": \"Agent-20132\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "Agent-177b5",
-        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-177b5\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
-        "target": "ConditionalRouter-9eae7",
-        "targetHandle": "{\"fieldName\": \"input_text\", \"id\": \"ConditionalRouter-9eae7\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "source": "Agent-20132",
+        "sourceHandle": "{\"dataType\": \"Agent\", \"id\": \"Agent-20132\", \"name\": \"response\", \"output_types\": [\"Message\"]}",
+        "target": "ConditionalRouter-0764a",
+        "targetHandle": "{\"fieldName\": \"input_text\", \"id\": \"ConditionalRouter-0764a\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_text",
-            "id": "ConditionalRouter-9eae7",
+            "id": "ConditionalRouter-0764a",
             "inputTypes": [
               "Message"
             ],
@@ -18641,27 +18641,27 @@
           },
           "sourceHandle": {
             "dataType": "Agent",
-            "id": "Agent-177b5",
+            "id": "Agent-20132",
             "name": "response",
             "output_types": [
               "Message"
             ]
           }
         },
-        "id": "xy-edge__Agent-177b5{\"dataType\": \"Agent\", \"id\": \"Agent-177b5\", \"name\": \"response\", \"output_types\": [\"Message\"]}-ConditionalRouter-9eae7{\"fieldName\": \"input_text\", \"id\": \"ConditionalRouter-9eae7\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "id": "xy-edge__Agent-20132{\"dataType\": \"Agent\", \"id\": \"Agent-20132\", \"name\": \"response\", \"output_types\": [\"Message\"]}-ConditionalRouter-0764a{\"fieldName\": \"input_text\", \"id\": \"ConditionalRouter-0764a\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "ConditionalRouter-9eae7",
-        "sourceHandle": "{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-9eae7\", \"name\": \"true_result\", \"output_types\": [\"Message\"]}",
-        "target": "Agent-37483",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-37483\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "source": "ConditionalRouter-0764a",
+        "sourceHandle": "{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-0764a\", \"name\": \"true_result\", \"output_types\": [\"Message\"]}",
+        "target": "Agent-e4726",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"Agent-e4726\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "Agent-37483",
+            "id": "Agent-e4726",
             "inputTypes": [
               "Message"
             ],
@@ -18669,27 +18669,27 @@
           },
           "sourceHandle": {
             "dataType": "ConditionalRouter",
-            "id": "ConditionalRouter-9eae7",
+            "id": "ConditionalRouter-0764a",
             "name": "true_result",
             "output_types": [
               "Message"
             ]
           }
         },
-        "id": "xy-edge__ConditionalRouter-9eae7{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-9eae7\", \"name\": \"true_result\", \"output_types\": [\"Message\"]}-Agent-37483{\"fieldName\": \"input_value\", \"id\": \"Agent-37483\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
+        "id": "xy-edge__ConditionalRouter-0764a{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-0764a\", \"name\": \"true_result\", \"output_types\": [\"Message\"]}-Agent-e4726{\"fieldName\": \"input_value\", \"id\": \"Agent-e4726\", \"inputTypes\": [\"Message\"], \"type\": \"str\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "ConditionalRouter-9eae7",
-        "sourceHandle": "{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-9eae7\", \"name\": \"false_result\", \"output_types\": [\"Message\"]}",
-        "target": "ChatOutput-433be",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-433be\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
+        "source": "ConditionalRouter-0764a",
+        "sourceHandle": "{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-0764a\", \"name\": \"false_result\", \"output_types\": [\"Message\"]}",
+        "target": "ChatOutput-5f293",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-5f293\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "ChatOutput-433be",
+            "id": "ChatOutput-5f293",
             "inputTypes": [
               "Data",
               "DataFrame",
@@ -18699,27 +18699,27 @@
           },
           "sourceHandle": {
             "dataType": "ConditionalRouter",
-            "id": "ConditionalRouter-9eae7",
+            "id": "ConditionalRouter-0764a",
             "name": "false_result",
             "output_types": [
               "Message"
             ]
           }
         },
-        "id": "xy-edge__ConditionalRouter-9eae7{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-9eae7\", \"name\": \"false_result\", \"output_types\": [\"Message\"]}-ChatOutput-433be{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-433be\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
+        "id": "xy-edge__ConditionalRouter-0764a{\"dataType\": \"ConditionalRouter\", \"id\": \"ConditionalRouter-0764a\", \"name\": \"false_result\", \"output_types\": [\"Message\"]}-ChatOutput-5f293{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-5f293\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
         "selected": false,
         "animated": false,
         "className": ""
       },
       {
-        "source": "ChatOutput-433be",
-        "sourceHandle": "{\"dataType\": \"ChatOutput\", \"id\": \"ChatOutput-433be\", \"name\": \"message\", \"output_types\": [\"Message\"]}",
-        "target": "ChatOutput-eecaa",
-        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-eecaa\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
+        "source": "ChatOutput-cc5b5",
+        "sourceHandle": "{\"dataType\": \"ChatOutput\", \"id\": \"ChatOutput-cc5b5\", \"name\": \"message\", \"output_types\": [\"Message\"]}",
+        "target": "ChatOutput-29446",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-29446\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
         "data": {
           "targetHandle": {
             "fieldName": "input_value",
-            "id": "ChatOutput-eecaa",
+            "id": "ChatOutput-29446",
             "inputTypes": [
               "Data",
               "DataFrame",
@@ -18729,14 +18729,44 @@
           },
           "sourceHandle": {
             "dataType": "ChatOutput",
-            "id": "ChatOutput-433be",
+            "id": "ChatOutput-cc5b5",
             "name": "message",
             "output_types": [
               "Message"
             ]
           }
         },
-        "id": "xy-edge__ChatOutput-433be{\"dataType\": \"ChatOutput\", \"id\": \"ChatOutput-433be\", \"name\": \"message\", \"output_types\": [\"Message\"]}-ChatOutput-eecaa{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-eecaa\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
+        "id": "xy-edge__ChatOutput-cc5b5{\"dataType\": \"ChatOutput\", \"id\": \"ChatOutput-cc5b5\", \"name\": \"message\", \"output_types\": [\"Message\"]}-ChatOutput-29446{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-29446\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
+        "selected": false,
+        "animated": false,
+        "className": ""
+      },
+      {
+        "source": "ChatOutput-5f293",
+        "sourceHandle": "{\"dataType\": \"ChatOutput\", \"id\": \"ChatOutput-5f293\", \"name\": \"message\", \"output_types\": [\"Message\"]}",
+        "target": "ChatOutput-29446",
+        "targetHandle": "{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-29446\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
+        "data": {
+          "targetHandle": {
+            "fieldName": "input_value",
+            "id": "ChatOutput-29446",
+            "inputTypes": [
+              "Data",
+              "DataFrame",
+              "Message"
+            ],
+            "type": "other"
+          },
+          "sourceHandle": {
+            "dataType": "ChatOutput",
+            "id": "ChatOutput-5f293",
+            "name": "message",
+            "output_types": [
+              "Message"
+            ]
+          }
+        },
+        "id": "xy-edge__ChatOutput-5f293{\"dataType\": \"ChatOutput\", \"id\": \"ChatOutput-5f293\", \"name\": \"message\", \"output_types\": [\"Message\"]}-ChatOutput-29446{\"fieldName\": \"input_value\", \"id\": \"ChatOutput-29446\", \"inputTypes\": [\"Data\", \"DataFrame\", \"Message\"], \"type\": \"other\"}",
         "selected": false,
         "animated": false,
         "className": ""

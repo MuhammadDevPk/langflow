@@ -125,6 +125,34 @@ class VAPIToLangflowRealNode:
 
         return None
 
+    def _load_openai_model_template(self) -> Optional[Dict]:
+        """
+        Load OpenAIModel template for router nodes.
+
+        Returns:
+            OpenAIModel template node or None if not found.
+        """
+        # Check if openai_model_template.json exists
+        openai_model_path = Path(__file__).parent / "openai_model_template.json"
+        if openai_model_path.exists():
+            with open(openai_model_path, 'r') as f:
+                return json.load(f)
+
+        # Fallback: try to load from Main Agent flow
+        main_agent_path = Path(__file__).parent / "flows" / "Main Agent_9f30562c-5e21-4aba-aac5-3dc226b2495f.json"
+        if main_agent_path.exists():
+            try:
+                with open(main_agent_path, 'r') as f:
+                    data = json.load(f)
+                    nodes = data.get('data', {}).get('nodes', [])
+                    for node in nodes:
+                        if node.get('data', {}).get('type') == 'OpenAIModel':
+                            return copy.deepcopy(node)
+            except Exception as e:
+                print(f"  ⚠  Warning: Could not load OpenAIModel from Main Agent flow: {e}")
+
+        return None
+
     def _validate_openai_api_key(self) -> bool:
         """
         Validate the OpenAI API key by making a test request to OpenAI's API.
@@ -190,6 +218,13 @@ class VAPIToLangflowRealNode:
                 library['ConditionalRouter'] = conditional_router_template
                 print(f"  ✓ Loaded ConditionalRouter template from all_nodes_json.json")
 
+        # Load OpenAIModel template if not already present (needed for router nodes)
+        if 'OpenAIModel' not in library:
+            openai_model_template = self._load_openai_model_template()
+            if openai_model_template:
+                library['OpenAIModel'] = openai_model_template
+                print(f"  ✓ Loaded OpenAIModel template for router nodes")
+
         return library
 
     def convert(self, vapi_json_path: str, output_path: Optional[str] = None) -> str:
@@ -251,15 +286,32 @@ class VAPIToLangflowRealNode:
             print("  ⚠  Warning: No ChatInput template found")
             chat_input_id = None
 
+        # Build set of nodes that have incoming edges (to detect orphans)
+        edge_targets = {edge['to'] for edge in vapi_edges}
+
+        # Identify start node (first node that should always be created)
+        start_node_name = vapi_nodes[0]['name'] if vapi_nodes else None
+
+        # Track which nodes we actually create (for edge validation later)
+        created_node_names = set()
+
         # Convert each VAPI node to Langflow node
         for i, vapi_node in enumerate(vapi_nodes):
+            node_name = vapi_node.get('name', f'node_{i}')
+
+            # Skip orphan nodes (no incoming edges) unless it's the start node
+            if node_name not in edge_targets and node_name != start_node_name:
+                print(f"  ⚠ Skipping orphan node: {node_name}")
+                continue
+
             try:
                 langflow_node = self._convert_vapi_node(vapi_node, i)
                 new_flow['data']['nodes'].append(langflow_node)
                 id_map[vapi_node['name']] = langflow_node['id']
+                created_node_names.add(node_name)
 
                 node_type = vapi_node.get('type', 'unknown')
-                print(f"  ✓ {vapi_node['name']} ({node_type}): {langflow_node['id']}")
+                print(f"  ✓ {node_name} ({node_type}): {langflow_node['id']}")
             except Exception as e:
                 print(f"  ✗ Error converting {vapi_node.get('name', 'unknown')}: {e}")
 
@@ -284,30 +336,61 @@ class VAPIToLangflowRealNode:
         print(f"  Found {len(branching_nodes)} branching points\n")
 
         if branching_nodes:
-            print("Inserting routing logic for branching points...")
-            for source_name, outgoing_edges in branching_nodes.items():
-                source_id = id_map.get(source_name)
-                if not source_id:
-                    print(f"  ⚠  Warning: Source node not found for branching: {source_name}")
-                    continue
+            # Calculate node depths to determine which branching points to route
+            print("Calculating node depths to filter first-level branching...")
+            node_depths = self._calculate_node_depths(vapi_nodes, vapi_edges)
 
-                # Get source node position
-                source_node = next((n for n in new_flow['data']['nodes'] if n['id'] == source_id), None)
-                if not source_node:
-                    continue
+            # Filter branching nodes: only keep first-level (depth ≤ 1)
+            # This keeps only the top-level routing decisions, dramatically reducing cascade
+            MAX_ROUTING_DEPTH = 1
+            first_level_branching = {}
+            nested_branching = {}
 
-                source_pos = source_node['position']
+            for node_name, edges in branching_nodes.items():
+                depth = node_depths.get(node_name, 999)
+                if depth <= MAX_ROUTING_DEPTH:
+                    first_level_branching[node_name] = edges
+                else:
+                    nested_branching[node_name] = edges
 
-                # Insert RouterAgent + ConditionalRouter chain
-                routing_nodes = self._insert_routing_logic(
-                    source_id, source_name, outgoing_edges, id_map, source_pos
-                )
+            print(f"  First-level branching (depth ≤ {MAX_ROUTING_DEPTH}): {len(first_level_branching)} nodes")
+            print(f"  Nested branching (depth > {MAX_ROUTING_DEPTH}): {len(nested_branching)} nodes (will use direct edges)\n")
 
-                # Add routing nodes to flow
-                new_flow['data']['nodes'].extend(routing_nodes)
-                print(f"  ✓ {source_name}: Added {len(routing_nodes)} routing nodes ({len(outgoing_edges)} branches)")
+            if first_level_branching:
+                print("Inserting routing logic for first-level branching points...")
+                for source_name, outgoing_edges in first_level_branching.items():
+                    source_id = id_map.get(source_name)
+                    if not source_id:
+                        print(f"  ⚠  Warning: Source node not found for branching: {source_name}")
+                        continue
 
-            print(f"\nInserted routing logic for {len(branching_nodes)} branching points\n")
+                    # Get source node position
+                    source_node = next((n for n in new_flow['data']['nodes'] if n['id'] == source_id), None)
+                    if not source_node:
+                        continue
+
+                    source_pos = source_node['position']
+                    depth = node_depths.get(source_name, 0)
+
+                    # Insert RouterAgent + ConditionalRouter chain
+                    routing_nodes = self._insert_routing_logic(
+                        source_id, source_name, outgoing_edges, id_map, source_pos
+                    )
+
+                    # Add routing nodes to flow
+                    new_flow['data']['nodes'].extend(routing_nodes)
+                    print(f"  ✓ {source_name} (depth {depth}): Added {len(routing_nodes)} routing nodes ({len(outgoing_edges)} branches)")
+
+                print(f"\nInserted routing logic for {len(first_level_branching)} first-level branching points")
+
+            if nested_branching:
+                print(f"\nSkipped routing for {len(nested_branching)} nested branching points:")
+                for node_name in sorted(nested_branching.keys()):
+                    depth = node_depths.get(node_name, 999)
+                    num_branches = len(nested_branching[node_name])
+                    print(f"  ⊗ {node_name} (depth {depth}): {num_branches} branches → will use direct edges")
+
+            print()
 
         # Create edges
         print("Creating edges...")
@@ -323,6 +406,10 @@ class VAPIToLangflowRealNode:
 
         # Create edges from VAPI workflow (with routing logic if branching)
         edges_handled_by_routing = set()
+
+        # Get the first_level_branching set (only these use routing logic)
+        first_level_set = set(first_level_branching.keys()) if 'first_level_branching' in locals() else set()
+
         for vapi_edge in vapi_edges:
             from_name = vapi_edge.get('from')
             to_name = vapi_edge.get('to')
@@ -330,11 +417,14 @@ class VAPIToLangflowRealNode:
             to_id = id_map.get(to_name)
             condition = vapi_edge.get('condition')
 
-            # Check if this edge is part of a branching point
-            if from_name in branching_nodes:
+            # Check if this edge is part of a FIRST-LEVEL branching point
+            if from_name in first_level_set:
                 # This edge will be handled by routing logic
                 edges_handled_by_routing.add((from_name, to_name))
                 continue
+
+            # For nested branching (depth > 2), create direct edge (skip routing)
+            # This is the key change: nested branches connect directly without ConditionalRouter
 
             if from_id and to_id:
                 edge = self._create_edge(from_id, to_id, from_name, to_name, condition)
@@ -348,23 +438,36 @@ class VAPIToLangflowRealNode:
                     print(f"  ✓ {from_name} → {to_name}")
             else:
                 if not from_id:
-                    print(f"  ⚠  Warning: Source node not found: {from_name}")
+                    reason = "(orphan node)" if from_name not in created_node_names else "(not in id_map)"
+                    print(f"  ⚠  Skipping edge: Source node not found: {from_name} {reason}")
                 if not to_id:
-                    print(f"  ⚠  Warning: Target node not found: {to_name}")
+                    reason = "(orphan node)" if to_name not in created_node_names else "(not in id_map)"
+                    print(f"  ⚠  Skipping edge: Target node not found: {to_name} {reason}")
 
         # Create routing edges for branching points
         if hasattr(self, '_routing_components') and self._routing_components:
             print("\nCreating routing edges...")
+            
+            # Identify the start node name
+            start_node_name = next((n['name'] for n in vapi_nodes if n.get('isStart')), vapi_nodes[0]['name']) if vapi_nodes else None
+
             for source_name, routing_info in self._routing_components.items():
                 source_id = id_map.get(source_name)
                 router_agent_id = routing_info['router_agent_id']
                 edges_to_targets = routing_info['edges']
                 pattern = routing_info['routing_pattern']
 
-                # Connect source → RouterAgent
-                edge = self._create_edge(source_id, router_agent_id, source_name, f"Router({source_name})")
-                new_flow['data']['edges'].append(edge)
-                print(f"  ✓ {source_name} → Router({source_name})")
+                # LOGIC FIX: Only connect ChatInput to the Router if it's the START NODE.
+                # For deep nodes, we must connect Source -> Router (even if it has AI text issues, it's better than "all at once")
+                if chat_input_id and source_name == start_node_name:
+                    edge = self._create_edge(chat_input_id, router_agent_id, 'ChatInput', f"Router({source_name})")
+                    new_flow['data']['edges'].append(edge)
+                    print(f"  ✓ ChatInput → Router({source_name}) [Start Node Router]")
+                else:
+                    # For non-start nodes, connect Source -> Router
+                    edge = self._create_edge(source_id, router_agent_id, source_name, f"Router({source_name})")
+                    new_flow['data']['edges'].append(edge)
+                    print(f"  ✓ {source_name} → Router({source_name}) [Nested Router]")
 
                 if pattern == 'simple':
                     # 2-way routing: RouterAgent → ConditionalRouter → [true/false targets]
@@ -454,11 +557,33 @@ class VAPIToLangflowRealNode:
             if from_name in id_map:
                 terminal_nodes.discard(id_map[from_name])
 
+        # Identify reachable nodes (nodes with incoming edges in the NEW flow)
+        reachable_nodes = set()
+        for edge in new_flow['data']['edges']:
+            reachable_nodes.add(edge['target'])
+        
+        # Add Start Node to reachable (it's reached by ChatInput)
+        if start_node_name and start_node_name in id_map:
+            reachable_nodes.add(id_map[start_node_name])
+
         # Connect terminal nodes to ChatOutput
         if chat_output_id and terminal_nodes:
             for terminal_id in terminal_nodes:
+                # Skip unreachable nodes (dead code) to avoid "Input data cannot be None" errors
+                if terminal_id not in reachable_nodes:
+                    terminal_name = next((name for name, id_ in id_map.items() if id_ == terminal_id), "unknown")
+                    print(f"  ⚠ Skipping dead terminal node: {terminal_name} (no incoming edges)")
+                    continue
+
                 # Find the node name
                 terminal_name = next((name for name, id_ in id_map.items() if id_ == terminal_id), "unknown")
+
+                # Skip Start Node if it has a router (it's being bypassed by ChatInput -> Router)
+                # If we don't skip it, we'll see "Hello..." AND the routed response
+                if terminal_name == start_node_name and start_node_name in self._routing_components:
+                     print(f"  ⚠ Skipping Start Node output: {terminal_name} (handled by Router)")
+                     continue
+
                 edge = self._create_edge(terminal_id, chat_output_id, terminal_name, 'ChatOutput')
                 new_flow['data']['edges'].append(edge)
                 print(f"  ✓ {terminal_name} → ChatOutput")
@@ -616,11 +741,11 @@ class VAPIToLangflowRealNode:
         node_name = vapi_node.get('name', f'node_{index}')
 
         if node_type == 'conversation':
-            # Clone OpenAI or OpenAIModel component
-            component_type = 'OpenAIModel' if 'OpenAIModel' in self.component_library else 'OpenAI'
+            # Use Agent for all conversation nodes (reliable Message format)
+            component_type = 'Agent' if 'Agent' in self.component_library else 'OpenAIModel'
             if component_type not in self.component_library:
-                # Fallback to Agent if available
-                component_type = 'Agent' if 'Agent' in self.component_library else list(self.component_library.keys())[0]
+                # Fallback to any available component
+                component_type = list(self.component_library.keys())[0]
 
             langflow_node = self._clone_component(component_type)
 
@@ -908,6 +1033,53 @@ class VAPIToLangflowRealNode:
 
         return edge
 
+    def _calculate_node_depths(self, vapi_nodes: List[Dict], vapi_edges: List[Dict]) -> Dict[str, int]:
+        """
+        Calculate the depth of each node from the start node.
+
+        Args:
+            vapi_nodes: List of VAPI nodes
+            vapi_edges: List of VAPI edges
+
+        Returns:
+            Dictionary mapping node names to their depth (0 for start node)
+        """
+        # Find start node
+        start_nodes = [n for n in vapi_nodes if n.get('isStart', False)]
+        if not start_nodes and vapi_nodes:
+            start_nodes = [vapi_nodes[0]]
+
+        if not start_nodes:
+            return {}
+
+        start_name = start_nodes[0]['name']
+
+        # Build adjacency list
+        graph = {}
+        for edge in vapi_edges:
+            from_name = edge.get('from')
+            to_name = edge.get('to')
+            if from_name and to_name:
+                if from_name not in graph:
+                    graph[from_name] = []
+                graph[from_name].append(to_name)
+
+        # BFS to calculate depths
+        depths = {start_name: 0}
+        queue = [start_name]
+
+        while queue:
+            current = queue.pop(0)
+            current_depth = depths[current]
+
+            if current in graph:
+                for neighbor in graph[current]:
+                    if neighbor not in depths:
+                        depths[neighbor] = current_depth + 1
+                        queue.append(neighbor)
+
+        return depths
+
     def _find_branching_nodes(self, vapi_edges: List[Dict]) -> Dict[str, List[Dict]]:
         """
         Find nodes with multiple outgoing edges (branching points).
@@ -933,7 +1105,10 @@ class VAPIToLangflowRealNode:
     def _create_router_agent(self, source_node_name: str, conditions: List[Dict],
                             source_node_id: str, position: Dict[str, float]) -> Dict:
         """
-        Create a RouterAgent node that evaluates VAPI conditions using LLM.
+        Create a Router Agent that evaluates VAPI conditions using LLM.
+
+        Uses Agent (not OpenAIModel) because Agent's Message format is reliable
+        and works consistently with ConditionalRouter's MessageTextInput.
 
         Args:
             source_node_name: Name of the source node (for identification)
@@ -942,46 +1117,67 @@ class VAPIToLangflowRealNode:
             position: Position dictionary with x and y coordinates
 
         Returns:
-            RouterAgent node dictionary
+            Router node dictionary (Agent type)
         """
-        # Clone OpenAIModel (or Agent) as RouterAgent
-        if 'Agent' in self.component_library:
-            router = self._clone_component('Agent')
-        elif 'OpenAIModel' in self.component_library:
-            router = self._clone_component('OpenAIModel')
-        else:
-            raise ValueError("No Agent or OpenAIModel template available for RouterAgent")
+        # Use Agent for routing (reliable Message format)
+        if 'Agent' not in self.component_library:
+            raise ValueError("Agent template required for routing")
 
-        # Build routing prompt
+        router = self._clone_component('Agent')
+
+        # Build routing prompt with EXTREME strictness for numeric-only output
         condition_texts = []
         for i, condition in enumerate(conditions, 1):
             cond_prompt = condition.get('prompt', f'Condition {i}')
             condition_texts.append(f"{i}. {cond_prompt}")
 
-        routing_prompt = f"""You are a routing agent for a conversation workflow. Based on the user's message and conversation context, determine which condition best matches the user's intent.
+        routing_prompt = f"""ROUTING DECISION - CRITICAL FORMAT REQUIREMENT
 
 CONDITIONS:
 {chr(10).join(condition_texts)}
 
+YOUR RESPONSE FORMAT (CRITICAL):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Response MUST be EXACTLY this format:
+[DIGIT]
+
+Where [DIGIT] is 1, 2, 3, etc. based on which condition matches.
+
+CORRECT examples:
+1
+2
+3
+
+WRONG examples (DO NOT USE):
+- "1" (with quotes)
+- "The answer is 1"
+- "Route to 1"
+- "1 - User wants appointment"
+- "Based on analysis, I choose option 1"
+
 INSTRUCTIONS:
-- Analyze the user's message carefully
-- Choose the condition number (1, 2, 3, etc.) that BEST matches the user's intent
-- If multiple conditions could apply, choose the MOST SPECIFIC one
-- Respond with ONLY the number, nothing else
+1. Read the user's message carefully
+2. Match it to the BEST condition above
+3. Output ONLY the digit (no other text)
+4. Stop immediately
 
-Your response (just the number):"""
+Your response (digit only):"""
 
-        # Update prompt in template
+        # Update template for Agent
         template = router['data']['node']['template']
+
+        # Set system prompt/message
         if 'system_message' in template:
             template['system_message']['value'] = routing_prompt
+        elif 'system_prompt' in template:
+            template['system_prompt']['value'] = routing_prompt
         elif 'agent_description' in template:
             template['agent_description']['value'] = routing_prompt
 
         # Inject API key if available
         if self.openai_api_key and 'api_key' in template:
             template['api_key']['value'] = self.openai_api_key
-            print(f"    ✓ API key injected into RouterAgent")
+            print(f"    ✓ API key injected into Router Agent")
 
         # Set position
         router['position'] = position
@@ -1012,9 +1208,9 @@ Your response (just the number):"""
 
         # Configure the router
         template = router['data']['node']['template']
-        template['operator']['value'] = 'equals'
+        template['operator']['value'] = 'contains'  # Use 'contains' to be more forgiving
         template['match_text']['value'] = str(condition_index)
-        template['case_sensitive']['value'] = False
+        template['case_sensitive']['value'] = False  # Case insensitive matching
         template['max_iterations']['value'] = 10
         template['default_route']['value'] = 'false_result'
 
@@ -1067,6 +1263,8 @@ Your response (just the number):"""
             'edges': edges_to_targets,
             'num_branches': num_branches
         }
+
+
 
         if num_branches == 2:
             # Simple 2-way routing: single ConditionalRouter

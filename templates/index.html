@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice AI Agent</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎙️ Voice AI Agent</h1>
+            <p class="subtitle">Speak naturally with your AI assistant</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Recording Control -->
+            <div class="recording-section">
+                <button id="recordButton" class="record-btn">
+                    <span class="icon">🎤</span>
+                    <span class="text">Click to Speak</span>
+                </button>
+                <div id="statusIndicator" class="status-indicator">
+                    <span class="status-text">Ready</span>
+                </div>
+            </div>
+
+            <!-- Chat Transcript -->
+            <div class="chat-container">
+                <div id="chatLog" class="chat-log">
+                    <div class="welcome-message">
+                        <p>👋 Welcome! Click the microphone button to start speaking.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p class="powered-by">Powered by Deepgram, Langflow & ElevenLabs</p>
+        </footer>
+    </div>
+
+    <!-- Audio player (hidden) -->
+    <audio id="audioPlayer" style="display: none;"></audio>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

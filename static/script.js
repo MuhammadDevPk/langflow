@@ -82,12 +82,18 @@ async function startCall() {
         dataArray = new Uint8Array(bufferLength);
 
         isInCall = true;
+        isMonitoring = false; // Don't start monitoring yet
+        updateUI('agent-speaking');
+
+        console.log('Call started. Fetching greeting...');
+
+        // Fetch and play greeting
+        await playGreeting();
+
+        // After greeting finishes, start monitoring
         isMonitoring = true;
         updateUI('monitoring');
-
         console.log('Voice monitoring started. Thresholds: Speech=' + SPEECH_THRESHOLD + ', Silence=' + SILENCE_THRESHOLD);
-
-        // Start VAD monitoring
         monitorVoiceActivity();
 
     } catch (error) {
@@ -281,6 +287,30 @@ async function sendAudioToServer(audioBlob) {
         if (isInCall) {
             updateUI('monitoring');
         }
+    }
+}
+
+async function playGreeting() {
+    try {
+        const response = await fetch('/get_greeting');
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch greeting');
+        }
+
+        const data = await response.json();
+
+        // Display greeting in chat
+        addMessage('agent', data.greeting_text);
+
+        // Play greeting audio
+        if (data.greeting_audio) {
+            await playAudioResponse(data.greeting_audio);
+        }
+
+    } catch (error) {
+        console.error('Error playing greeting:', error);
+        // Continue anyway - user can still speak
     }
 }
 

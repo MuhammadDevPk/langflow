@@ -5,10 +5,13 @@ Orchestrates STT (Deepgram), Langflow Agent, and TTS (ElevenLabs)
 """
 
 import os
+import json
 import base64
+import io
 from pathlib import Path
 from typing import Optional
 import httpx
+from gtts import gTTS
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -24,7 +27,7 @@ DEEPGRAM_API_KEY = os.getenv("DEEPGRAM_API_KEY")
 ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 LANGFLOW_BASE_URL = os.getenv("LANGFLOW_BASE_URL", "http://localhost:7860")
-LANGFLOW_FLOW_ID = os.getenv("LANGFLOW_FLOW_ID", "ec2db58a-812e-461c-ba83-8054092225bc")
+LANGFLOW_FLOW_ID = os.getenv("LANGFLOW_FLOW_ID", "e4306c3a-8459-49c8-9339-baed51dc8fa4")
 LANGFLOW_API_KEY = os.getenv("LANGFLOW_API_KEY")
 
 # Validate required keys
@@ -112,6 +115,19 @@ async def query_langflow(text: str, session_id: str = "default") -> str:
         return "No response from agent"
 
 
+def synthesize_speech_google(text: str) -> bytes:
+    """Convert text to speech using Google TTS (free, no API key needed)"""
+    # Create gTTS object with US English
+    tts = gTTS(text=text, lang='en', tld='us', slow=False)
+    
+    # Save to bytes buffer
+    audio_buffer = io.BytesIO()
+    tts.write_to_fp(audio_buffer)
+    audio_buffer.seek(0)
+    
+    return audio_buffer.read()
+
+
 async def synthesize_speech_elevenlabs(text: str, voice_id: str = "21m00Tcm4TlvDq8ikWAM") -> bytes:
     """Convert text to speech using ElevenLabs API"""
     url = f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
@@ -188,6 +204,63 @@ async def process_audio(audio: UploadFile = File(...)):
 async def health_check():
     """Health check endpoint"""
     return {"status": "healthy", "langflow_url": LANGFLOW_BASE_URL}
+
+
+@app.get("/get_greeting")
+async def get_greeting():
+    """
+    Get the agent's greeting message from VAPI JSON and synthesize it
+    """
+    try:
+        # Read VAPI JSON file
+        vapi_json_path = Path("json/inputs/daniel_dental_agent.json")
+        if not vapi_json_path.exists():
+            raise HTTPException(status_code=404, detail="VAPI JSON file not found")
+        
+        with open(vapi_json_path, 'r') as f:
+            vapi_data = json.load(f)
+        
+        # Extract first message from start node
+        greeting_text = None
+        nodes = vapi_data.get('workflow', {}).get('nodes', [])
+        
+        for node in nodes:
+            if node.get('isStart') or node.get('name') == 'start':
+                message_plan = node.get('messagePlan', {})
+                greeting_text = message_plan.get('firstMessage', '')
+                break
+        
+        if not greeting_text:
+            greeting_text = "Thank you for calling Wellness Partners. This is Riley, your scheduling assistant. How may I help you today?"
+        
+        # Try to synthesize greeting - first with ElevenLabs, then fallback to Google
+        try:
+            audio_response = await synthesize_speech_elevenlabs(greeting_text)
+            audio_base64 = base64.b64encode(audio_response).decode('utf-8')
+            tts_engine = "ElevenLabs"
+        except httpx.HTTPStatusError as tts_error:
+            # If ElevenLabs fails, use Google TTS as fallback
+            print(f"ElevenLabs failed ({tts_error.response.status_code}), using Google TTS fallback...")
+            try:
+                audio_response = synthesize_speech_google(greeting_text)
+                audio_base64 = base64.b64encode(audio_response).decode('utf-8')
+                tts_engine = "Google TTS (Fallback)"
+            except Exception as google_error:
+                print(f"Google TTS also failed: {google_error}")
+                return JSONResponse(content={
+                    "greeting_text": greeting_text,
+                    "greeting_audio": None,
+                    "tts_error": "All TTS engines failed"
+                })
+        
+        return JSONResponse(content={
+            "greeting_text": greeting_text,
+            "greeting_audio": audio_base64,
+            "tts_engine": tts_engine
+        })
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error getting greeting: {str(e)}")
 
 
 if __name__ == "__main__":

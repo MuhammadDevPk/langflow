@@ -1,493 +1,464 @@
-# VAPI to Langflow Converter
+# Voice AI Dental Agent
 
-**Convert VAPI voice agent workflows to Langflow-compatible JSON format**
+**Intelligent voice interface for dental appointment scheduling powered by Langflow, Deepgram, and ElevenLabs**
 
-[![Status](https://img.shields.io/badge/status-86%25%20complete-yellow)]()
-[![Working](https://img.shields.io/badge/working-87%25-yellow)]()
-[![Production](https://img.shields.io/badge/production-3%2F5%20features-green)]()
-
----
-
-## 📋 Quick Links
-
-- **[Quick Reference](docs/QUICK_REFERENCE.md)** - One-page overview
-- **[Project Status Report](docs/PROJECT_STATUS_REPORT.md)** - Comprehensive status
-- **[Testing Guide](docs/FEATURE4_TESTING_GUIDE.md)** - Complete testing instructions
-- **[API Key Fix Guide](docs/API_KEY_FIX_GUIDE.md)** - Fix invalid API key issues
+[![Status](https://img.shields.io/badge/status-Production%20Ready-brightgreen)]()
+[![Voice Interface](https://img.shields.io/badge/voice-enabled-blue)]()
+[![AI Powered](https://img.shields.io/badge/AI-Langflow%20%2B%20OpenAI-purple)]()
 
 ---
 
 ## 🎯 Overview
 
-This converter transforms [VAPI](https://vapi.ai) voice agent workflows into [Langflow](https://langflow.org) visual workflows, enabling:
+A complete voice AI system that enables natural conversation for dental appointment scheduling. Built with:
 
-- ✅ **Variable extraction** from conversations
-- ✅ **First message configuration** for greetings
-- ✅ **Basic chat flow** with proper I/O connections
-- ⚠️ **Conditional routing** (structurally complete, testing pending)
-- ❌ **Tool integration** (placeholder only)
+- **Voice Interface** (Web & Phone)
+- **Speech Recognition** (Deepgram)
+- **AI Agent** (Langflow + OpenAI GPT-4)
+- **Text-to-Speech** (ElevenLabs with Google TTS fallback)
+- **VAPI to Langflow Conversion** (Unified Agent approach)
 
-**Use Case:** Migrate VAPI voice agents to Langflow for visual editing, debugging, and deployment.
+**Use Case:** Replace traditional phone systems with intelligent voice AI for appointment scheduling, rescheduling, and general inquiries.
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Quick Start - Testing the Dental Agent
 
 ### Prerequisites
 
 - Python 3.11+
+- Node.js (for uv package manager)
 - OpenAI API key
-- VAPI workflow JSON file
+- Deepgram API key
+- ElevenLabs API key (optional, Google TTS works as fallback)
+- Langflow API key
 
-### Installation
+### Step 1: Clone and Install
 
 ```bash
-# Clone repository
+# Clone the repository
 git clone <repository-url>
 cd langflow
 
-# Install dependencies (if needed)
-pip install requests python-dotenv
+# Install dependencies
+uv sync
 ```
 
-### Basic Usage
+### Step 2: Configure Environment
+
+Create a `.env` file:
 
 ```bash
-# Set your OpenAI API key
-echo "OPENAI_API_KEY=sk-..." > .env
+# Required API Keys
+OPENAI_API_KEY=sk-...
+DEEPGRAM_API_KEY=...
+ELEVENLABS_API_KEY=...  # Optional, fallback to Google TTS
+LANGFLOW_API_KEY=sk-...
 
-# Convert VAPI workflow to Langflow
-python3 vapi_to_langflow_realnode_converter.py \
-  json/inputs/daniel_dental_agent.json \
-  -o json/outputs/output.json
+# Langflow Configuration
+LANGFLOW_BASE_URL=http://localhost:7860
 ```
 
-### Import to Langflow
+### Step 3: Start Langflow
 
-1. Start Langflow: `langflow run --port 7860`
-2. Open: http://localhost:7860
-3. Click **Import** → Select generated JSON
-4. Add your OpenAI API key to Agent nodes
-5. Test in Playground!
+```bash
+# Start Langflow (must run on port 7860)
+uv run langflow run
+```
+
+**Important:** Langflow MUST run on port 7860 for the system to work.
+
+### Step 4: Import the Dental Agent
+
+```bash
+# Import flows to Langflow
+python3 agent_management/import_flows.py --api-key YOUR_LANGFLOW_API_KEY
+```
+
+This will:
+- Import the "Appointment Scheduler (Unified)" flow
+- Save the Flow ID to `flow_config.json`
+- Auto-configure the connection
+
+**Manual Alternative:** If you prefer to generate the agent from Vapi JSON:
+
+```bash
+python3 agent_management/vapi_converter/vapi_to_langflow_realnode_converter.py \
+  agent_management/json/inputs/daniel_dental_agent.json \
+  agent_management/flows/Appointment_Scheduler_Unified.json
+```
+
+### Step 5: Add OpenAI Key in Langflow
+
+1. Open http://localhost:7860
+2. Navigate to your imported "Appointment Scheduler (Unified)" flow
+3. Click on the OpenAI component
+4. Add your OpenAI API key
+5. Save the flow
+
+### Step 6: Start the Voice Interface
+
+```bash
+# Start the web voice interface
+uv run app.py
+```
+
+### Step 7: Test the Agent
+
+1. Open http://localhost:8000 in your browser
+2. Click the **"Click to Speak"** button
+3. Allow microphone access
+4. Start speaking!
+
+**Example conversation:**
+```
+Agent: "Thank you for calling Wellness Partners. This is Riley, your scheduling assistant. How may I help you today?"
+
+You: "I need to book an appointment"
+
+Agent: "I'd be happy to help you book an appointment! Are you a new patient or an existing patient?"
+
+You: "I'm a new patient"
+
+Agent: "Great! What type of appointment do you need?"
+```
 
 ---
 
 ## ✨ Features
 
-### Feature 1: Variable Extraction ✅ 100%
+### 1. Voice Interface ✅ Production Ready
 
-**Converts** VAPI `variableExtractionPlan` to JSON output instructions in agent prompts.
+**Web Interface:**
+- Real-time voice conversation
+- Voice Activity Detection (VAD)
+- Visual feedback (monitoring, recording, agent speaking)
+- Automatic greeting on connect
 
-**Example:**
-```
-IMPORTANT: After your response, you MUST extract the following information and output it as JSON:
-{
-  "customer_type": "new_patient" // Options: new_patient, existing_patient, unsure
-  "appointment_type": "<string>" // Type of appointment needed
-}
-```
+**Phone Interface (Twilio):**
+- Incoming call handling
+- Multi-agent support
+- TwiML response generation
 
-**Status:** ✅ Production ready | 19/24 nodes configured
-
----
-
-### Feature 2: Conversation Flow ✅ 100%
-
-**Converts** VAPI `messagePlan.firstMessage` to greeting instructions in agent prompts.
-
-**Example:**
-```
-FIRST MESSAGE: When starting the conversation or when this node is first reached, begin by saying:
-"Thank you for calling Wellness Partners. This is Riley, your virtual assistant..."
-
-Then continue with your role:
-[Original prompt]
-```
-
-**Status:** ✅ Production ready | 1/24 nodes configured
+**Tech Stack:**
+- Frontend: Vanilla JavaScript with Web Audio API
+- Backend: FastAPI + Python
+- STT: Deepgram API
+- TTS: ElevenLabs (with Google TTS fallback)
 
 ---
 
-### Feature 3: Basic Chat ✅ 100%
+### 2. Unified Agent Architecture ✅ Production Ready
 
-**Creates** proper I/O connections: ChatInput → Agent nodes → ChatOutput
+**Conversion Approach:**
+- Converts VAPI JSON workflows to single Unified Agent
+- All conversation logic in one comprehensive system prompt
+- Avoids Langflow's conditional routing limitations
+- Simpler, more reliable execution
 
-**Structure:**
-- 1 ChatInput (entry point)
-- 24 Agent nodes (conversation logic)
-- 3 ChatOutput nodes (exit points)
-- All edges use correct handles (JSON-stringified)
+**Generated Structure:**
+- 1 ChatInput node
+- 1 OpenAI Model node (Unified Agent)
+- 1 ChatOutput node
+- Simple linear flow
 
-**Status:** ✅ Production ready | 100% import compatibility
-
----
-
-### Feature 4: Conditional Routing ⚠️ 95%
-
-**Converts** VAPI edge conditions to intelligent routing using hybrid pattern:
-
-**Pattern:** RouterAgent (LLM evaluates conditions) + ConditionalRouter (routes based on result)
-
-**Simple Routing (2-way):**
-```
-Agent → RouterAgent → ConditionalRouter
-                      ├─ [TRUE: condition 1] → Path A
-                      └─ [FALSE] → Path B
-```
-
-**Cascade Routing (3+ way):**
-```
-Agent → RouterAgent → Router1
-                      ├─ [TRUE: condition 1] → Path A
-                      └─ [FALSE] → Router2
-                                  ├─ [TRUE: condition 2] → Path B
-                                  └─ [FALSE: default] → Path C
-```
-
-**Generated Nodes:**
-- 6 RouterAgent nodes (one per branching point)
-- 7 ConditionalRouter nodes (for path selection)
-- All 28 Agent nodes have API keys injected
-
-**Status:** ⚠️ Structure verified (100%), runtime testing pending (blocked by invalid API key)
-
-**Docs:** [Feature 4 Implementation](docs/CONDITIONAL_ROUTING_IMPLEMENTATION.md)
+**Why Unified?**
+- ✅ Avoids Langflow's If-Else component bugs
+- ✅ Simpler to maintain and debug
+- ✅ Better conversation context handling
+- ✅ Faster response times
 
 ---
 
-### Feature 5: Tool Integration ❌ 40%
+### 3. Dynamic Flow ID Management ✅ Production Ready
 
-**Intended:** Convert VAPI tools (EndCall, TransferCall) to functional Langflow components
+**Problem Solved:** Flow IDs change when importing to different Langflow instances
 
-**Current:** ChatOutput placeholders only
+**Solution:**
+- `import_flows.py` saves Flow ID to `flow_config.json`
+- `app.py` automatically reads from config
+- No manual ID copying needed
 
-**Status:** ❌ Not production ready | Requires 5-10 hours development
-
----
-
-## 📊 Status Summary
-
-| Feature | Implemented | Working | Production Ready |
-|---------|-------------|---------|------------------|
-| 1. Variable Extraction | 100% | 100% | ✅ YES |
-| 2. Conversation Flow | 100% | 100% | ✅ YES |
-| 3. Basic Chat | 100% | 100% | ✅ YES |
-| 4. Conditional Routing | 100% | 95% | ⚠️ TESTING PENDING |
-| 5. Tool Integration | 30% | 40% | ❌ NO |
-| **Overall** | **86%** | **87%** | **3/5 features** |
+**Benefits:**
+- 🎯 Works for all team members after import
+- 🎯 No code changes needed
+- 🎯 Clear warning if ID is missing
 
 ---
 
-## 🔴 Critical Blocker
+### 4. Agent Management Tools ✅ Production Ready
 
-### Invalid OpenAI API Key
-
-**Problem:** Cannot test Feature 4 routing due to invalid API key
-
-**Solution:** Obtain new valid API key from OpenAI
-
-**Quick Fix (10 minutes):**
-
+**Export Flows:**
 ```bash
-# 1. Get new key from https://platform.openai.com/api-keys
-
-# 2. Update .env
-echo "OPENAI_API_KEY=sk-NEW-KEY-HERE" > .env
-
-# 3. Clear Langflow cache
-sqlite3 ~/.langflow/data/database.db "DELETE FROM variable WHERE name='OPENAI_API_KEY';"
-
-# 4. Regenerate JSON
-python3 vapi_to_langflow_realnode_converter.py \
-  json/inputs/daniel_dental_agent.json \
-  -o json/outputs/feature4_VALID_KEY.json
-
-# 5. Import to Langflow and test
+python3 agent_management/export_flows.py --api-key YOUR_API_KEY
 ```
 
-**Full Guide:** [API Key Fix Guide](docs/API_KEY_FIX_GUIDE.md)
-
----
-
-## 🧪 Testing
-
-### Test Features 1-3 (Working)
-
+**Import Flows:**
 ```bash
-# Generate JSON
-python3 vapi_to_langflow_realnode_converter.py \
-  json/inputs/daniel_dental_agent.json \
-  -o test_output.json
-
-# Import to Langflow UI
-# Send message: "Hi, I want to book an appointment"
-# ✅ Expected: Agent responds, extracts variables, handles flow
+python3 agent_management/import_flows.py --api-key YOUR_API_KEY
 ```
 
-### Test Feature 4 (After API Key Fix)
-
+**Convert Vapi to Langflow:**
 ```bash
-# Import feature4_routing_FIXED.json to Langflow
-
-# Test 1: New appointment routing
-"Hi, I want to book an appointment"
-# ✅ Expected: Routes ONLY to customer_type (no other responses)
-
-# Test 2: Reschedule routing
-"I need to reschedule my appointment"
-# ✅ Expected: Routes ONLY to reschedule_cancel
-
-# Test 3: General info routing
-"What are your office hours?"
-# ✅ Expected: Routes ONLY to general_info
+python3 agent_management/vapi_converter/vapi_to_langflow_realnode_converter.py \
+  agent_management/json/inputs/daniel_dental_agent.json \
+  agent_management/flows/output.json
 ```
 
-**Complete Testing Guide:** [Feature 4 Testing Guide](docs/FEATURE4_TESTING_GUIDE.md)
-
-**Test Scenarios:** [13 detailed test cases](docs/TEST_SCENARIOS.md)
+**All scripts:**
+- Auto-detect correct directories
+- Work from any location
+- Save configs to project root
 
 ---
 
 ## 📁 Project Structure
 
 ```
-langflow/
-├── vapi_to_langflow_realnode_converter.py   # Main converter (1,190 lines)
-├── conditional_router_template.json         # ConditionalRouter template
+/
+├── app.py                              # Main web voice interface
+├── twilio_bridge_production.py         # Twilio phone integration
+├── static/                              # Frontend assets
+│   ├── script.js                       # Voice UI logic
+│   └── style.css                       # UI styling
+├── templates/
+│   └── index.html                      # Main HTML page
+├── .env                                 # API keys (gitignored)
+├── flow_config.json                     # Auto-generated Flow ID
 │
-├── json/
-│   ├── inputs/
-│   │   └── daniel_dental_agent.json         # VAPI input (24 nodes)
-│   └── outputs/
-│       └── feature4_routing_FIXED.json      # Latest output (39 nodes)
-│
-├── docs/
-│   ├── QUICK_REFERENCE.md                   # One-page overview
-│   ├── PROJECT_STATUS_REPORT.md             # Comprehensive status
-│   ├── API_KEY_FIX_GUIDE.md                 # Fix invalid API key
-│   ├── FEATURE4_TESTING_GUIDE.md            # Complete testing instructions
-│   ├── TEST_SCENARIOS.md                    # 13 test cases
-│   ├── CONDITIONAL_ROUTING_IMPLEMENTATION.md # Feature 4 deep dive
-│   ├── CONVERSATION_FLOW_IMPLEMENTATION.md  # Feature 2 details
-│   └── VARIABLE_EXTRACTION_IMPLEMENTATION.md # Feature 1 details
-│
-└── .env                                      # OpenAI API key (gitignored)
+└── agent_management/                    # Agent utilities
+    ├── flows/                           # Exported Langflow flows
+    ├── json/                            # Vapi JSON workflows
+    │   └── inputs/
+    │       └── daniel_dental_agent.json # Dental agent workflow
+    ├── import_flows.py                  # Import to Langflow
+    ├── export_flows.py                  # Export from Langflow
+    └── vapi_converter/                  # Conversion utilities
+        ├── vapi_to_langflow_realnode_converter.py
+        └── unified_agent_builder.py
 ```
 
 ---
 
-## 🔧 Advanced Usage
+## 🎯 How It Works
 
-### Skip API Key Validation (Faster)
+### Voice Conversation Flow
+
+```
+1. User clicks microphone
+   ↓
+2. Greeting plays (from Vapi JSON)
+   ↓
+3. User speaks → Audio recorded
+   ↓
+4. Deepgram transcribes audio → Text
+   ↓
+5. Langflow processes with GPT-4 → Response text
+   ↓
+6. ElevenLabs synthesizes → Audio
+   ↓
+7. Audio plays to user
+   ↓
+8. Repeat from step 3
+```
+
+### Multi-Turn Conversation
+
+- Langflow maintains conversation context
+- Each message includes history
+- Agent remembers previous responses
+- Seamless multi-turn dialogue
+
+---
+
+## 🧪 Testing
+
+### Test Scenarios
+
+**Scenario 1: New Appointment**
+```
+You: "I need to book an appointment"
+Expected: Agent asks if new/existing patient
+```
+
+**Scenario 2: Reschedule**
+```
+You: "I need to reschedule my appointment"
+Expected: Agent asks for appointment details
+```
+
+**Scenario 3: General Info**
+```
+You: "What are your office hours?"
+Expected: Agent provides information
+```
+
+**Scenario 4: Cancellation**
+```
+You: "I need to cancel my appointment"
+Expected: Agent handles cancellation flow
+```
+
+### Error Handling Tests
+
+**Empty Audio:**
+- Speak nothing → "Could not transcribe audio. Please speak clearly."
+
+**Invalid API Key:**
+- App shows warning at startup
+- Langflow errors shown in response
+
+**Network Errors:**
+- Graceful error messages
+- Fallback TTS if ElevenLabs fails
+
+---
+
+## 🔧 Configuration
+
+### API Keys Required
+
+| Service | Required | Fallback | Purpose |
+|---------|----------|----------|---------|
+| OpenAI | ✅ Yes | None | Agent intelligence |
+| Deepgram | ✅ Yes | None | Speech-to-Text |
+| Langflow | ✅ Yes | None | Agent platform |
+| ElevenLabs | ⚠️ Optional | Google TTS | Text-to-Speech |
+
+### Environment Variables
 
 ```bash
-python3 vapi_to_langflow_realnode_converter.py \
-  json/inputs/daniel_dental_agent.json \
-  -o output.json \
-  --skip-validation
+# Required
+OPENAI_API_KEY=sk-...
+DEEPGRAM_API_KEY=...
+LANGFLOW_API_KEY=sk-...
+
+# Optional
+ELEVENLABS_API_KEY=...
+LANGFLOW_BASE_URL=http://localhost:7860
 ```
 
-**Use when:** You know your API key is valid and want faster generation
+---
 
-### With Validation (Recommended)
+## 🚨 Troubleshooting
 
+### "No LANGFLOW_FLOW_ID found"
+
+**Solution:**
 ```bash
-python3 vapi_to_langflow_realnode_converter.py \
-  json/inputs/daniel_dental_agent.json \
-  -o output.json
+python3 agent_management/import_flows.py --api-key YOUR_API_KEY
 ```
 
-**Benefit:** Automatically validates API key with OpenAI before generation
+### "Could not access microphone"
 
----
+**Solution:** Access via http://localhost:8000 (not http://0.0.0.0:8000)
 
-## 📈 What Gets Generated
+### "404: /get_greeting"
 
-### Input: VAPI Workflow
-- 24 conversation nodes
-- 29 edges with AI conditions
-- 6 branching points
-- Variable extraction plans
-- First message configuration
-- Tool definitions
+**Solution:** Restart app.py to reload the endpoint
 
-### Output: Langflow JSON
-- **39 nodes total:**
-  - 1 ChatInput (entry)
-  - 24 Agent nodes (conversation)
-  - 6 RouterAgent nodes (routing logic)
-  - 7 ConditionalRouter nodes (path selection)
-  - 3 ChatOutput nodes (exits)
-- **45 edges total:**
-  - 17 conversation edges
-  - 28 routing edges
-- **All nodes configured:**
-  - API keys injected (28/28 Agent nodes)
-  - Variable extraction instructions (19/24 nodes)
-  - First messages (1/24 nodes)
-  - Routing prompts (6 RouterAgents)
+### Langflow not responding
 
----
-
-## 🐛 Known Issues
-
-### Issue 1: API Key Injection Bug ✅ FIXED (v1.4.0)
-- **Problem:** RouterAgent nodes had empty API keys
-- **Cause:** Checked wrong field name (`'openai_api_key'` vs `'api_key'`)
-- **Fix:** Changed field name at line 921-923
-- **Status:** RESOLVED
-
-### Issue 2: Invalid User API Key 🔴 ACTIVE
-- **Problem:** User's OpenAI API key is rejected by OpenAI (401)
-- **Impact:** Cannot test Feature 4 routing
-- **Solution:** User must obtain new valid key
-- **Status:** BLOCKING - User action required
-- **Guide:** [API_KEY_FIX_GUIDE.md](docs/API_KEY_FIX_GUIDE.md)
-
----
-
-## 💡 Key Design Decisions
-
-### Why RouterAgent + ConditionalRouter?
-
-**Alternative 1:** Pure LLM routing (agent chooses path directly)
-- ❌ Less reliable (hallucinations)
-- ❌ Harder to debug
-- ❌ No fallback logic
-
-**Alternative 2:** Rule-based routing (regex patterns)
-- ❌ Not flexible enough
-- ❌ Requires manual pattern writing
-- ❌ Hard to maintain
-
-**Chosen: Hybrid Pattern** ✅
-- ✅ LLM evaluates complex conditions
-- ✅ ConditionalRouter provides reliable branching
-- ✅ Easy to debug (see which number was returned)
-- ✅ Clear separation of concerns
-
-### Why JSON-Stringified Handles?
-
-Langflow edge format requires:
-```json
-{
-  "sourceHandle": "{\"dataType\":\"Agent\",\"id\":\"node_id\",\"name\":\"response\",\"output_types\":[\"Message\"]}",
-  "targetHandle": "{\"baseClasses\":[\"Message\"],\"dataType\":\"Message\",\"id\":\"target_id\",\"inputTypes\":[\"Message\"],\"name\":\"input_value\",\"type\":\"str\"}"
-}
+**Solution:** Ensure Langflow is running on port 7860:
+```bash
+uv run langflow run
 ```
-
-**Why:** Langflow uses stringified JSON objects for rich metadata in edge connections
 
 ---
 
 ## 🎯 Next Steps
 
-### Immediate (10 minutes)
-1. 🔴 **User:** Obtain new valid OpenAI API key
-2. 🔴 **User:** Update `.env` and regenerate JSON
+### Current Features (Complete)
+- ✅ Voice interface (web)
+- ✅ Unified agent architecture
+- ✅ Dynamic Flow ID management
+- ✅ Speech recognition (Deepgram)
+- ✅ Text-to-speech (ElevenLabs + Google TTS)
+- ✅ Multi-turn conversations
+- ✅ Greeting message
+- ✅ Auto-import/export tools
 
-### Short-term (45 minutes)
-1. 🟡 **Developer:** Test Feature 4 with valid key
-2. 🟡 **Developer:** Run all 13 test scenarios
-3. 🟡 **Developer:** Document results
-
-### Long-term (5-10 hours)
-1. ⚪ Implement Feature 5 (Tool Integration)
-2. ⚪ Add automated test suite
-3. ⚪ Support additional VAPI features
-
----
-
-## 📚 Documentation
-
-### Quick Start
-- **[Quick Reference](docs/QUICK_REFERENCE.md)** - One-page overview (read this first!)
-
-### Feature Documentation
-- **[Feature 1: Variable Extraction](docs/VARIABLE_EXTRACTION_IMPLEMENTATION.md)**
-- **[Feature 2: Conversation Flow](docs/CONVERSATION_FLOW_IMPLEMENTATION.md)**
-- **[Feature 4: Conditional Routing](docs/CONDITIONAL_ROUTING_IMPLEMENTATION.md)**
-
-### Testing & Troubleshooting
-- **[Feature 4 Testing Guide](docs/FEATURE4_TESTING_GUIDE.md)** - Complete testing instructions (30-45 min)
-- **[Test Scenarios](docs/TEST_SCENARIOS.md)** - 13 detailed test cases for all routing paths
-- **[API Key Fix Guide](docs/API_KEY_FIX_GUIDE.md)** - Fix invalid API key issues
-
-### Status Reports
-- **[Project Status Report](docs/PROJECT_STATUS_REPORT.md)** - Comprehensive status (this is the detailed version)
-- **[Verification Checklist](docs/PHASE4_VERIFICATION_CHECKLIST.md)** - Step-by-step verification
+### Planned Features
+- ⏳ Google Calendar integration
+- ⏳ Appointment booking tool
+- ⏳ Call transfer tool
+- ⏳ SMS notifications
+- ⏳ Phone integration (Twilio)
 
 ---
 
-## 🤝 Contributing
+## 📊 Build Progress
 
-### Report Issues
-- Invalid API key: See [API_KEY_FIX_GUIDE.md](docs/API_KEY_FIX_GUIDE.md)
-- Import errors: Check Langflow console logs (F12)
-- Routing not working: Verify API key is valid
-
-### Request Features
-- Open an issue with feature description
-- Provide example VAPI workflow JSON
-- Expected Langflow behavior
-
----
-
-## 🏆 Success Metrics
-
-- ✅ **100% import compatibility** - Generated JSON always imports successfully
-- ✅ **3/5 features production-ready** - Features 1-3 fully functional
-- ✅ **39 nodes generated** from 24 VAPI nodes
-- ✅ **45 edges connected** with correct handles
-- ✅ **6 branching points** with intelligent routing
-- ✅ **28/28 Agent nodes** have API keys populated
-- ✅ **Automatic API key validation** - Prevents invalid keys before generation
-- ⚠️ **0/13 runtime tests** completed (blocked by invalid API key)
+| Component | Status | Notes |
+|-----------|--------|-------|
+| Voice UI | ✅ 100% | Web interface complete |
+| STT (Deepgram) | ✅ 100% | Working |
+| TTS (ElevenLabs) | ✅ 100% | With Google TTS fallback |
+| Langflow Agent | ✅ 100% | Unified approach |
+| VAPI Converter | ✅ 100% | Generates Unified Agent |
+| Import/Export | ✅ 100% | Auto-detects directories |
+| Dynamic Flow ID | ✅ 100% | Auto-configuration |
+| Google Calendar | ⏳ 0% | Planned |
+| Tool Calling | ⏳ 0% | Planned |
+| Phone (Twilio) | ✅ 80% | Backend ready, needs testing |
 
 ---
 
 ## 📞 Support
 
 ### Documentation
-- **Quick Reference:** [docs/QUICK_REFERENCE.md](docs/QUICK_REFERENCE.md)
-- **Project Status:** [docs/PROJECT_STATUS_REPORT.md](docs/PROJECT_STATUS_REPORT.md)
-- **API Key Fix:** [docs/API_KEY_FIX_GUIDE.md](docs/API_KEY_FIX_GUIDE.md)
-- **Testing Guide:** [docs/FEATURE4_TESTING_GUIDE.md](docs/FEATURE4_TESTING_GUIDE.md)
+- `VOICE_SETUP_GUIDE.md` - Voice interface setup
+- `walkthrough.md` - Complete feature walkthrough
+- `google_calendar_setup.md` - Calendar integration guide
 
-### External Resources
-- **OpenAI API Keys:** https://platform.openai.com/api-keys
-- **VAPI Documentation:** https://docs.vapi.ai
-- **Langflow Documentation:** https://docs.langflow.org
+### Common Issues
 
----
+**Microphone not working:**
+- Use http://localhost:8000 (browsers require secure context)
 
-## 📝 License
+**Agent not responding:**
+- Check OpenAI key in Langflow UI
+- Verify Langflow is running on port 7860
 
-[Add your license here]
+**Import fails:**
+- Ensure Langflow is running
+- Check API key is valid
 
 ---
 
 ## 🙏 Credits
 
 Built with:
-- [VAPI](https://vapi.ai) - Voice AI platform
 - [Langflow](https://langflow.org) - Visual AI workflow builder
-- [OpenAI](https://openai.com) - Language models
+- [OpenAI](https://openai.com) - GPT-4 language model
+- [Deepgram](https://deepgram.com) - Speech-to-Text API
+- [ElevenLabs](https://elevenlabs.io) - Text-to-Speech API
+- [FastAPI](https://fastapi.tiangolo.com) - Web framework
+- [Twilio](https://twilio.com) - Phone integration
 
 ---
 
-**Version:** 1.4.0
-**Last Updated:** November 16, 2025
-**Status:** Ready for Feature 4 testing pending valid API key
-**Maintained by:** [Your name]
+**Version:** 2.0.0
+**Last Updated:** November 26, 2025
+**Status:** Production Ready
+**Maintained by:** VoxHive Team
 
 ---
 
-## 🚀 Getting Help
+## 🚀 Get Started Now
 
-1. **Read:** [Quick Reference](docs/QUICK_REFERENCE.md) (5 minutes)
-2. **Issue:** Invalid API key? → [API Key Fix Guide](docs/API_KEY_FIX_GUIDE.md)
-3. **Testing:** Want to test routing? → [Testing Guide](docs/FEATURE4_TESTING_GUIDE.md)
-4. **Status:** What's working? → [Project Status Report](docs/PROJECT_STATUS_REPORT.md)
+```bash
+# 1. Start Langflow
+uv run langflow run
 
-**Most common issue:** Invalid OpenAI API key → See [API_KEY_FIX_GUIDE.md](docs/API_KEY_FIX_GUIDE.md) for solution
+# 2. Import agent
+python3 agent_management/import_flows.py --api-key YOUR_KEY
+
+# 3. Start voice interface
+uv run app.py
+
+# 4. Open browser
+http://localhost:8000
+```
+
+**That's it!** Click "Click to Speak" and start talking! 🎤

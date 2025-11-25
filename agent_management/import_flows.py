@@ -252,7 +252,7 @@ def import_flow(base_url: str, api_key: str, flow_file: Path, folder_id: Optiona
 def import_all_flows(
     base_url: str = "http://localhost:7860",
     api_key: str = None,
-    flows_dir: str = "flows",
+    flows_dir: str = None,
     skip_existing: bool = True
 ):
     """Smart import: auto-detect or create folder, then import all flows."""
@@ -264,6 +264,13 @@ def import_all_flows(
     if not api_key:
         print("Error: API key required. Set LANGFLOW_API_KEY environment variable or use --api-key flag")
         return False
+
+    # Determine flows directory relative to this script if not specified
+    if flows_dir is None:
+        script_dir = Path(__file__).parent
+        flows_dir = script_dir / "flows"
+    else:
+        flows_dir = Path(flows_dir)
 
     # Check if Langflow is running
     print(f"Checking if Langflow is running on {base_url}...")
@@ -330,7 +337,9 @@ def import_all_flows(
             # Check if this is the Unified Agent flow and save its ID
             if "Appointment Scheduler (Unified)" in flow_name:
                 try:
-                    config_path = Path("flow_config.json")
+                    # Save to project root (2 levels up from script: agent_management/import_flows.py -> root)
+                    script_dir = Path(__file__).parent
+                    config_path = script_dir.parent / "flow_config.json"
                     with open(config_path, "w") as f:
                         json.dump({"flow_id": imported_id}, f, indent=2)
                     print(f"   💾 Saved Flow ID to {config_path}")
@@ -379,8 +388,8 @@ def main():
     )
     parser.add_argument(
         "--flows-dir",
-        help="Directory containing flow JSON files (default: flows)",
-        default="flows"
+        help="Directory containing flow JSON files (default: auto-detect relative to script)",
+        default=None
     )
     parser.add_argument(
         "--force",

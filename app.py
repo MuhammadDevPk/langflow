@@ -236,14 +236,14 @@ async def health_check():
     return {"status": "healthy", "langflow_url": LANGFLOW_BASE_URL}
 
 
-@app.get("/get_greeting")
+@app.get("/greeting")
 async def get_greeting():
     """
     Get the agent's greeting message from VAPI JSON and synthesize it
     """
     try:
         # Read VAPI JSON file
-        vapi_json_path = Path("json/inputs/daniel_dental_agent.json")
+        vapi_json_path = Path("agent_management/json/inputs/daniel_dental_agent.json")
         if not vapi_json_path.exists():
             raise HTTPException(status_code=404, detail="VAPI JSON file not found")
         

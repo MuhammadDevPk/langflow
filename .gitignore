@@ -20,3 +20,7 @@ langflow.db
 # Langflow cache
 .cache/
 langflow.log
+
+
+#credentials.json(Google Service Account)
+credentials.json

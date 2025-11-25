@@ -1,171 +1,171 @@
 {
   "exported_at": null,
-  "total_flows": 59,
+  "total_flows": 37,
   "flows": [
     {
-      "id": "9b944110-7e92-42ae-b452-ddb21b04eb25",
+      "id": "cf00a607-4684-4f95-af7b-f00cb5287cae",
       "name": "Market Research",
-      "filename": "Market Research_9b944110-7e92-42ae-b452-ddb21b04eb25.json"
+      "filename": "Market Research_cf00a607-4684-4f95-af7b-f00cb5287cae.json"
     },
     {
-      "id": "ca6d6223-1c21-437b-9728-c5cb4c96445b",
+      "id": "751bda37-4f1d-41d7-8a0a-95f4c7d0bed4",
       "name": "Knowledge Ingestion",
-      "filename": "Knowledge Ingestion_ca6d6223-1c21-437b-9728-c5cb4c96445b.json"
+      "filename": "Knowledge Ingestion_751bda37-4f1d-41d7-8a0a-95f4c7d0bed4.json"
     },
     {
-      "id": "cbebc448-1ab0-4cc6-98e4-9ba842d0e34b",
+      "id": "a9c227e5-d926-43d6-bfb7-c084b0468f61",
       "name": "Pok\u00e9dex Agent",
-      "filename": "Pok\u00e9dex Agent_cbebc448-1ab0-4cc6-98e4-9ba842d0e34b.json"
+      "filename": "Pok\u00e9dex Agent_a9c227e5-d926-43d6-bfb7-c084b0468f61.json"
     },
     {
-      "id": "40ea4822-bfca-450a-a083-c04fc5ab2e7d",
+      "id": "31e16998-0b8c-4d7b-a081-36e61a93df34",
       "name": "Text Sentiment Analysis",
-      "filename": "Text Sentiment Analysis_40ea4822-bfca-450a-a083-c04fc5ab2e7d.json"
+      "filename": "Text Sentiment Analysis_31e16998-0b8c-4d7b-a081-36e61a93df34.json"
     },
     {
-      "id": "8e5c3947-ffbe-4356-aa52-1068eeb144ea",
+      "id": "d224cde1-e6fb-4177-97d6-523b5f071a49",
       "name": "Memory Chatbot",
-      "filename": "Memory Chatbot_8e5c3947-ffbe-4356-aa52-1068eeb144ea.json"
+      "filename": "Memory Chatbot_d224cde1-e6fb-4177-97d6-523b5f071a49.json"
     },
     {
-      "id": "5c6a5cb4-45ff-40ed-b3e3-92367049671e",
+      "id": "50d4ab40-73fc-4d3b-ad6d-468bef6142ac",
       "name": "SaaS Pricing",
-      "filename": "SaaS Pricing_5c6a5cb4-45ff-40ed-b3e3-92367049671e.json"
+      "filename": "SaaS Pricing_50d4ab40-73fc-4d3b-ad6d-468bef6142ac.json"
     },
     {
-      "id": "89f49bf5-585f-45d8-a48f-b639b93204b3",
+      "id": "245961a4-8cd7-4e28-8940-33e860c17906",
       "name": "Hybrid Search RAG",
-      "filename": "Hybrid Search RAG_89f49bf5-585f-45d8-a48f-b639b93204b3.json"
+      "filename": "Hybrid Search RAG_245961a4-8cd7-4e28-8940-33e860c17906.json"
     },
     {
-      "id": "c84c67cc-c71e-411b-9598-ffad6a35c409",
+      "id": "110bfcc1-1950-4f57-8b94-f6038cf6bedf",
       "name": "Vector Store RAG",
-      "filename": "Vector Store RAG_c84c67cc-c71e-411b-9598-ffad6a35c409.json"
+      "filename": "Vector Store RAG_110bfcc1-1950-4f57-8b94-f6038cf6bedf.json"
     },
     {
-      "id": "514a981d-ff28-448f-9d5a-eb74aeb47550",
+      "id": "c87f0f8f-ae4d-4a56-bd67-66692c6d8f78",
       "name": "Basic Prompting",
-      "filename": "Basic Prompting_514a981d-ff28-448f-9d5a-eb74aeb47550.json"
+      "filename": "Basic Prompting_c87f0f8f-ae4d-4a56-bd67-66692c6d8f78.json"
     },
     {
-      "id": "e9287a7b-64fb-480d-ae5c-6966c5c2a87c",
+      "id": "9f3b17ae-afeb-44e3-b860-335b16520fcd",
       "name": "Travel Planning Agents",
-      "filename": "Travel Planning Agents_e9287a7b-64fb-480d-ae5c-6966c5c2a87c.json"
+      "filename": "Travel Planning Agents_9f3b17ae-afeb-44e3-b860-335b16520fcd.json"
     },
     {
-      "id": "f8ceb9ab-80d5-40fe-a142-db542d4cfe87",
+      "id": "ffb6d956-7f2b-409a-912a-15d0e5fd0c1a",
       "name": "Blog Writer",
-      "filename": "Blog Writer_f8ceb9ab-80d5-40fe-a142-db542d4cfe87.json"
+      "filename": "Blog Writer_ffb6d956-7f2b-409a-912a-15d0e5fd0c1a.json"
     },
     {
-      "id": "fe9cc54b-f78c-42db-b39c-5ac51e0fa366",
+      "id": "f298fea0-72af-45d9-8850-b767fa966104",
       "name": "Price Deal Finder",
-      "filename": "Price Deal Finder_fe9cc54b-f78c-42db-b39c-5ac51e0fa366.json"
+      "filename": "Price Deal Finder_f298fea0-72af-45d9-8850-b767fa966104.json"
     },
     {
-      "id": "ebf4fdc9-d8a3-46cd-bf90-1967fae30dcc",
+      "id": "3b4445d0-17e6-4415-a39a-fbedcd872d2a",
       "name": "Twitter Thread Generator",
-      "filename": "Twitter Thread Generator_ebf4fdc9-d8a3-46cd-bf90-1967fae30dcc.json"
+      "filename": "Twitter Thread Generator_3b4445d0-17e6-4415-a39a-fbedcd872d2a.json"
     },
     {
-      "id": "31fabb90-4ba9-40ff-83c7-b171331eb36c",
+      "id": "06a758e2-4406-430b-a087-f6873d00a92a",
       "name": "Knowledge Retrieval",
-      "filename": "Knowledge Retrieval_31fabb90-4ba9-40ff-83c7-b171331eb36c.json"
+      "filename": "Knowledge Retrieval_06a758e2-4406-430b-a087-f6873d00a92a.json"
     },
     {
-      "id": "9609d421-1857-499f-ac71-e8f6a6b83cec",
+      "id": "127c4bc3-7ecb-47a9-9f80-fd3329459fd9",
       "name": "Research Agent",
-      "filename": "Research Agent_9609d421-1857-499f-ac71-e8f6a6b83cec.json"
+      "filename": "Research Agent_127c4bc3-7ecb-47a9-9f80-fd3329459fd9.json"
     },
     {
-      "id": "c21e6752-1b3b-4753-87aa-0c467e469977",
+      "id": "4f401bb0-f37a-4202-ad79-e713eaf45084",
       "name": "Research Translation Loop",
-      "filename": "Research Translation Loop_c21e6752-1b3b-4753-87aa-0c467e469977.json"
+      "filename": "Research Translation Loop_4f401bb0-f37a-4202-ad79-e713eaf45084.json"
     },
     {
-      "id": "451eae6a-a045-45e9-b66b-c862ae5f59a4",
+      "id": "6c8ca642-c904-4485-a9f7-edf854411da7",
       "name": "Sequential Tasks Agents",
-      "filename": "Sequential Tasks Agents_451eae6a-a045-45e9-b66b-c862ae5f59a4.json"
+      "filename": "Sequential Tasks Agents_6c8ca642-c904-4485-a9f7-edf854411da7.json"
     },
     {
-      "id": "fa5342d6-1a66-4853-bc52-a0b4d398a06a",
+      "id": "ced1e08f-f455-4e33-87c6-b0f64c9ba544",
       "name": "Instagram Copywriter",
-      "filename": "Instagram Copywriter_fa5342d6-1a66-4853-bc52-a0b4d398a06a.json"
+      "filename": "Instagram Copywriter_ced1e08f-f455-4e33-87c6-b0f64c9ba544.json"
     },
     {
-      "id": "e9a2a8f9-78a7-43c2-91ea-b04d4676ee2d",
+      "id": "c2c9a7b1-380f-4d3d-9420-04550e67dfba",
       "name": "Financial Report Parser",
-      "filename": "Financial Report Parser_e9a2a8f9-78a7-43c2-91ea-b04d4676ee2d.json"
+      "filename": "Financial Report Parser_c2c9a7b1-380f-4d3d-9420-04550e67dfba.json"
     },
     {
-      "id": "c09c6d29-ed10-46ae-9765-ec4fdd4df6a9",
+      "id": "9745b712-a2fb-40c4-b53a-d565bb96a451",
       "name": "Simple Agent",
-      "filename": "Simple Agent_c09c6d29-ed10-46ae-9765-ec4fdd4df6a9.json"
+      "filename": "Simple Agent_9745b712-a2fb-40c4-b53a-d565bb96a451.json"
     },
     {
-      "id": "7464635a-24ae-43eb-87bb-c1cd3903fb4f",
+      "id": "6dae149e-1ec4-4b17-8cdc-fa2d2f30f598",
       "name": "Meeting Summary",
-      "filename": "Meeting Summary_7464635a-24ae-43eb-87bb-c1cd3903fb4f.json"
+      "filename": "Meeting Summary_6dae149e-1ec4-4b17-8cdc-fa2d2f30f598.json"
     },
     {
-      "id": "9b6b384d-0b73-44ac-8980-ea1fc1bd3013",
+      "id": "d399ecb4-f0e2-4fee-b0fb-04bb6afe2f9e",
       "name": "Document Q&A",
-      "filename": "Document Q&A_9b6b384d-0b73-44ac-8980-ea1fc1bd3013.json"
+      "filename": "Document Q&A_d399ecb4-f0e2-4fee-b0fb-04bb6afe2f9e.json"
     },
     {
-      "id": "b447742a-fab5-454d-9808-18bcb805a300",
+      "id": "9c28a592-cc4a-431c-abad-887c80fe8dad",
       "name": "Invoice Summarizer",
-      "filename": "Invoice Summarizer_b447742a-fab5-454d-9808-18bcb805a300.json"
+      "filename": "Invoice Summarizer_9c28a592-cc4a-431c-abad-887c80fe8dad.json"
     },
     {
-      "id": "0c3a8a2d-de49-478d-b258-73774b4a20f1",
+      "id": "ae240c59-7826-4075-be3c-0e16c340b3da",
       "name": "YouTube Analysis",
-      "filename": "YouTube Analysis_0c3a8a2d-de49-478d-b258-73774b4a20f1.json"
+      "filename": "YouTube Analysis_ae240c59-7826-4075-be3c-0e16c340b3da.json"
     },
     {
-      "id": "8462b284-90cd-423d-828b-2881f607cc49",
+      "id": "ba801532-6ea7-4569-a72d-2c90fc58ea95",
       "name": "Image Sentiment Analysis",
-      "filename": "Image Sentiment Analysis_8462b284-90cd-423d-828b-2881f607cc49.json"
+      "filename": "Image Sentiment Analysis_ba801532-6ea7-4569-a72d-2c90fc58ea95.json"
     },
     {
-      "id": "e8b831ea-82df-4a85-9a4f-8b39ef8a6727",
+      "id": "0fea6f76-c60d-4cd4-9aef-501cb8509f6d",
       "name": "Social Media Agent",
-      "filename": "Social Media Agent_e8b831ea-82df-4a85-9a4f-8b39ef8a6727.json"
+      "filename": "Social Media Agent_0fea6f76-c60d-4cd4-9aef-501cb8509f6d.json"
     },
     {
-      "id": "12097122-b341-4f7e-951c-92925d52747c",
+      "id": "6498bb60-d53f-4dfe-bf74-e75d54944621",
       "name": "Custom Component Generator",
-      "filename": "Custom Component Generator_12097122-b341-4f7e-951c-92925d52747c.json"
+      "filename": "Custom Component Generator_6498bb60-d53f-4dfe-bf74-e75d54944621.json"
     },
     {
-      "id": "4ecedce0-dc20-470d-83a8-423dc2a0fe3a",
+      "id": "86b22ff0-3430-4ae1-a98b-1dce3fb94013",
       "name": "NVIDIA RTX Remix",
-      "filename": "NVIDIA RTX Remix_4ecedce0-dc20-470d-83a8-423dc2a0fe3a.json"
+      "filename": "NVIDIA RTX Remix_86b22ff0-3430-4ae1-a98b-1dce3fb94013.json"
     },
     {
-      "id": "2937c8c9-480d-4d78-9b22-201509372de9",
+      "id": "e4a5e3d8-859d-4c5a-87cc-9a2d5646a0b6",
       "name": "Search agent",
-      "filename": "Search agent_2937c8c9-480d-4d78-9b22-201509372de9.json"
+      "filename": "Search agent_e4a5e3d8-859d-4c5a-87cc-9a2d5646a0b6.json"
     },
     {
-      "id": "3f24fe3f-335e-4e02-8873-4cb780361a84",
+      "id": "7824fd47-3a81-49fd-979b-5043c94f4cfb",
       "name": "SEO Keyword Generator",
-      "filename": "SEO Keyword Generator_3f24fe3f-335e-4e02-8873-4cb780361a84.json"
+      "filename": "SEO Keyword Generator_7824fd47-3a81-49fd-979b-5043c94f4cfb.json"
     },
     {
-      "id": "7ebacc2d-2335-4a53-801e-6672795f22ca",
+      "id": "983efc5d-1e20-4905-8d1a-1abfd2e88035",
       "name": "Portfolio Website Code Generator",
-      "filename": "Portfolio Website Code Generator_7ebacc2d-2335-4a53-801e-6672795f22ca.json"
+      "filename": "Portfolio Website Code Generator_983efc5d-1e20-4905-8d1a-1abfd2e88035.json"
     },
     {
-      "id": "a928e912-1ca7-4333-8b79-e91652f42cfd",
+      "id": "64b1984e-3a06-4dce-bb96-d65df5a56787",
       "name": "News Aggregator",
-      "filename": "News Aggregator_a928e912-1ca7-4333-8b79-e91652f42cfd.json"
+      "filename": "News Aggregator_64b1984e-3a06-4dce-bb96-d65df5a56787.json"
     },
     {
-      "id": "35448ca4-5bc8-4ef1-80e7-1cdb5b32e88e",
+      "id": "3d3433db-63fa-46aa-9c68-714dbd8926bb",
       "name": "Basic Prompt Chaining",
-      "filename": "Basic Prompt Chaining_35448ca4-5bc8-4ef1-80e7-1cdb5b32e88e.json"
+      "filename": "Basic Prompt Chaining_3d3433db-63fa-46aa-9c68-714dbd8926bb.json"
     },
     {
       "id": "da264e1a-f117-4cb4-9565-cd572d4cd80a",
@@ -178,124 +178,14 @@
       "filename": "Main Agent_9f30562c-5e21-4aba-aac5-3dc226b2495f.json"
     },
     {
-      "id": "d0ec9349-1d18-4347-821f-fbb1539e9dbe",
-      "name": "Voxie Agent ba2e04be-155c-4888-81bc-cc50ecea3985",
-      "filename": "Voxie Agent ba2e04be-155c-4888-81bc-cc50ecea3985_d0ec9349-1d18-4347-821f-fbb1539e9dbe.json"
+      "id": "8c5a9465-7d80-4fe3-8c40-0c3f340d4976",
+      "name": "All nodes json",
+      "filename": "All nodes json_8c5a9465-7d80-4fe3-8c40-0c3f340d4976.json"
     },
     {
-      "id": "1c960a88-3d7f-4642-aa15-f862b523d996",
-      "name": "Voxie Agent 1",
-      "filename": "Voxie Agent 1_1c960a88-3d7f-4642-aa15-f862b523d996.json"
-    },
-    {
-      "id": "5ec80e8d-f5f2-485e-89b2-92a3d4faa07f",
-      "name": "Voxie Agent 1 (1)",
-      "filename": "Voxie Agent 1 (1)_5ec80e8d-f5f2-485e-89b2-92a3d4faa07f.json"
-    },
-    {
-      "id": "6d6184f9-539b-406b-9add-f3dfb28b4ff0",
-      "name": "Voxie Agent 1 (2)",
-      "filename": "Voxie Agent 1 (2)_6d6184f9-539b-406b-9add-f3dfb28b4ff0.json"
-    },
-    {
-      "id": "76c0c376-55c4-4da3-979a-5a541a97db24",
-      "name": "Basic Agent Blue Print",
-      "filename": "Basic Agent Blue Print_76c0c376-55c4-4da3-979a-5a541a97db24.json"
-    },
-    {
-      "id": "ddca90cc-5e80-4f48-b59b-74835e75cf3c",
-      "name": "Voxie Agent 1 (3)",
-      "filename": "Voxie Agent 1 (3)_ddca90cc-5e80-4f48-b59b-74835e75cf3c.json"
-    },
-    {
-      "id": "d8e47d3a-9403-4db4-a634-0bf60782d397",
-      "name": "Voxie Agent - You are a polite FAQ helper for our hotel room boo...",
-      "filename": "Voxie Agent - You are a polite FAQ helper for our hotel room boo..._d8e47d3a-9403-4db4-a634-0bf60782d397.json"
-    },
-    {
-      "id": "468fb70f-1235-4745-b703-de5b26837fc7",
-      "name": "Voxie Agent - You are a polite FAQ helper for our hotel room boo",
-      "filename": "Voxie Agent - You are a polite FAQ helper for our hotel room boo_468fb70f-1235-4745-b703-de5b26837fc7.json"
-    },
-    {
-      "id": "988851f1-8aa5-47c8-ad49-206a0dfd2524",
-      "name": "Voxie Agent - You are a polite FAQ helper for our hotel room boo (1)",
-      "filename": "Voxie Agent - You are a polite FAQ helper for our hotel room boo (1)_988851f1-8aa5-47c8-ad49-206a0dfd2524.json"
-    },
-    {
-      "id": "b3a412a3-de1d-4afd-8266-48bba6c90fa7",
-      "name": "Voxie Agent - You are a polite FAQ helper for our hotel room boo (2)",
-      "filename": "Voxie Agent - You are a polite FAQ helper for our hotel room boo (2)_b3a412a3-de1d-4afd-8266-48bba6c90fa7.json"
-    },
-    {
-      "id": "f4d6ba39-fd60-4bfb-b215-cb104b08db72",
-      "name": "Voxie Agent - You are a polite FAQ helper for our hotel room boo (3)",
-      "filename": "Voxie Agent - You are a polite FAQ helper for our hotel room boo (3)_f4d6ba39-fd60-4bfb-b215-cb104b08db72.json"
-    },
-    {
-      "id": "07b8cc4a-79e3-4b4f-b185-c665aa386937",
-      "name": "Voxie Agent - You are a polite car receptionist agent. Your role",
-      "filename": "Voxie Agent - You are a polite car receptionist agent. Your role_07b8cc4a-79e3-4b4f-b185-c665aa386937.json"
-    },
-    {
-      "id": "132efb61-c37e-4ac9-8e94-2b013be94ca2",
-      "name": "Voxie Agent - You are a polite car receptionist agent. Your role (1)",
-      "filename": "Voxie Agent - You are a polite car receptionist agent. Your role (1)_132efb61-c37e-4ac9-8e94-2b013be94ca2.json"
-    },
-    {
-      "id": "461eba2a-d457-4563-8052-a7adebac8f5b",
-      "name": "Voxie Agent - You are a polite car receptionist agent. Your role (2)",
-      "filename": "Voxie Agent - You are a polite car receptionist agent. Your role (2)_461eba2a-d457-4563-8052-a7adebac8f5b.json"
-    },
-    {
-      "id": "0c7809f0-c757-480b-af37-ab5d993834dd",
-      "name": "Voxie Agent - You are a polite car receptionist agent. Your role (3)",
-      "filename": "Voxie Agent - You are a polite car receptionist agent. Your role (3)_0c7809f0-c757-480b-af37-ab5d993834dd.json"
-    },
-    {
-      "id": "6542eb6d-8bc1-4ba2-9a81-90399e62b6a2",
-      "name": "Voxie Agent - You are a polite hotel manager assistant. Your rol",
-      "filename": "Voxie Agent - You are a polite hotel manager assistant. Your rol_6542eb6d-8bc1-4ba2-9a81-90399e62b6a2.json"
-    },
-    {
-      "id": "a606ba58-4cf6-4d2d-a21b-42ab3d9f3d7f",
-      "name": "Voxie Agent - You are a polite and helpful marketer agent for a ",
-      "filename": "Voxie Agent - You are a polite and helpful marketer agent for a_a606ba58-4cf6-4d2d-a21b-42ab3d9f3d7f.json"
-    },
-    {
-      "id": "6d865c0e-2921-443e-9990-9da168b06308",
-      "name": "Voxie Agent - You are a polite call center agent for our company",
-      "filename": "Voxie Agent - You are a polite call center agent for our company_6d865c0e-2921-443e-9990-9da168b06308.json"
-    },
-    {
-      "id": "c80aed32-be17-47aa-8694-224444ed91de",
-      "name": "Voxie Agent - You are a polite call center agent for our company (1)",
-      "filename": "Voxie Agent - You are a polite call center agent for our company (1)_c80aed32-be17-47aa-8694-224444ed91de.json"
-    },
-    {
-      "id": "690da610-c299-4d53-a279-4cd3502d26d0",
-      "name": "Voxie Agent - You are a polite FAQ helper for our hotel room boo (4)",
-      "filename": "Voxie Agent - You are a polite FAQ helper for our hotel room boo (4)_690da610-c299-4d53-a279-4cd3502d26d0.json"
-    },
-    {
-      "id": "f8145ca8-5735-43c0-a61b-7ecfe12394ef",
-      "name": "Voxie Agent - You are a charming flirting girl agent who engages",
-      "filename": "Voxie Agent - You are a charming flirting girl agent who engages_f8145ca8-5735-43c0-a61b-7ecfe12394ef.json"
-    },
-    {
-      "id": "902b8ea4-d361-44a1-91f3-b02fddb52950",
-      "name": "Voxie Agent - You are a polite and helpful Macbook Guidance Assi",
-      "filename": "Voxie Agent - You are a polite and helpful Macbook Guidance Assi_902b8ea4-d361-44a1-91f3-b02fddb52950.json"
-    },
-    {
-      "id": "09d345c3-308d-4153-80e3-a3351af657e7",
-      "name": "Voxie Agent - You are a polite FAQ helper for our hotel room boo (5)",
-      "filename": "Voxie Agent - You are a polite FAQ helper for our hotel room boo (5)_09d345c3-308d-4153-80e3-a3351af657e7.json"
-    },
-    {
-      "id": "30b46419-fac7-4f0c-bd93-30c1b6fd3106",
-      "name": "Voxie Agent - You are a charming flirting agent designed to enga",
-      "filename": "Voxie Agent - You are a charming flirting agent designed to enga_30b46419-fac7-4f0c-bd93-30c1b6fd3106.json"
+      "id": "e4306c3a-8459-49c8-9339-baed51dc8fa4",
+      "name": "Appointment Scheduler (Unified)",
+      "filename": "Appointment Scheduler (Unified)_e4306c3a-8459-49c8-9339-baed51dc8fa4.json"
     }
   ]
 }

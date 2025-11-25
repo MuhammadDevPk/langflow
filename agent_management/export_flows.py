@@ -124,8 +124,20 @@ def scrub_secrets_from_flow(flow_data: Dict[str, Any], parent_key: str = None) -
     return flow_data
 
 
-def export_flows(base_url: str = "http://localhost:7860", api_key: str = None, output_dir: str = "flows"):
-    """Export all flows to JSON files."""
+def export_all_flows(
+    base_url: str = "http://localhost:7860",
+    api_key: str = None,
+    output_dir: str = None,
+    scrub: bool = True
+):
+    """Export all flows from Langflow to individual JSON files."""
+    
+    # Determine output directory relative to this script if not specified
+    if output_dir is None:
+        script_dir = Path(__file__).parent
+        output_path = script_dir / "flows"
+    else:
+        output_path = Path(output_dir)
 
     if not api_key:
         api_key = os.getenv("LANGFLOW_API_KEY")

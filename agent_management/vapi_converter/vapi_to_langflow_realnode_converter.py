@@ -39,20 +39,23 @@ class VAPIToLangflowUnified:
 
     def _find_template(self) -> str:
         """Find a suitable template flow."""
-        flows_dir = Path(__file__).parent / "flows"
+        # flows directory is a sibling of vapi_converter (both in agent_management)
+        script_dir = Path(__file__).parent
+        flows_dir = script_dir.parent / "flows"
+        
         candidates = [
-            flows_dir / "Basic Agent Blue Print_76c0c376-55c4-4da3-979a-5a541a97db24.json",
-            flows_dir / "Main Agent_9f30562c-5e21-4aba-aac5-3dc226b2495f.json"
+            flows_dir / "Basic Agent Blue Print_db0fbfd2-0d14-4088-a001-23a950623b1e.json",
+            flows_dir / "Main Agent_5ba25e7a-91aa-4259-8d4a-e54fe42f1df5.json"
         ]
         for candidate in candidates:
             if candidate.exists():
                 return str(candidate)
         
         # Fallback
-        json_files = list(flows_dir.glob("*.json"))
+        json_files = list(flows_dir.glob("*.json")) if flows_dir.exists() else []
         if json_files:
             return str(json_files[0])
-        raise FileNotFoundError("No template flow found.")
+        raise FileNotFoundError(f"No template flow found in {flows_dir}")
 
     def _load_template(self) -> Dict:
         with open(self.template_path, 'r') as f:

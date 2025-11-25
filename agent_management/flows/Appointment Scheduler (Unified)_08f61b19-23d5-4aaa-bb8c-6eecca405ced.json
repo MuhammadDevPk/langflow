@@ -1217,7 +1217,7 @@
     }
   },
   "is_component": false,
-  "updated_at": "2025-11-25T16:54:42+00:00",
+  "updated_at": "2025-11-25T18:14:48+00:00",
   "webhook": false,
   "endpoint_name": null,
   "tags": [],
@@ -1226,6 +1226,6 @@
   "action_name": null,
   "action_description": null,
   "access_type": "PRIVATE",
-  "id": "e4306c3a-8459-49c8-9339-baed51dc8fa4",
+  "id": "08f61b19-23d5-4aaa-bb8c-6eecca405ced",
   "user_id": "7ddfb6d5-14f0-42ab-b1f3-cd42c65f89fc"
 }

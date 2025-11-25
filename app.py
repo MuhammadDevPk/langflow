@@ -236,7 +236,7 @@ async def health_check():
     return {"status": "healthy", "langflow_url": LANGFLOW_BASE_URL}
 
 
-@app.get("/greeting")
+@app.get("/get_greeting")
 async def get_greeting():
     """
     Get the agent's greeting message from VAPI JSON and synthesize it
@@ -296,6 +296,12 @@ async def get_greeting():
 if __name__ == "__main__":
     print("\n" + "="*60)
     print("🚀 Voice AI Interface Running")
-    print("📍 Access here: http://localhost:8000 (Use this for Microphone access)")
+    print("📍 Access here: http://localhost:8000")
     print("="*60 + "\n")
-    uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)
+    
+    # Configure uvicorn to suppress the default "Uvicorn running on..." message
+    log_config = uvicorn.config.LOGGING_CONFIG
+    log_config["formatters"]["default"]["fmt"] = "%(levelprefix)s %(message)s"
+    log_config["formatters"]["access"]["fmt"] = '%(levelprefix)s %(client_addr)s - "%(request_line)s" %(status_code)s'
+    
+    uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True, log_config=log_config)

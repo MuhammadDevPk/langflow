@@ -196,8 +196,8 @@ def update_flow_components(base_url: str, api_key: str, flow_id: str) -> bool:
         return False
 
 
-def import_flow(base_url: str, api_key: str, flow_file: Path, folder_id: Optional[str] = None) -> bool:
-    """Import a single flow file into Langflow."""
+def import_flow(base_url: str, api_key: str, flow_file: Path, folder_id: Optional[str] = None) -> Optional[str]:
+    """Import a single flow file into Langflow. Returns flow_id if successful."""
     try:
         # Read the flow file
         with open(flow_file, 'r', encoding='utf-8') as f:
@@ -228,20 +228,25 @@ def import_flow(base_url: str, api_key: str, flow_file: Path, folder_id: Optiona
         if response.status_code in (200, 201):
             # Get the imported flow ID from response
             result = response.json()
+            
+            # Handle case where result is a list (some Langflow versions)
+            if isinstance(result, list) and len(result) > 0:
+                result = result[0]
+            
             flow_id = result.get("id")
 
             # Auto-update components to latest versions
             if flow_id:
                 update_flow_components(base_url, api_key, flow_id)
 
-            return True
+            return flow_id
         else:
             print(f"    Error: HTTP {response.status_code} - {response.text}")
-            return False
+            return None
 
     except Exception as e:
         print(f"    Error: {str(e)}")
-        return False
+        return None
 
 
 def import_all_flows(
@@ -316,9 +321,21 @@ def import_all_flows(
             continue
 
         # Import the flow
-        if import_flow(base_url, api_key, flow_file, folder_id):
+        imported_id = import_flow(base_url, api_key, flow_file, folder_id)
+        if imported_id:
             print(f"   ✓ Imported successfully")
+            print(f"     ID: {imported_id}")
             imported += 1
+            
+            # Check if this is the Unified Agent flow and save its ID
+            if "Appointment Scheduler (Unified)" in flow_name:
+                try:
+                    config_path = Path("flow_config.json")
+                    with open(config_path, "w") as f:
+                        json.dump({"flow_id": imported_id}, f, indent=2)
+                    print(f"   💾 Saved Flow ID to {config_path}")
+                except Exception as e:
+                    print(f"   ⚠️ Failed to save flow config: {e}")
         else:
             print(f"   ✗ Failed to import")
             failed += 1

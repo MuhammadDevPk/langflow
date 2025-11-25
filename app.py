@@ -264,4 +264,8 @@ async def get_greeting():
 
 
 if __name__ == "__main__":
+    print("\n" + "="*60)
+    print("🚀 Voice AI Interface Running")
+    print("📍 Access here: http://localhost:8000 (Use this for Microphone access)")
+    print("="*60 + "\n")
     uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)

@@ -101,6 +101,34 @@ async def transcribe_audio_deepgram(audio_data: bytes) -> str:
         return transcript
 
 
+import re
+
+def clean_agent_response(text: str) -> str:
+    """
+    Clean the agent response by removing JSON blocks and internal thoughts.
+    Expected format from Unified Agent:
+    1. Conversational text
+    2. JSON block (optional)
+    3. [State: ...] (optional)
+    """
+    if not text:
+        return ""
+        
+    # Remove Internal Thought [State: ...]
+    text = re.sub(r'\[State:.*?\]', '', text, flags=re.DOTALL)
+    
+    # Remove JSON blocks (```json ... ```)
+    text = re.sub(r'```json.*?```', '', text, flags=re.DOTALL)
+    
+    # Remove raw JSON at the end (starting with { and ending with })
+    # We look for the last occurrence of a JSON-like block at the end of the string
+    # This is a heuristic; for robust parsing we'd need a JSON parser, 
+    # but for cleaning TTS output this is usually sufficient.
+    text = re.sub(r'\s*\{[\s\S]*?\}\s*$', '', text)
+    
+    return text.strip()
+
+
 async def query_langflow(text: str, session_id: str = "default") -> str:
     """Send text to Langflow and get agent response"""
     # Use the /run endpoint (correct for Langflow v1.5+)
@@ -136,9 +164,9 @@ async def query_langflow(text: str, session_id: str = "default") -> str:
                     if isinstance(message, dict):
                         text_response = message.get("text", "")
                         if text_response:
-                            return text_response
+                            return clean_agent_response(text_response)
                     elif isinstance(message, str):
-                        return message
+                        return clean_agent_response(message)
         except Exception as e:
             print(f"Error parsing Langflow response: {e}")
         

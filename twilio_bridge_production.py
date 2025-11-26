@@ -8,6 +8,7 @@ import requests
 import os
 import json
 import logging
+import re
 from datetime import datetime
 from twilio.twiml.voice_response import VoiceResponse, Gather
 
@@ -192,10 +193,23 @@ def call_langflow_api(flow_id, speech, caller_number):
             "reply": "I encountered a technical issue. Please try again."
         }
 
+def clean_agent_response(text: str) -> str:
+    """
+    Clean the agent response by removing JSON blocks and internal thoughts.
+    """
+    if not text:
+        return ""
+    # Remove Internal Thought [State: ...]
+    text = re.sub(r'\[State:.*?\]', '', text, flags=re.DOTALL)
+    # Remove JSON blocks (```json ... ```)
+    text = re.sub(r'```json.*?```', '', text, flags=re.DOTALL)
+    # Remove raw JSON at the end
+    text = re.sub(r'\s*\{[\s\S]*?\}\s*$', '', text)
+    return text.strip()
+
 def extract_agent_reply(response_data):
     """
     Extract agent reply from Langflow response.
-    Tries multiple strategies to find the text response.
     """
     try:
         # Strategy 1: outputs -> first item -> outputs -> results -> message -> text
@@ -204,14 +218,12 @@ def extract_agent_reply(response_data):
             if 'outputs' in first_output and len(first_output['outputs']) > 0:
                 results = first_output['outputs'][0].get('results', {})
                 message = results.get('message', {})
-                text = message.get('text', '')
-                if text:
-                    return text
-
-                # Try alternative path
-                text = first_output.get('message', {}).get('text', '')
-                if text:
-                    return text
+                
+                if isinstance(message, dict):
+                    text = message.get('text', '')
+                    return clean_agent_response(text)
+                elif isinstance(message, str):
+                    return clean_agent_response(message)
 
         # Strategy 2: outputs -> text (simple structure)
         if 'outputs' in response_data:
@@ -219,12 +231,12 @@ def extract_agent_reply(response_data):
             if isinstance(outputs, dict):
                 text = outputs.get('text') or outputs.get('response') or outputs.get('message')
                 if text:
-                    return text
+                    return clean_agent_response(text)
 
         # Strategy 3: direct text/message field
         text = response_data.get('text') or response_data.get('message') or response_data.get('response')
         if text:
-            return text
+            return clean_agent_response(text)
 
         # Strategy 4: Check for messages array
         if 'messages' in response_data and isinstance(response_data['messages'], list):
@@ -232,7 +244,7 @@ def extract_agent_reply(response_data):
                 last_message = response_data['messages'][-1]
                 text = last_message.get('message') or last_message.get('text')
                 if text:
-                    return text
+                    return clean_agent_response(text)
 
         logger.warning("⚠️  Could not extract reply from response")
         return None

@@ -1,0 +1,136 @@
+name: Langflow CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint-and-test:
+    name: Lint & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          version: "latest"
+
+      - name: Install dependencies
+        run: |
+          uv sync
+
+      - name: Run linting (optional - add ruff/black if needed)
+        run: |
+          uv run python -m py_compile app.py main.py
+        continue-on-error: true
+
+      # Uncomment and customize if you have tests
+      # - name: Run tests
+      #   run: |
+      #     uv run pytest tests/ -v
+
+  build:
+    name: Build Check
+    runs-on: ubuntu-latest
+    needs: lint-and-test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          version: "latest"
+
+      - name: Install dependencies
+        run: |
+          uv sync
+
+      - name: Verify application can start
+        run: |
+          uv run python -c "import app; print('App module loads successfully')"
+        env:
+          # Add any required environment variables here
+          LANGFLOW_DATABASE_URL: "sqlite:///./test.db"
+
+  # Uncomment this job if you want to deploy (e.g., to a server, Docker, etc.)
+  # deploy:
+  #   name: Deploy
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+  #
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
+  #
+  #     - name: Deploy to server
+  #       run: |
+  #         echo "Add your deployment steps here"
+  #         # Examples:
+  #         # - SSH to server and pull latest code
+  #         # - Build and push Docker image
+  #         # - Deploy to cloud platform (AWS, GCP, etc.)
+
+
+
+
+  # //////////////////////
+
+name: Langflow CI/CD
+
+on:
+  push:
+    branches:
+      - main
+    pull_request:
+      branches:
+        - main
+
+jobs:
+  lint-and-test:
+    name: Lint & Test
+    runs-on: ubuntu-latest 
+
+    steps:
+      - name: Checkout code 
+        uses: actions/checkout@v4 
+
+      - name: Set up Python 
+        uses: actions/setup-python@v5 
+        with:
+          python-version: "3.11"
+
+      - name: Install uv 
+        uses: astral-sh/setup-uv@v4
+        with:
+          version: "latest" 
+
+      - name: Install dependencies 
+        run: |
+          uv sync 
+
+      - name: Run linting (optional - add ruff/black if needed)
+        run: |
+          uv run python -m py_compile app.py main.py 
+        continue-on-error: true 
+
+      - name: Run tests

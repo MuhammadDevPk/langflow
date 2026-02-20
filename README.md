@@ -13,28 +13,29 @@
 Voxhive Dental Agent is a production-ready Voice AI system designed to handle dental appointment scheduling with natural, human-like conversation. It automates the intake process, captures patient details, and provides a seamless scheduling experience over the web or phone.
 
 By combining **Deepgram** for lightning-fast speech-to-text, **ElevenLabs** for realistic text-to-speech, and **Langflow** for intelligent agent orchestration, this project demonstrates a modern approach to Voice AI agents.
-| Feature                    | Implementation | Status                | Notes                                         |
+| Feature | Implementation | Status | Notes |
 | -------------------------- | -------------- | --------------------- | --------------------------------------------- |
-| **1. Variable Extraction** | ✅ 100%        | **COMPLETE**          | Handled via Unified Agent system prompt       |
-| **2. Conversation Flow**   | ✅ 100%        | **COMPLETE**          | First messages & transitions in system prompt |
-| **3. Basic Chat**          | ✅ 100%        | **COMPLETE**          | Full STT → Agent → TTS pipeline working       |
-| **4. Conditional Routing** | ✅ 100%        | **COMPLETE**          | LLM-driven routing via Unified Agent approach |
-| **5. Tool Integration**    | ✅ 100%        | **COMPLETE**          | Google Calendar booking and availability      |
-| **Overall Progress**       | **100%**       | **All Core Complete** | Voice system and tool integrations ready.     |
+| **1. Variable Extraction** | ✅ 100% | **COMPLETE** | Handled via Unified Agent system prompt |
+| **2. Conversation Flow** | ✅ 100% | **COMPLETE** | First messages & transitions in system prompt |
+| **3. Basic Chat** | ✅ 100% | **COMPLETE** | Full STT → Agent → TTS pipeline working |
+| **4. Conditional Routing** | ✅ 100% | **COMPLETE** | LLM-driven routing via Unified Agent approach |
+| **5. Tool Integration** | ✅ 100% | **COMPLETE** | Google Calendar booking and availability |
+| **Overall Progress** | **100%** | **All Core Complete** | Voice system and tool integrations ready. |
 
 ### What's Working Now
 
-- ✅ **Voice conversations** with real-time STT/TTS
-- ✅ **Smart routing** - Agent follows conversation flow intelligently
-- ✅ **Variable extraction** - Agent captures customer info
-- ✅ **Multi-turn dialogue** - Maintains context across conversation
-- ✅ **Greeting handling** - Plays custom greeting on connect
+- ✅ **Full Google Calendar Integration** - Book, check availability, and cancel dental appointments.
+- ✅ **Voice conversations** with real-time STT/TTS.
+- ✅ **Smart routing** - Agent follows conversation flow intelligently.
+- ✅ **Variable extraction** - Agent captures patient info (name, phone, email, etc.).
+- ✅ **Multi-turn dialogue** - Maintains context across conversation.
+- ✅ **Greeting handling** - Plays custom greeting on connect.
 
 ### What's Next
 
-- ⏳ **Google Calendar integration** - For appointment booking
-- ⏳ **Call transfer** - Route to human agents
-- ⏳ **SMS notifications** - Appointment confirmations
+- ⏳ **Call transfer** - Route to human agents.
+- ⏳ **SMS/Email notifications** - Real appointment confirmations via SendGrid/Twilio.
+- ⏳ **Advanced Availability** - Multi-doctor scheduling.
 
 ---
 
@@ -141,33 +142,48 @@ This will:
 
 ---
 
-## 🎤 Running the Application
+## 📅 Google Calendar Setup
 
-Once Langflow is set up, start the Voice Interface backend:
+To enable appointment booking, you must set up a Google Cloud Service Account:
+
+### 1. Create Google Cloud Project
+
+- Go to [Google Cloud Console](https://console.cloud.google.com/).
+- Create a new project and enable the **Google Calendar API**.
+
+### 2. Create Service Account
+
+- Navigate to **IAM & Admin > Service Accounts**.
+- Create a service account and generate a **JSON Key**.
+- Rename the downloaded file to `credentials.json` and place it in the project root.
+
+### 3. Share Calendar
+
+- Open [Google Calendar](https://calendar.google.com/).
+- Create a new calendar for the agent or use an existing one.
+- Go to **Settings and sharing**.
+- Get the **Calendar ID** (usually an email-like string).
+- Under **Share with specific people**, add the Service Account email (found in your `credentials.json`) with **Make changes to events** permission.
+
+### 4. Verify Connection
+
+Run the verification script to ensure the agent can connect:
 
 ```bash
-python3 agent_management/vapi_converter/vapi_to_langflow_realnode_converter.py \
-  agent_management/json/inputs/daniel_dental_agent.json \
-  agent_management/flows/Appointment_Scheduler_Unified.json
+uv run test_calendar.py
 ```
 
-### Step 5: Add OpenAI Key in Langflow
+---
 
-1. Open http://localhost:7860
-2. Navigate to your imported "Appointment Scheduler (Unified)" flow
-3. Click on the OpenAI component
-4. Add your OpenAI API key
-5. Save the flow
+## 🎤 Running the Application
 
-### Step 6: Start the Voice Interface
-
-Once Langflow is set up, start the Voice Interface backend:
+Once Langflow and Google Calendar are set up, start the Voice Interface backend:
 
 ```bash
 uv run app.py
 ```
 
-### Step 7: Test the Agent
+### Step 5: Test the Agent
 
 1. Open [http://localhost:8000](http://localhost:8000) in your browser.
 2. Click **"Click to Speak"** and allow microphone access.
@@ -461,11 +477,9 @@ uv run langflow run
 
 ### Planned Features
 
-- ⏳ Google Calendar integration
-- ⏳ Appointment booking tool
-- ⏳ Call transfer tool
-- ⏳ SMS notifications
-- ⏳ Phone integration (Twilio)
+- ⏳ **Call transfer tool**
+- ⏳ **SMS/Email notifications** (Real sending via SendGrid/Twilio)
+- ⏳ **Native Twilio Integration**
 
 ---
 
@@ -480,8 +494,8 @@ uv run langflow run
 | VAPI Converter   | ✅ 100% | Generates Unified Agent      |
 | Import/Export    | ✅ 100% | Auto-detects directories     |
 | Dynamic Flow ID  | ✅ 100% | Auto-configuration           |
-| Google Calendar  | ⏳ 0%   | Planned                      |
-| Tool Calling     | ⏳ 0%   | Planned                      |
+| Google Calendar  | ✅ 100% | Book, check & cancel logic   |
+| Tool Calling     | ✅ 100% | Automated tool injection     |
 | Phone (Twilio)   | ✅ 80%  | Backend ready, needs testing |
 
 ---
@@ -490,9 +504,8 @@ uv run langflow run
 
 ### Documentation
 
-- `VOICE_SETUP_GUIDE.md` - Voice interface setup
-- `walkthrough.md` - Complete feature walkthrough
-- `google_calendar_setup.md` - Calendar integration guide
+- [README.md](file:///Users/muhammad/Personal/Projects/Personal%20Projects/pawel/Voxhive/langflow/README.md) - Main guide
+- [walkthrough.md](file:///Users/muhammad/.gemini/antigravity/brain/fc80fdd6-1900-4f4a-b2af-86d81ab25094/walkthrough.md) - Feature walkthrough
 
 ### Common Issues
 

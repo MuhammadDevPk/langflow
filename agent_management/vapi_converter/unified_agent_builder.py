@@ -26,6 +26,7 @@ class UnifiedAgentBuilder:
             "2. **Transitions**: After each user response, check the 'Transitions' for your current node. If a condition is met, move to the next node immediately.",
             "3. **Responses**: Speak ONLY the 'Prompt' for your current node. Do not make up text outside the instructions.",
             "4. **Variable Extraction**: If the current node requires variable extraction, output the JSON at the end of your response.",
+            "5. **Tool Usage**: When the user confirms an appointment time, call the `book_appointment` tool with the extracted details (patient_name, phone_number, email, appointment_type, appointment_date, appointment_time).",
             "\n--- CONVERSATION FLOW ---"
         ]
 

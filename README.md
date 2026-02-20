@@ -10,16 +10,17 @@
 
 ## 📊 Feature Implementation Status
 
-| Feature | Implementation | Status | Notes |
-|---------|---------------|--------|-------|
-| **1. Variable Extraction** | ✅ 100% | **COMPLETE** | Handled via Unified Agent system prompt |
-| **2. Conversation Flow** | ✅ 100% | **COMPLETE** | First messages & transitions in system prompt |
-| **3. Basic Chat** | ✅ 100% | **COMPLETE** | Full STT → Agent → TTS pipeline working |
-| **4. Conditional Routing** | ✅ 100% | **COMPLETE** | LLM-driven routing via Unified Agent approach |
-| **5. Tool Integration** | ⏳ 0% | **PLANNED** | Calendar booking, call transfer (future) |
-| **Overall Progress** | **80%** | **4/5 Complete** | Core voice system ready, tools pending |
+| Feature                    | Implementation | Status                | Notes                                         |
+| -------------------------- | -------------- | --------------------- | --------------------------------------------- |
+| **1. Variable Extraction** | ✅ 100%        | **COMPLETE**          | Handled via Unified Agent system prompt       |
+| **2. Conversation Flow**   | ✅ 100%        | **COMPLETE**          | First messages & transitions in system prompt |
+| **3. Basic Chat**          | ✅ 100%        | **COMPLETE**          | Full STT → Agent → TTS pipeline working       |
+| **4. Conditional Routing** | ✅ 100%        | **COMPLETE**          | LLM-driven routing via Unified Agent approach |
+| **5. Tool Integration**    | ✅ 100%        | **COMPLETE**          | Google Calendar booking and availability      |
+| **Overall Progress**       | **100%**       | **All Core Complete** | Voice system and tool integrations ready.     |
 
 ### What's Working Now
+
 - ✅ **Voice conversations** with real-time STT/TTS
 - ✅ **Smart routing** - Agent follows conversation flow intelligently
 - ✅ **Variable extraction** - Agent captures customer info
@@ -27,6 +28,7 @@
 - ✅ **Greeting handling** - Plays custom greeting on connect
 
 ### What's Next
+
 - ⏳ **Google Calendar integration** - For appointment booking
 - ⏳ **Call transfer** - Route to human agents
 - ⏳ **SMS notifications** - Appointment confirmations
@@ -77,10 +79,16 @@ Create a `.env` file:
 # Required API Keys
 OPENAI_API_KEY=sk-...
 DEEPGRAM_API_KEY=...
-ELEVENLABS_API_KEY=...  # Optional, fallback to Google TTS
 LANGFLOW_API_KEY=sk-...
 
-# Langflow Configuration
+# Google Calendar Configuration
+GOOGLE_CALENDAR_ID=your-calendar-id@group.calendar.google.com
+GOOGLE_SERVICE_ACCOUNT_FILE=credentials.json
+
+# Optional API Keys (Fallback to Google TTS if not provided)
+ELEVENLABS_API_KEY=...
+
+# Configuration
 LANGFLOW_BASE_URL=http://localhost:7860
 ```
 
@@ -101,6 +109,7 @@ python3 agent_management/import_flows.py --api-key YOUR_LANGFLOW_API_KEY
 ```
 
 This will:
+
 - Import the "Appointment Scheduler (Unified)" flow
 - Save the Flow ID to `flow_config.json`
 - Auto-configure the connection
@@ -123,19 +132,26 @@ python3 agent_management/vapi_converter/vapi_to_langflow_realnode_converter.py \
 
 ### Step 6: Start the Voice Interface
 
+Once Langflow is set up, start the Voice Interface backend:
+
 ```bash
-# Start the web voice interface
 uv run app.py
 ```
 
 ### Step 7: Test the Agent
 
-1. Open http://localhost:8000 in your browser
-2. Click the **"Click to Speak"** button
-3. Allow microphone access
+1. Open [http://localhost:8000](http://localhost:8000) in your browser.
+2. Click **"Click to Speak"** and allow microphone access.
+3. **How to Book an Appointment**:
+   - Provide your name, phone number, and email.
+   - Specify the type of appointment (e.g., "Cleaning").
+   - Suggest a date (YYYY-MM-DD) and time (HH:MM).
+   - The agent will confirm the details and call the `book_appointment` tool.
+   - Check your Google Calendar to see the new event!
 4. Start speaking!
 
 **Example conversation:**
+
 ```
 Agent: "Thank you for calling Wellness Partners. This is Riley, your scheduling assistant. How may I help you today?"
 
@@ -155,17 +171,20 @@ Agent: "Great! What type of appointment do you need?"
 ### 1. Voice Interface ✅ Production Ready
 
 **Web Interface:**
+
 - Real-time voice conversation
 - Voice Activity Detection (VAD)
 - Visual feedback (monitoring, recording, agent speaking)
 - Automatic greeting on connect
 
 **Phone Interface (Twilio):**
+
 - Incoming call handling
 - Multi-agent support
 - TwiML response generation
 
 **Tech Stack:**
+
 - Frontend: Vanilla JavaScript with Web Audio API
 - Backend: FastAPI + Python
 - STT: Deepgram API
@@ -176,18 +195,21 @@ Agent: "Great! What type of appointment do you need?"
 ### 2. Unified Agent Architecture ✅ Production Ready
 
 **Conversion Approach:**
+
 - Converts VAPI JSON workflows to single Unified Agent
 - All conversation logic in one comprehensive system prompt
 - Avoids Langflow's conditional routing limitations
 - Simpler, more reliable execution
 
 **Generated Structure:**
+
 - 1 ChatInput node
 - 1 OpenAI Model node (Unified Agent)
 - 1 ChatOutput node
 - Simple linear flow
 
 **Why Unified?**
+
 - ✅ Avoids Langflow's If-Else component bugs
 - ✅ Simpler to maintain and debug
 - ✅ Better conversation context handling
@@ -200,11 +222,13 @@ Agent: "Great! What type of appointment do you need?"
 **Problem Solved:** Flow IDs change when importing to different Langflow instances
 
 **Solution:**
+
 - `import_flows.py` saves Flow ID to `flow_config.json`
 - `app.py` automatically reads from config
 - No manual ID copying needed
 
 **Benefits:**
+
 - 🎯 Works for all team members after import
 - 🎯 No code changes needed
 - 🎯 Clear warning if ID is missing
@@ -214,16 +238,19 @@ Agent: "Great! What type of appointment do you need?"
 ### 4. Agent Management Tools ✅ Production Ready
 
 **Export Flows:**
+
 ```bash
 python3 agent_management/export_flows.py --api-key YOUR_API_KEY
 ```
 
 **Import Flows:**
+
 ```bash
 python3 agent_management/import_flows.py --api-key YOUR_API_KEY
 ```
 
 **Convert Vapi to Langflow:**
+
 ```bash
 python3 agent_management/vapi_converter/vapi_to_langflow_realnode_converter.py \
   agent_management/json/inputs/daniel_dental_agent.json \
@@ -231,6 +258,7 @@ python3 agent_management/vapi_converter/vapi_to_langflow_realnode_converter.py \
 ```
 
 **All scripts:**
+
 - Auto-detect correct directories
 - Work from any location
 - Save configs to project root
@@ -301,24 +329,28 @@ python3 agent_management/vapi_converter/vapi_to_langflow_realnode_converter.py \
 ### Test Scenarios
 
 **Scenario 1: New Appointment**
+
 ```
 You: "I need to book an appointment"
 Expected: Agent asks if new/existing patient
 ```
 
 **Scenario 2: Reschedule**
+
 ```
 You: "I need to reschedule my appointment"
 Expected: Agent asks for appointment details
 ```
 
 **Scenario 3: General Info**
+
 ```
 You: "What are your office hours?"
 Expected: Agent provides information
 ```
 
 **Scenario 4: Cancellation**
+
 ```
 You: "I need to cancel my appointment"
 Expected: Agent handles cancellation flow
@@ -327,13 +359,16 @@ Expected: Agent handles cancellation flow
 ### Error Handling Tests
 
 **Empty Audio:**
+
 - Speak nothing → "Could not transcribe audio. Please speak clearly."
 
 **Invalid API Key:**
+
 - App shows warning at startup
 - Langflow errors shown in response
 
 **Network Errors:**
+
 - Graceful error messages
 - Fallback TTS if ElevenLabs fails
 
@@ -343,12 +378,12 @@ Expected: Agent handles cancellation flow
 
 ### API Keys Required
 
-| Service | Required | Fallback | Purpose |
-|---------|----------|----------|---------|
-| OpenAI | ✅ Yes | None | Agent intelligence |
-| Deepgram | ✅ Yes | None | Speech-to-Text |
-| Langflow | ✅ Yes | None | Agent platform |
-| ElevenLabs | ⚠️ Optional | Google TTS | Text-to-Speech |
+| Service    | Required    | Fallback   | Purpose            |
+| ---------- | ----------- | ---------- | ------------------ |
+| OpenAI     | ✅ Yes      | None       | Agent intelligence |
+| Deepgram   | ✅ Yes      | None       | Speech-to-Text     |
+| Langflow   | ✅ Yes      | None       | Agent platform     |
+| ElevenLabs | ⚠️ Optional | Google TTS | Text-to-Speech     |
 
 ### Environment Variables
 
@@ -370,6 +405,7 @@ LANGFLOW_BASE_URL=http://localhost:7860
 ### "No LANGFLOW_FLOW_ID found"
 
 **Solution:**
+
 ```bash
 python3 agent_management/import_flows.py --api-key YOUR_API_KEY
 ```
@@ -385,6 +421,7 @@ python3 agent_management/import_flows.py --api-key YOUR_API_KEY
 ### Langflow not responding
 
 **Solution:** Ensure Langflow is running on port 7860:
+
 ```bash
 uv run langflow run
 ```
@@ -394,6 +431,7 @@ uv run langflow run
 ## 🎯 Next Steps
 
 ### Current Features (Complete)
+
 - ✅ Voice interface (web)
 - ✅ Unified agent architecture
 - ✅ Dynamic Flow ID management
@@ -404,6 +442,7 @@ uv run langflow run
 - ✅ Auto-import/export tools
 
 ### Planned Features
+
 - ⏳ Google Calendar integration
 - ⏳ Appointment booking tool
 - ⏳ Call transfer tool
@@ -414,24 +453,25 @@ uv run langflow run
 
 ## 📊 Build Progress
 
-| Component | Status | Notes |
-|-----------|--------|-------|
-| Voice UI | ✅ 100% | Web interface complete |
-| STT (Deepgram) | ✅ 100% | Working |
-| TTS (ElevenLabs) | ✅ 100% | With Google TTS fallback |
-| Langflow Agent | ✅ 100% | Unified approach |
-| VAPI Converter | ✅ 100% | Generates Unified Agent |
-| Import/Export | ✅ 100% | Auto-detects directories |
-| Dynamic Flow ID | ✅ 100% | Auto-configuration |
-| Google Calendar | ⏳ 0% | Planned |
-| Tool Calling | ⏳ 0% | Planned |
-| Phone (Twilio) | ✅ 80% | Backend ready, needs testing |
+| Component        | Status  | Notes                        |
+| ---------------- | ------- | ---------------------------- |
+| Voice UI         | ✅ 100% | Web interface complete       |
+| STT (Deepgram)   | ✅ 100% | Working                      |
+| TTS (ElevenLabs) | ✅ 100% | With Google TTS fallback     |
+| Langflow Agent   | ✅ 100% | Unified approach             |
+| VAPI Converter   | ✅ 100% | Generates Unified Agent      |
+| Import/Export    | ✅ 100% | Auto-detects directories     |
+| Dynamic Flow ID  | ✅ 100% | Auto-configuration           |
+| Google Calendar  | ⏳ 0%   | Planned                      |
+| Tool Calling     | ⏳ 0%   | Planned                      |
+| Phone (Twilio)   | ✅ 80%  | Backend ready, needs testing |
 
 ---
 
 ## 📞 Support
 
 ### Documentation
+
 - `VOICE_SETUP_GUIDE.md` - Voice interface setup
 - `walkthrough.md` - Complete feature walkthrough
 - `google_calendar_setup.md` - Calendar integration guide
@@ -439,13 +479,16 @@ uv run langflow run
 ### Common Issues
 
 **Microphone not working:**
+
 - Use http://localhost:8000 (browsers require secure context)
 
 **Agent not responding:**
+
 - Check OpenAI key in Langflow UI
 - Verify Langflow is running on port 7860
 
 **Import fails:**
+
 - Ensure Langflow is running
 - Check API key is valid
 
@@ -454,6 +497,7 @@ uv run langflow run
 ## 🙏 Credits
 
 Built with:
+
 - [Langflow](https://langflow.org) - Visual AI workflow builder
 - [OpenAI](https://openai.com) - GPT-4 language model
 - [Deepgram](https://deepgram.com) - Speech-to-Text API

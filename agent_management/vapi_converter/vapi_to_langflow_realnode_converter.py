@@ -127,6 +127,7 @@ class VAPIToLangflowUnified:
         }
 
         # 3. Create Nodes
+        # 3. Create Nodes
         # ChatInput
         chat_input = self._clone_component('ChatInput')
         chat_input['position'] = {'x': 0, 'y': 0}
@@ -163,6 +164,66 @@ class VAPIToLangflowUnified:
         chat_output = self._clone_component('ChatOutput')
         chat_output['position'] = {'x': 800, 'y': 0}
         new_flow['data']['nodes'].append(chat_output)
+
+        # Calendar Tool Node (Custom Component)
+        # We create a generic CustomComponent node and populate it with our tool code
+        calendar_tool_code = ""
+        try:
+            # Read the tool code from file
+            tool_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "custom_tools", "calendar_tool.py")
+            with open(tool_path, "r") as f:
+                calendar_tool_code = f.read()
+        except Exception as e:
+            print(f"Warning: Could not read calendar_tool.py: {e}")
+            calendar_tool_code = "# Error loading tool code"
+
+        # Create the node structure manually since we might not have a template for CustomComponent
+        calendar_node_id = f"CustomComponent-{uuid.uuid4().hex[:5]}"
+        calendar_node = {
+            "id": calendar_node_id,
+            "type": "genericNode",
+            "position": {"x": 400, "y": 300},
+            "data": {
+                "type": "CustomComponent",
+                "id": calendar_node_id,
+                "node": {
+                    "template": {
+                        "_type": "Component",
+                        "code": {
+                            "type": "code",
+                            "required": True,
+                            "placeholder": "",
+                            "list": False,
+                            "show": True,
+                            "multiline": True,
+                            "value": calendar_tool_code,
+                            "name": "code",
+                            "advanced": False,
+                            "dynamic": True
+                        }
+                    },
+                    "description": "A tool for booking appointments in Google Calendar",
+                    "display_name": "Google Calendar Tool",
+                    "icon": "Calendar",
+                    "base_classes": ["Tool"],
+                    "outputs": [
+                        {
+                            "types": ["Tool"],
+                            "selected": "Tool",
+                            "name": "build",
+                            "display_name": "Tool",
+                            "method": "build",
+                            "value": "__UNDEFINED__",
+                            "cache": True,
+                            "allows_loop": False,
+                            "group_outputs": False,
+                            "tool_mode": True
+                        }
+                    ]
+                }
+            }
+        }
+        new_flow['data']['nodes'].append(calendar_node)
 
         # 4. Create Edges with Complex Handles
         def create_handle(node_id, name, type_str, io_type, data_type=None):
@@ -225,8 +286,30 @@ class VAPIToLangflowUnified:
             },
             "type": "default"
         }
+
+        # Calendar Tool -> Agent
+        # Source: Calendar Tool (tool) - CustomComponent usually outputs a Tool or similar
+        # We need to check the output name in the custom component code, usually it's the return type name or defined in outputs
+        # For CustomComponent, it often defaults to "build" output if not specified.
+        # Let's assume standard Tool output.
+        source_handle_3 = create_handle(calendar_node['id'], "build", "Tool", "source", "CustomComponent")
+        # Target: Agent (tools)
+        target_handle_3 = create_handle(agent_node['id'], "tools", "Tool", "target", "list")
+
+        edge3 = {
+            "id": f"edge-{uuid.uuid4().hex[:8]}",
+            "source": calendar_node['id'],
+            "target": agent_node['id'],
+            "sourceHandle": json.dumps(source_handle_3),
+            "targetHandle": json.dumps(target_handle_3),
+            "data": {
+                "sourceHandle": source_handle_3,
+                "targetHandle": target_handle_3
+            },
+            "type": "default"
+        }
         
-        new_flow['data']['edges'] = [edge1, edge2]
+        new_flow['data']['edges'] = [edge1, edge2, edge3]
 
         # 5. Output
         output_json = json.dumps(new_flow, indent=2)
